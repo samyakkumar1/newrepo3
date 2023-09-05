@@ -1,0 +1,44 @@
+.page-top-logo{margin-bottom: 0}
+.cart-company,.cart-desc{display: block;}
+.cart-company-logo,.preview-cart{display: inline-block;}
+.cart-prev-edit{padding: 0 25px;border-radius: 4px;}
+.preview-cart-column{padding-left: 30px;}
+.checkbox a{text-decoration: none;}
+.checkbox{font-weight: normal;}
+.logo-price{margin-top: 10px;display: block;}
+.preview-cart{font-size: 13px;position: relative;top: 12px;left: 10px;}
+.cart-company{font-size: 15px;}
+.checkbox-column{padding-left: 30px;}
+.preview-cart-left{padding-left: 30px;margin-top: 20px;}
+.visit-card-edit{margin-bottom: 10px;font-size: 13px;}
+.visiting-card-edit{margin-top: 0;margin-left: 30px;}
+.visit-card-edit label{margin-bottom: 0;}
+.visit-card-edit img{height: 50px;width: auto;}
+#card-prev-next,#choose-qty-next,#card-qty-next,#stock-next{padding: 3px 40px;border-radius: 2px;background: gray;}
+.edit-logo-card{margin: 15px;}
+.edit-logo-card a{text-decoration: underline;}
+.label-weight{font-weight: normal;}
+ul.card-per-price,ul.card-price{padding-left: 5px;}
+ul.card-per-price li,ul.card-price li{line-height: 23px;margin-bottom: 5px;list-style: none;}
+.label-block{display: block;padding: 5px 0;}
+.panel-body{background: #f4f4f4;}
+.order-change a{color: #00cccb;text-decoration: underline;font-size: 13px;}
+.order-change{display: inline-block;padding-left: 20px;}
+.order-label{display: inline-block;width: 50%;}
+.change-business-cards{padding-left: 15px;font-size: 13px;}
+.business-right{padding-left: 2px;border: 2px solid #ccc;border-radius: 4px;padding-right: 2px;}
+.business-card-label{background: #fff;padding: 10px;}
+.buss-card-total{font-weight: bolder;font-size: 15px;}
+.buss-card-amount{font-weight: bolder;font-size: 15px;color: #00cccb;}
+.bussCard-logo-label{background: #fff;border: 2px solid #ccc;padding: 10px;margin: 5px 0 2px;font-size: 15px;}
+.buss-card-quantity{background: #fff;padding: 10px;border: 2px solid #ccc;margin-bottom: 35px;}
+.logo-right-label{font-weight: normal;font-size: 13px;color: #777777;}
+.business-card-head{padding: 10px 0;font-size: 15px;}
+.bussCard-qty-list{padding-bottom: 3px;}
+.preview-pdt-text{padding-left: 30px;margin: 15px 0 25px;}
+.edit-inactive{position: relative;}
+.panel-title a.edit-active{display:none;position: absolute;top: 5px;right: 7px;padding: 3px 12px !important;border: 1px solid #fff;}
+.edit-text{font-size: 13px;display: inline-block;}
+#buss-card-checkout{padding: 3px 50px;background: gray;color: #fff;border: 1px gray;border-radius: 3px;margin: 0 auto;display: block;width: 50%;}
+.checkout-column{margin-bottom: 40px;}
+

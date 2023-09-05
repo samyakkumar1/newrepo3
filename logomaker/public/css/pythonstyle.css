@@ -1,0 +1,234 @@
+/*The Style file for Product-Buy Pipeline isolation
+Author: DesignerBe
+*/
+
+/* http://meyerweb.com/eric/tools/css/reset/ v2.0 | 20110126 License: none (public domain) */
+
+.right-menu {
+    margin-top:30px;
+    text-align: right;
+    padding-right: 20px;
+}
+
+.right-menu li{
+    height:20px;
+    float:right;
+    list-style-type: none;
+    padding-left: 5px;
+    padding-right: 5px;
+} 
+
+.right-menu a{
+    font-family: Arial, Helvetica, sans-serif;
+    font-family: Arial;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 3px;
+
+    color: #717171;
+} 
+
+.top-logo{
+    padding: 20px 0px 20px 60px;
+}
+
+.top-logo img{
+    max-width: 40%;
+    height:auto;
+}
+
+.centered-head{
+    text-align: center;
+}
+
+.section-centre {
+    position: relative;
+    top:1px;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.thin-h2-black{
+
+    font-family: Arial;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 42px;
+
+    color: #000000;
+}
+
+.thin-h3-grey{
+    font-family: Arial;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+
+    margin-top: 10px;
+    /* identical to box height */
+
+color: #464646;
+}
+
+.thin-p5-grey{
+    font-family: Arial;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+
+    margin-top: 10px;
+    /* identical to box height */
+
+color: #464646;
+}
+.alignleft {
+    padding-left: 100px;
+	float: left;
+}
+.alignright {
+    padding-right: 100px;
+	float: right;
+}
+
+.thin-h4-grey{
+    font-family: Arial;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+
+    margin-top: 10px;
+    /* identical to box height */
+
+color: #7c7c7c;
+}
+
+.fm-ip{
+    background: #FFFFFF;
+    border: 1px solid #A7A7A7;
+    box-sizing: border-box;
+    border-radius: 6px;
+    width: 40%;
+    margin-top: 10px;
+}
+
+.fm-tx-area{
+    background: #FFFFFF;
+    border: 1px solid #A7A7A7;
+    box-sizing: border-box;
+    border-radius: 6px;
+    margin-top: 20px;  
+    padding: 10px;
+}
+
+
+
+::placeholder{
+    font-family: Armata;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+
+    color: #7A7A7A;
+}
+
+input[type="text" i]
+{
+    font-family: Armata;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    padding:10px 0px 10px 10px !important;
+
+    color: rgb(26, 26, 26);
+
+}
+
+.input:focus{
+    outline: none !important;
+    border-color: #719ECE;
+    box-shadow: 0 0 10px #719ECE;
+}
+
+.ip-form{
+    text-align: center;
+    position: relative;
+    top: 30px;
+}
+
+
+.ip-form li{
+    list-style: none;
+    height: auto;
+}
+
+
+.nxt-btn{
+    position: relative;
+    top:30px;
+    background: #21B3FA;
+    border: 1px solid #21B3FA;
+    border-radius: 2px;
+    color:#fff;
+    margin-top: 20px;
+
+/* identical to box height */
+
+    text-align: center;
+
+color: #FFFFFF;
+}
+
+button span.text {
+    padding: 0px 10px 0px 10px;
+    font-size: 20px;
+
+    font-family: Armata;
+    font-style: normal;
+    font-weight: thin;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 70%;
+    height: 10px;
+    border-radius: 5px;  
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+  }
+  
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%; 
+    background: #0f0f0f;
+    cursor: pointer;
+  }
+  
+  .slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #181a18;
+    cursor: pointer;
+  }
+
+.slidecontainer{
+    max-width: 70%;
+    text-align: center;
+}
+
+.att-slide-text{
+    margin-bottom: 35px;   
+}
+
+.att-block{
+    line-height:10px;
+}
+
+

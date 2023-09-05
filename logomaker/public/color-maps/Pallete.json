@@ -1,0 +1,100 @@
+[{
+    "Color":"Yellow",
+    "Representation": ["optimism", "warmth", "clarity", "attention"],
+    "Industry": ["Food","Sports","Travel", "Animals", "Religious"],
+    "AV_dict":[{"masculine":"0.5","affordable":"0.5","modern":"0.5"}],
+    "Description": "Yellow represents optimism, warmth, and clarity. It is a vibrant color that is attention grabbing and youthful. Ventures who use yellow generally want to grab attention and want people to feel comfortable and warm when seeing it. It is a color that stands out in a busy or crowded area. You will find that many large fast-food restaurants use yellow in their brand logo to help evoke warm emotions from their consumers. You may build your brand around this color to enjoy it's benefits.",
+    "pimg": ["yellow.png", "yellow2.png", "yellow3.png"],
+    "hex": "#F6E902"
+}
+,
+{
+    "Color":"Orange",
+    "Representation": ["confidence","alertness","joy","Enthusiasm","creativity"],
+    "Industry": ["Food","Sports","Travel","Religous"],
+    "AV_dict":[{"masculine":"0.5","affordable":"0.5","modern":"0.5"}],
+    "Description": "Orange represents confidence and is an excellent colour for grabbing people's attention. You may have seen a call to action in this colour as it draws the eye. Nickelodeon, the children's TV show, uses orange to grab the attention of young minds. It is also a favourite advertising colour for soft drinks such as Fanta and Crush. You may build your brand identity about this color.",
+    "pimg": ["orange.png", "orange2.png", "orange3.png"],
+    "hex": "#F77601"
+}
+,
+{
+    "Color":"Blue",
+    "Representation": ["calm", "security", "trust","loyalty", "intelligence"],
+    "Industry": ["Health care","IT/Engineering","Information Technology", "Business and Consulting", "Account Finance and Insurance", "Computer"],
+    "AV_dict":[{"masculine":"0.5","affordable":"0.5","modern":"0.5"}],
+    "Description": "Blue represents strength and calmness. It is a colour that many health care providers use in their brand logo and is used to help bring the allure of power, tranquillity, and dependability. It signals a level of pride and shows professionalism and reliability.",
+    "pimg": ["blue.png", "blue2.png", "blue3.png"],
+    "hex": "#1237BC"
+}
+,
+{
+    "Color":"Red",
+    "Representation": ["urgency", "sexy", "passion","energy", "power","strength"],
+    "Industry": ["Health care","Sports", "Account Finance and Insurance"],
+    "AV_dict":[{"masculine":"0.5","affordable":"0.5","modern":"0.5"}],
+    "Description": "Red represents urgency, sexy, exciting and passion. Red is visually stimulating, and it is designed to raise pulse rates. It is a colour that's used in many big retail companies such as K-Mart and Target. Coca-Cola also uses red to create a sense of urgency and excitement when seeing the label. You may use this color pallete built around this color in your web designs, templates etc to get the maximum benefit from it's color pschology.",
+    "pimg": ["red.png", "red2.png", "red3.png"],
+    "hex": "#B40000"
+}
+,
+{
+    "Color":"Purple",
+    "Representation": ["Royalty", "Soothing","Calm", "Beauty","power","nobility","Extravagance","wisdom"],
+    "Industry": ["Food","Sports"],
+    "AV_dict":[{"masculine":"0","Affordable":"0","modern":"0.5"}],
+    "Description": "Purple represents royalty and trust. Purple also sparks the imagination, and images of grandeur, mysticism, and opulence. It gives off the illusion that anything is possible, and it offers an open feel with a regal appeal. You may use this color pallete built around this color in your web designs, templates etc to get the maximum benefit from it's color pschology.",
+    "pimg": ["purple.png", "purple2.png", "purple3.png"],
+    "hex": "#300048"
+}
+,
+{
+    "Color":"Green",
+    "Representation": ["health", "wealth","vitality","relax"],
+    "Industry": ["Health Care","Sports", "Animals", "Gardening", "Agriculture"],
+    "AV_dict":[{"masculine":"0.5","affordable":"0.5","modern":"0.5"}],
+    "Description": "Green represents growth and money. You will find that many money-related brands have green in their logo design. It is also used for companies that are involved in the environmental space. For example, the tractor company John Deere uses green in their logo.Woolworths, the food retailer, also uses green.",
+    "pimg": ["green.png", "green2.png", "green3.png"],
+    "hex": "#008000"
+}
+,
+{
+    "Color":"Black & White",
+    "Representation": ["power", "sleekness","clarity","luxury", "elegance", "sophistication","class"],
+    "Industry": ["Sports", "Business and Consulting", "Account Finance and Insurance", "Computer"],
+    "AV_dict":[{"masculine":"0.5","affordable":"1","modern":"0.5"}],
+    "Description": "Black and white represent elegance, sophistication, and class. Black and white can be seen in logos that want to represent power. Nike, Puma, and Mercedes-Benz are some of the brands that incorporate black and white. Black is a great colour if your brand caters to audiences that want to feel mysterious.",
+    "pimg": ["blackWhite.png", "blackWhite2.png", "blackWhite3.png"],
+    "hex": "#000"
+}
+,
+{
+    "Color":"Pink",
+    "Representation": ["romance", "Modern","clarity", "Beauty","girls","sweet", "innocent","sensitive","loving"],
+    "Industry": ["Food","Sports"],
+    "AV_dict":[{"masculine":"0","affordable":"0.5","modern":"0.5"}],
+    "Description": "Pink represents optimism, warmth, and clarity. It is a vibrant colour that can stand out on billboards and busy streets.Businesses who use yellow, generally want to grab attention and want people to feel comfortable and warm when seeing it.You will find that many large fast food restaurants use yellow in their brand logo to help evoke warm emotions from their consumers",
+    "pimg": ["pink.png", "pink2.png", "pink3.png"],
+    "hex": "#E31D73"
+}
+,
+{
+    "Color":"Brown",
+    "Representation": ["Classic", "Wooden","military"],
+    "Industry": ["Food","Sports","agriculture", "Furniture"],
+    "AV_dict":[{"masculine":"0.5","luxury":"0.5","modern":"0"},{"masculine":"1","affordable":"0.5","Modern":"0.5"}],
+    "Description": "Make your brand appear rugged, masculine or serious. Brown is very underutilized, so you'll stand out from the competition. You can use this color as a part of your designs, marketing graphics for a better reach to your selected audience.",
+    "pimg": ["brown.png", "brown2.png", "brown3.png"],
+    "hex": "#471C1C"
+}
+,
+{
+    "Color":"Grey",
+    "Representation": ["power", "sleekness","clarity","affordable", "elegance", "sophistication","class"],
+    "Industry": ["Sports", "Business and Consulting", "Account Finance and Insurance", "Computer"],
+    "AV_dict":[{"masculine":"0.5","affordable":"0","modern":"0.5"}],
+    "Description": "Grey represents optimism, warmth, and clarity. It is a vibrant colour that can stand out on billboards and busy streets.Businesses who use yellow, generally want to grab attention and want people to feel comfortable and warm when seeing it.You will find that many large fast food restaurants use yellow in their brand logo to help evoke warm emotions from their consumers",
+    "pimg": ["grey.png", "grey2.png", "grey3.png"],
+    "hex": "#484848"
+}
+]

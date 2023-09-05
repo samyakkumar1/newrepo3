@@ -1,0 +1,113 @@
+<% include myHeader.ejs %>
+<script>
+  $(function () {
+      var user = getUser();
+      if (user != undefined) {
+          if (user.first_name != undefined && user.first_name != null) {
+              $("#name").val(user.first_name);
+          }
+          if (user.email != undefined && user.email != null) {
+              $("#email").val(user.email);
+          }
+      }
+      $("#contactForm").validate({ 
+                submitHandler: function(form) {
+                    form.submit();
+                }
+      });
+      $(".btn-send-message").click(function (e) {
+          e.preventDefault();
+          if ($("#contactForm").valid()) {
+              addWaitingOverlay();
+              var data = {
+                  name: $("#name").val(),
+                  email: $("#email").val(),
+                  subject: $("#subject").val(),
+                  message: "Phone Number: " + $("#phone_no").val() + "<br/>" + $("#message").val()
+              };
+              doPost("/contactUs", data, function (resp) {
+                  removeWaitingOverlay();
+                  if (resp.status == 200) {
+                      showToast("Your message has been sent to us.<br/>We will get back to you soon.", "success");
+                      $("#name").val("");
+                      $("#email").val("");
+                      $("#subject").val("");
+                      $("#message").val("");
+                      $("#phone_no").val("");
+                  } else {
+                      bootbox.alert(resp.msg);
+                  }
+              }, function (err) {
+                  removeWaitingOverlay();
+                  bootbox.alert("Server Error: Communication failure.");
+              });
+          } else {
+            bootbox.alert("Please fill the required details properly.");
+          }
+      });
+  })
+</script>
+<section class="page-top page-top-logo">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="page-common-header">Contact Online Free Logo</h1>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="container">
+        <div class="row">
+          <div id="validation_summary"></div>
+        </div>
+  <div class="row">
+    <div class="col-md-12 about-us-left">
+      <p>Online free logo is committed to meet customer expectation in providing reliable logo making experience. We have taken all efforts to give you an easy to use logo generator. Logos once bought are removed from the site. Online free logo has made possible cheap logo design experience.
+      <span class="contact-span"><b>Write down your query below and we shall get back to you within 24 hours. We are happy to assist you in every possible way to provide you.  happy logo designing!</b></span></p>
+      <form id="contactForm" action="/contactUs" method="POST" novalidate="novalidate">
+        <div class="row">
+          <div class="form-group">
+            <div class="col-md-12">
+              <label>Your name *</label>
+              <input type="text" value="" data-msg-required="Please enter your name." maxlength="100" class="form-control" name="name" id="name" required="" aria-required="true">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group"> 
+            <div class="col-md-6">
+              <label>Your email address *</label>
+              <input type="email" value="" data-msg-required="Please enter your email address." data-msg-email="Please enter a valid email address." maxlength="100" class="form-control" name="email" id="email" required="" aria-required="true">
+            </div>
+            <div class="col-md-6">
+              <label>Your phone number *</label>
+              <input type="text" value="" data-msg-required="Please enter your phone number." maxlength="100" class="form-control" name="phone_no" id="phone_no" required="" aria-required="true">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <div class="col-md-12">
+              <label>Subject</label>
+              <input type="text" value="" data-msg-required="Please enter the subject." maxlength="100" class="form-control" name="subject" id="subject" required="" aria-required="true">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <div class="col-md-12">
+              <label>Message *</label>
+              <textarea maxlength="5000" data-msg-required="Please enter your message." rows="10" class="form-control" name="message" id="message" required="" aria-required="true"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <input type="button" value="Send Message" class="btn btn-contact-us btn-lg btn-send-message" data-loading-text="Loading...">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<% include myFooter.ejs %>

@@ -1,0 +1,17 @@
+.shipping-content-header{
+	font-weight: 700;
+	padding-bottom: 15px;
+	color: #00a5a4;
+	font-size: 15px;
+}
+.shipping-policy-page span{
+	display: block;
+}
+.shipping-contents i{
+	margin-right: 5px;
+	color: #00a5a4;
+}
+.shipping-status{
+	color: #00a5a4;
+	display: block;
+}

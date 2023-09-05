@@ -1,0 +1,146 @@
+/* header section images*/
+
+/*.online-freelogo{
+	background: url('/img/sprite.png') no-repeat -712px -501px;
+	width: 261px;
+	height: 77px;
+}*/
+/*.blue {
+	background: url('/img/sprite.png') no-repeat -294px -1028px;
+	width: 234px;
+	height: 330px;
+}*/
+
+.icon-green-monitor {
+	background: url('/img/sprite.png') no-repeat -30px -438px;
+	width: 133px!important;
+	height: 133px!important;
+}
+.icon-orange-badge {
+	background: url('/img/sprite.png') no-repeat -175px -431px;
+	width: 133px!important;
+	height: 133px!important;
+}
+.icon-blue-download {
+	background: url('/img/sprite.png') no-repeat -331px -438px;
+	width: 133px!important;
+	height: 133px!important;
+}
+.icon-red-hand {
+	background: url('/img/sprite.png') no-repeat -489px -440px;
+	width: 133px!important;
+	height: 133px!important;
+}
+
+.orange-curve {
+	background: url('/img/sprite.png') no-repeat -1508px -420px;
+	width: 111px;
+	height: 17px;
+}
+.red-curve {
+	background: url('/img/sprite.png') no-repeat -1510px -400px;
+	width: 108px;
+	height: 16px;
+}
+
+.green-curve {
+	background: url('/img/sprite.png') no-repeat -1510px -382px;
+	width: 108px;
+	height: 16px;
+}
+
+/*carousel section*/
+/*.aqua-drop {
+	background: url('/img/sprite.png') no-repeat -26px -29px;
+	width: 325px;
+	height: 61px;
+}*/
+.man {
+	background: url('/img/sprite.png') no-repeat -1497px -837px;
+	width: 243px;
+	height: 320px;
+}
+/*.world-map {
+	background-image: url('/img/sprite.png');
+        background-repeat: no-repeat;
+        background-position: -627px -1035px;
+	width: 777px;
+	height: 338px;
+}*/
+.down-arrow {
+	background: url('/img/sprite.png') no-repeat -1049px -1px;
+	width: 217px;
+	height: 283px;
+        margin-left: 50px;
+        margin-top: 60px;
+}
+.monitor {
+	background: url('/img/sprite.png') no-repeat -752px -2px;
+	width: 99px;
+	height: 82px;
+}
+.badge {
+	background: url('/img/sprite.png') no-repeat -1432px -143px;
+	width: 96px;
+	height: 83px;
+}
+.hand {
+	background: url('/img/sprite.png') no-repeat -1488px -235px;
+	width: 80px;
+	height: 101px;
+}
+
+.note {
+	background: url('/img/sprite.png') no-repeat -1822px -1187px;
+	width: 180px;
+	height: 180px;
+        margin-left: 50px;
+        margin-top: 60px;
+}
+
+/* footer section images*/
+.paypal {
+	background: url('/img/sprite.png') no-repeat -1953px -1079px;
+	width: 32px;
+	height: 24px;
+}
+.visa {
+	background: url('/img/sprite.png') no-repeat -1935px -1033px;
+	width: 52px;
+	height: 32px;
+}
+.netbanking {
+	background: url('/img/sprite.png') no-repeat -1195px -399px;
+	width: 102px;
+	height: 30px;
+}
+.master-card {
+	background: url('/img/sprite.png') no-repeat -1942px -1109px;
+	width: 53px;
+	height: 32px;
+}
+.paytm {
+	background: url('/img/sprite.png') no-repeat -1873px -1039px;
+	width: 32px;
+	height: 32px;
+}
+.direct-cash {
+	background: url('/img/sprite.png') no-repeat -1810px -1037px;
+	width: 52px;
+	height: 32px;
+}
+.supprt-mail {
+	background: url('/img/sprite.png') no-repeat -866px -45px;
+	width: 180px;
+	height: 18px;
+}
+
+.powered-by li span{display: block;}
+/*#footer .contact i{margin: 5px 8px 10px 0!important;}*/
+
+#footer .contact li a span {display: inline-block;}
+
+.logo-all-pdts{background-color:transparent!important;color:gray!important;}
+.logo-all-pdts:hover{color:#fff !important;}
+#signUpBtn{margin-top: 20px!important;margin-bottom: 10px!important;}
+.feedback_trigger.left-bottom{right:0!important;}

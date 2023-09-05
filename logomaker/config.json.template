@@ -1,0 +1,70 @@
+    {
+    "PRINTER_URL": "http://52.77.214.80:8081"
+    "WARNING_EMAILS_INTERVAL_DAYS": [1, 3, 7],
+    "JOB_TRIGGER_TIME": {
+        "HOUR": 0,
+        "MINUTE": 0
+    },
+    "DISABLE_HEAPDUMP": false,
+    "APP_PORT": 8080,
+    "APP_DOMAIN": "http://localhost:8080",
+    "ADMIN_APP_DOMAIN": "http://localhost:8082",
+    "SESSION_KEY": "somekey",
+    "SESSION_SECRET": "somesecret",
+    "LOGO_PATH": "",
+    "CARD_PATH": "",
+    "USER_LOGO_PATH": "",
+    "USER_CARD_PATH": "",
+	"OTHER_PRODUCTS_PATH": "",
+	"USER_OTHER_PRODUCTS_PATH": "",
+    "PASSWORD": "d6F3Efeq",
+    "DEVELOPMENT_VERSION": true,
+    "GENERAL_CATEGORY_ID": 0,
+    "REFIRAL_KEY": "",
+    "FLAT_DISCOUNT_LOGO": 20,
+    "FLAT_DISCOUNT_CARD": 20,
+    "FLAT_DISCOUNT_OTHER": 20,
+    "USE_MIN_FILES": true, 
+    "db": {
+        "DB_HOST": "127.0.0.1",
+        "DB_NAME": "logomaker",
+        "DB_USER": "dbuser",
+        "DB_PASSWORD": "dbpasswd",
+        "MAX_DB_CONNECTIONS": 10
+    },
+    "redis": {
+        "REDIS_HOST": "127.0.0.1",
+        "REDIS_PORT": 6379,
+        "REDIS_PASSWORD": "redis_passkey",
+        "REDIS_SESSIION_PREFIX": "logomaker_sess:",
+        "MAX_REDIS_CONNECTIONS": 10
+    },
+    "emailConfig": {
+        "provider": "Gmail",
+        "auth": {
+            "user": "gmail.user@gmail.com",
+            "pass": "encrypted_userpass"
+        }
+    },
+    "paypalExpressConfig":{
+        "username": "suraj_api1.printbindaas.com",
+        "password": "FN77PEEFXJEPP4SE",
+        "signature": "Ae5Tu1Q7iSeNqUALKdZjvrTKozXAAadYnBc3dWIDB9-n6Jm1hAk3losd"
+    },
+    "facebook": {
+        "appId": "",
+        "appSecret": "",
+        "redirectUri": ""
+    },
+    "payTmConfig": {
+        "Website": "Printbindaas",
+        "MID": "Printb00843406183442",
+        "Merchant_Key": "IqGu!_WbgeeA1Lq8",
+        "Industry_Type": "Retail",
+        "url": "https://pguat.paytm.com/oltp-web/processTransaction?orderid="
+    },
+    "stripeCheckoutConfig" : {
+        "secretKey": "sk_test_bYm2wkbweiyTsSnnj8Ql2jLe",
+        "publicKey": "pk_test_JOlUtKFKsFqPbjGplH2ZoMsP "
+    }
+}

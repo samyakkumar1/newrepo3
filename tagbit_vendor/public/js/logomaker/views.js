@@ -1,0 +1,3 @@
+window.views = {
+	_default: ""
+};

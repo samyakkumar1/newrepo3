@@ -1,0 +1,35 @@
+<% include header.ejs %>
+<script src="/js/logomaker/helpers/purchased-logos.js"></script>
+<style>
+    .tableRow td {
+        text-align: center;
+    }
+</style>
+<section class="page_top">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Purchased Logos</h1>
+                <select class="pull-right col-md-4" id="categories" style="top: 10px" placeholder="Choose a category"></select>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container admin_container table_card">
+    <table class="col-md-12 tableRow" border="1" id="tblPurchasedLogos">
+        <thead>
+        <tr>
+            <th>Logo</th>
+            <th>Purchased User</th>
+            <th>Visibility</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="3">No purchased Logos</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<% include footer.ejs %>

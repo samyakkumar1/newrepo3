@@ -1,0 +1,162 @@
+<% include ../header.ejs %>
+				<tr>
+					<td>
+						<table width="100%" cellspacing="0" cellpadding="0"><!-- /Banner -->
+							<tr>
+								<td> 
+                  <img style="width: 100%" src="cid:static_banner@logomaker.com" alt="banner"> 
+								</td>
+							</tr>
+						</table><!-- /Banner -->
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<table width="100%" cellpadding="0" cellspacing="0" style="margin-top:20px;"><!-- /Content -->
+							<tr>
+								<td>
+									<p><span style="display: block; margin-bottom: 10px;">Hi <%= name %>,</span>Thank you for designing "<%= companyName %>" Logo at <a style="color: #0ed7d6; text-decoration: none;" href="http:<%= base %>/" target="_blank" title="Online Free Logo">www.tagbit.co</a></p>
+                  <h3>Your logo design has been purchased. Try recommended designs and buy. </h3>
+								</td>
+							</tr>
+						</table><!-- /.Content -->
+					</td>
+				</tr>
+				<tr>
+					<td style="text-align:center;">
+						<table width="100%" cellpadding="0" cellspacing="0">
+							<tr>
+								<td>
+									<table width="100%" cellspacing="0" cellpadding="0" style="background: #dfdfdf; width:90%; padding:5px; margin-top:20px;"><!-- Special Offer -->
+										<tr>
+											<td style="border:2px dotted #cecece; position: relative;">
+												<p style="font-size: 14px; color:#454545;">Purchase your logos before anyone else takes it!<br>We are offering discount of </p>
+												<h1 style="color:#00cccb; font-size:60px; font-weight: 800; margin: 0;">40%</h1>
+												<h2 style="color:#000; font-size:25px; font-weight: 700; margin:0;">FLAT</h2>
+												<h3 style="color:#555555; font-size:26px; font-weight: 800;">So Hurry, <a style="color:#00cccb; text-decoration: none;" href="#" target="_blank" title="Buy Now">BUY NOW!</a></h3>
+											</td>
+										</tr>
+									</table><!-- Special Offer -->
+								</td>
+								<td style="text-align:center;"><img src="cid:discount@logomaker.com" alt="Special"></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<table width="100%" cellspacing="0" cellpadding="0" style="margin-top:20px;"><!-- /Bullet Content -->
+							<tr>
+								<td>
+									<ul style="padding: 0; margin: 0;">
+										<li style="background: url(<%= base %>/img/email/bullet.jpg) 0 0 no-repeat; list-style: none; font-size: 14px; line-height: 22px; padding:1px 0 20px 45px; margin-left:0;">All the logos you see on our website are UNIQUE. They have not been used by anyone before. </li>
+										<li style="background: url(<%= base %>/img/email/bullet.jpg) 0 0 no-repeat; list-style: none; font-size: 14px; line-height: 22px; padding:1px 0 20px 45px; margin-left:0;">What’s more, you can play with 1000s designs to choose from various different industries.</li>
+										<li style="background: url(<%= base %>/img/email/bullet.jpg) 0 0 no-repeat; list-style: none; font-size: 14px; line-height: 22px; padding:1px 0 20px 45px; margin-left:0;">We provide .pdf, .svg,. png and .jpeg file formats of “<%= companyName %>” logo. It means you can use your logo for large scale and high resolution printing applications like banners, packaging, mailers, t-shirts, business cards, letter heads, mugs, etc</li>
+									</ul>
+								</td>
+							</tr>
+						</table><!-- /.Bullet Content -->
+            <br/>
+             
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<table cellspacing="0" cellpadding="0" style="width: 83%; margin: 15px auto;"><!-- /Saved Logos -->
+							<tr>
+								<td style="background: #00cccb; color: #454545; text-align: center; text-transform: uppercase; padding:10px 0;">YOUR LOGO</td>
+							</tr>
+							<tr>
+								<td>
+									<table width="100%" cellspacing="0" cellpadding="0">
+										<tr>
+											<td>
+												<div style="padding: 6px; width: 123px; height:123px; margin:20px auto 0; border: 1px solid #dedede;">
+													<a href="#" target="_bank"><img src="cid:purchased_logo@logomaker.com" alt="Online free Logo" style="border:1px solid #517fa6; width: 122px; height:122px;"></a>
+												</div>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr> 
+						</table><!-- /.Saved Logos -->
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<table cellspacing="0" cellpadding="0" style="width: 83%; margin: 15px auto;"><!-- /Saved Logos -->
+							<tr>
+								<td style="background: #00cccb; color: #454545; text-align: center; text-transform: uppercase; padding:10px 0;">RECOMMENDED LOGOS</td>
+							</tr>
+							<tr>
+								<td>
+									<table width="100%" cellspacing="0" cellpadding="0">
+										<tr>
+											<td>
+												<div style="padding: 6px; width: 123px; height:123px; margin:20px auto 0; border: 1px solid #dedede;">
+													<a href="<%= logoImage ? base + '/logo-design-online/' + logoImage[0].url : base + '/logo-design-online' %>" target="_bank"><img src="cid:prev_logo_0@logomaker.com" alt="Online free Logo" style="border:1px solid #517fa6; width: 122px; height:122px;"></a>
+												</div>
+											</td>
+											<td>
+												<div style="padding: 6px; width: 123px; height:123px; margin:20px auto 0; border: 1px solid #dedede;">
+													<a href="<%= logoImage ? base + '/logo-design-online/' + logoImage[1].url : base + '/logo-design-online' %>" target="_bank"><img src="cid:prev_logo_1@logomaker.com" alt="Online free Logo" style="border:1px solid #517fa6; width: 122px; height:122px;"></a>
+												</div>
+											</td>
+											<td>
+												<div style="padding: 6px; width: 123px; height:123px; margin:20px auto 0; border: 1px solid #dedede;">
+													<a href="<%= logoImage ? base + '/logo-design-online/' + logoImage[2].url : base + '/logo-design-online' %>" target="_bank"><img src="cid:prev_logo_2@logomaker.com" alt="Online free Logo" style="border:1px solid #517fa6; width: 122px; height:122px;"></a>
+												</div>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr> 
+						</table><!-- /.Saved Logos -->
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<table cellspacing="0" cellpadding="0" style="width: 83%; margin: 15px auto;"><!-- /Recommended Business Cards -->
+							<tr>
+								<td style="background: #00cccb; color: #454545; text-align: center; text-transform: uppercase; padding:10px 0;">RECOMMENDED BUSINESS CARDS</td>
+							</tr>
+							<tr>
+								<td>
+									<table width="100%" cellspacing="0" cellpadding="0">
+										<tr>
+											<td>
+												<div style="padding: 6px ; border: 1px solid #dedede; width: 197px; height:93px; margin:20px auto 0;">
+													<a href="<%= cardImage ? base + '/design-business-card-online/' + cardImage[0].url : base + '/design-business-card-online' %>" target="_bank"><img src="cid:prev_card_0@logomaker.com" alt="Online free Logo" style="border:1px solid #517fa6; width: 196px; height: 92px;"></a>
+												</div>
+											</td>
+											<td>
+												<div style="padding: 6px ; border: 1px solid #dedede; width: 197px; height:93px; margin:20px auto 0;">
+													<a href="<%= cardImage ? base + '/design-business-card-online/' + cardImage[1].url : base + '/design-business-card-online' %>" target="_bank"><img src="cid:prev_card_1@logomaker.com" alt="Online free Logo" style="border:1px solid #517fa6; width: 196px; height: 92px;"></a>
+												</div>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<table width="100%" cellspacing="0" cellpadding="0">
+										<tr>
+											<td>
+												<div style="padding: 6px ; border: 1px solid #dedede; width: 197px; height:93px; margin:20px auto 0;">
+													<a href="<%= cardImage ? base + '/design-business-card-online/' + cardImage[2].url : base + '/design-business-card-online' %>" target="_bank"><img src="cid:prev_card_2@logomaker.com" alt="Online free Logo" style="border:1px solid #517fa6; width: 196px; height: 92px;"></a>
+												</div>
+											</td>
+											<td>
+												<div style="padding: 6px ; border: 1px solid #dedede; width: 197px; height:93px; margin:20px auto 0;">
+													<a href="<%= cardImage ? base + '/design-business-card-online/' + cardImage[3].url : base + '/design-business-card-online' %>" target="_bank"><img src="cid:prev_card_3@logomaker.com" alt="Online free Logo" style="border:1px solid #517fa6; width: 196px; height: 92px;"></a>
+												</div>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table><!-- /.Recommended Business Cards -->
+					</td>
+				</tr> 
+<% include ../footer.ejs %>

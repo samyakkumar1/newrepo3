@@ -1,0 +1,46 @@
+<% include header.ejs %>
+  <link rel="stylesheet" href="/js/thirdparty/summernote/summernote.css" />
+  <script type="text/javascript" src="/js/thirdparty/summernote/summernote.js"></script> 
+<style>
+  .right-menu-fix{
+      left: -175px;
+  }
+  #text_editor {
+      height: 150px !important;
+  }
+</style>
+<script src="/js/logomaker/helpers/composer.js"></script>
+<section class="page_top">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Composer</h1>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="container"> 
+  <form role="form"> 
+    <div class="form-group"> 
+        <label><input type='checkbox' checked="" id="newTemplateBtn" /> New Template?</label>
+    </div> 
+    <div class="form-group chooseTemplateSection"> 
+        <label>Choose a Template</label> 
+        <select class="form-control templateList"></select> 
+    </div> 
+    <div class="form-group newTemplateSection">  
+        <input class="form-control" id="newTemplateName" placeholder="Enter Template Name Here"/> 
+    </div> 
+    <textarea id="html_editor"></textarea> 
+    <textarea id="text_editor" class="form-control" cols="10"></textarea>
+    <br/>
+    <div class="form-group">  
+        <button class="btn btn-primary pull-right" id="saveBtn">Save</button>
+        <button class="btn btn-success ">Preview</button>
+        <button class="btn btn-success">Variables?</button> 
+        <button class="btn btn-success" id="textMode">Edit Plain Text</button>
+        <button class="btn btn-success" id="htmlMode">Edit HTML Text</button>
+    </div> 
+  </form>
+</div>
+<% include footer.ejs %>

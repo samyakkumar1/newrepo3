@@ -1,0 +1,474 @@
+<% include myHeader.ejs %>
+<script>
+    var flatDiscountPercentageLogo = <%= config.FLAT_DISCOUNT_LOGO %>;
+    var flatDiscountPercentageCard = <%= config.FLAT_DISCOUNT_CARD %>;
+    var version =  "<%= options.version %>";
+</script>
+<!--<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>-->
+
+<% if (global.config.USE_MIN_FILES == true) { %>
+<script src="/js/logomaker.min.js?v=<%= options.version %>"></script>
+
+<% } else { %>
+<script src="/js/logomaker/helpers/logomaker.js"></script>
+
+<% } %>
+<link rel="stylesheet" href="/css/create-logo.css?v=<%= options.version %>">
+<style type="text/css">
+body::-webkit-scrollbar-thumb{background-color:red;outline:1px solid slategrey}
+
+</style>
+<section class="page-top page-top-logo">
+    <div class="container" style="margin-top:180px;">
+        <div class="row">
+            <div class="col-md-12">
+                <span class="page-common-header">Create your logo</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <header class="header-section"  style="margin-top:100px;z-index:1;">
+        <div class="header-bottom">
+
+<div class="container py-3 my-3 border rounded shadow-sm wizard-tabs " style="margin-top:95px;">
+    <div class="row" >
+        <section class="col-12">
+            <ul class="wizard-steps" role="tablist">
+                <li  class="active wiz-one " style="background-color:purple;border-color:purple">
+                    <a  class="text-center" data-toggle="tab" aria-controls="step1"  title="Step 1" style="color:purple">
+					          <span class="badge hidden-xs" style="background-color:#505bda;">1</span>
+		 Enter Identity </a>
+                </li>
+                <li  class="wiz-two" style="background-color:purple;border-color:purple">
+                    <a  class="text-center" data-toggle="tab" aria-controls="step2"  title="Step 2" style="color:purple"> 
+					          <span class="badge hidden-xs" style="background-color:#505bda;">2</span>
+		Choose your Industry </a>
+                </li>
+                <li  class="wiz-three" style="background-color:purple;border-color:purple">
+                    <a  class="text-center" data-toggle="tab" aria-controls="step3"  title="Step 3" style="color:purple"> 
+				          <span class="badge hidden-xs" style="background-color:#505bda;">3</span>
+		Choose/Edit Template </a>
+                </li>
+                <li  class="wiz-four" style="background-color:purple;border-color:purple">
+                    <a  class="text-center" data-toggle="tab" aria-controls="complete"  title="Complete" style="color:purple">
+				          <span class="badge hidden-xs" style="background-color:#505bda;">4</span>
+		 Save & Download </a>
+                </li>
+            </ul>
+            </section>
+    </div> 
+</div>
+
+</div>
+</header>
+
+
+
+<div role="main" class="main create-logo">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="create-logo-header text-left" style="margin-top: 20px;">
+                    <div>A logo is the face of your brand, an immediately recognizable image that tell the world what you're all about. With Tagbit you can design your professional logo by logo maker. By inserting a few informatio's so we get to know about your business and what you'll get a design that's right for you.</div>
+
+                    <div>We've crafted a suite of logo design tools that are building to help you the best impression on your customers. Our online logo maker enables you to take part in the logo designing process while keeping true to fonts, symbols and texts.</div>
+
+                    <div>Logo design was never this easy. Just enter your company name and tagline and get a suitable logo design in seconds.</div>    
+
+                    <div>The logo design once purchased will not available for further purchase. You can edit your logo design multiple times for FREE.</div>
+
+                    <div>Happy logo designing!</div>
+
+                </div>
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion"
+                                   href="#" class="">
+                                    Enter the name of your company
+                                </a>
+                            </h4>
+                            <h4 class="panel-title panel-title-active comm-bg">
+                                <span class="panel-desc">
+                                    <i class="fa fa-check-square-o"></i>
+                                    <span class="panel-desc-check">1. IDENTITY</span>
+                                    <span class="panel-title-company"></span>
+                                    <span class="panel-title-desc"></span>
+                                </span>
+                                <a data-toggle="collapse" data-parent="#accordion" href="#" class="comm-bg">
+                                    <span class="panel-edit">
+                                        <i class="fa fa-edit"></i>
+                                        <span class="edit-text">Edit</span>
+                                    </span>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="accordionOne" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-6 remove-left">
+                                        <label>What is your company name ?</label>
+                                        <input type="text" value="" class="form-control input-lg" id="company-name"
+                                               maxlength="24">
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 remove-left-mobile">
+                                        <label>Your company tag line (optional)</label>
+                                        <input type="text" value="" class="form-control input-lg" id="company-tagline"
+                                               maxlength="30">
+                                    </div>
+                                </div>
+                                <div class="identity-next">
+                                    <button type="button" class="btn-primary2" id="nextBtnStep1" style="font-weight:bolder;">Next</button>
+                                </div>
+                                <div class="identity-cancel">
+                                    <button type="button" class="btn-primary2">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-two">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion"
+                                   href="#" class="">
+                                    <h1>Choose your Industry</h1>
+                                </a>
+                            </h4>
+                            <h4 class="panel-title panel-title-active comm-bg">
+                                    <span class="panel-desc">
+                                        <i class="fa fa-check-square-o"></i>
+                                        <span class="panel-desc-check">2. INDUSTRY</span>
+                                        <span class="panel-sec-desc" >IT/Engineering</span>
+                                    </span>
+                                <a data-toggle="collapse" data-parent="#accordion"
+                                   href="#" class="comm-bg">
+                                        <span class="panel-edit">
+                                            <i class="fa fa-edit"></i>
+                                            <span class="edit-text">Edit</span>
+                                        </span>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="accordionTwo" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <div class="col-md-12 keyword-div">
+                                        <input type="text" value="" class="form-control input-lg"
+                                               id="industry-key-search" placeholder="Keyword Search">
+                                        <i class="fa fa-search"></i>
+                                    </div>
+                                </div>
+                                <ul class="keyword-lists">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-three">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion"
+                                   href="#" class="">
+                                    Choose/Edit Template
+                                </a>
+                            </h4>
+                            <h4 class="panel-title panel-title-active comm-bg">
+        <span class="panel-desc">
+            <i class="fa fa-check-square-o"></i>
+            <span class="panel-desc-check">3. CUSTOMIZED TEMPLATE</span>
+            <span class="panel-active-span">
+                <span class="panel-active-img"><img src="/img/logo1.jpg"></span>
+                <span class="panel-title-head">
+                    <span class="panel-title-company panel-company-active"></span>
+                    <span class="panel-title-desc panel-desc-active"></span>
+                </span>
+            </span>
+        </span>
+                                <a data-toggle="collapse" data-parent="#accordion" href="#" class="comm-bg">
+            <span class="panel-edit">
+                <i class="fa fa-edit"></i>
+                <span class="edit-text">Edit</span>
+            </span>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="accordionThree" class="panel-collapse collapse">
+                            <div class="panel-body" style="display: none;" id="actualLogoEditorPanelBody">
+                                <div class="col-md-12">
+                                    <div class="col-md-3" style="display:none;padding: 0px;border: solid 1px #E6E6E6;">
+                                        <div class="editorLayout">
+                                            <div class="lefTPaneHeader">Logo Suggestions</div>
+                                            <div class="col-md-12 leftPanecontents">
+                                                <span class="logos"></span>
+
+                                                <div class="col-md-12" style="padding: 20px">
+                                                    <button class="col-md-12 btn btn-sm btn-default"
+                                                            id="loadMoreLogosBtn">
+                                                        Load More Logos
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="" id="iframeHolder">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <a class="tooltip1" data-toggle="tooltip" data-placement="right"
+                                           data-original-title="Choose a different category">
+                                            <span class="template-back" id="templateBack">Back</span></a>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <a class="tooltip1 pull-right" data-toggle="tooltip" data-placement="left"
+                                           data-original-title="Saves the edited logo in �My Designs�.">
+                                            <span class="template-save" id="templateSave" 
+											<% if (!user) { %>
+											onclick="logalert()"
+											<% } %> >Save & Continue</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-body row" id="logoListerPanelBody">
+                                
+                                    <div class="col-md-6 keyword-search">
+                                        <select id="e1">
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 keyword-search" id="search" >
+                                        <input type="text" value="" class="form-control"
+                                               id="industry-sub-key-search" placeholder="Keyword Search">
+                                        <i class="fa fa-search"></i>
+                                    </div>
+                                
+                               <div class="col-md-3 pull-right" style="display: none;">
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" id="hidePurchasedLogoCheckBox"> Hide Purchased Logos</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6" style="display: none">
+                                    <ul class="template-filter">
+                                        <li class="template-filter-li active">ALL</li>
+                                        <li class="template-filter-li">New</li>
+                                        <li class="template-filter-li">Popular</li>
+                                    </ul>
+                                </div>
+                                <div class="clr"></div>
+                                <div class="template-space"></div>
+                                <span class="logos row">
+                                </span>
+                                <div class="col-md-12">
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <a class="tooltip1" data-toggle="tooltip" data-placement="right"
+                                           data-original-title="Choose a different category">
+                                            <button class="btn btn-sm btn-primary template-back"
+                                                    id="backToChooseCategory">Back
+                                            </button>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <a class="tooltip1 pull-right" data-toggle="tooltip" data-placement="left"
+                                           data-original-title="Saves the edited logo in �My Designs�.">
+                                            <button class="btn btn-sm btn-primary template-save" id="loadMoreLogosBtn2">
+                                                Load More Logos
+                                            </button>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="pull-left">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-four">
+                    <h4 class="panel-heading panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"
+                           href="#" class="">
+                            Save and Purchase
+                        </a>
+                    </h4>
+
+                    <div id="accordionFour" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="col-md-4 free-logo-column custom22">
+                                <div class="free-logo">
+                                    <span class="logo-text">Your Logo is saved in "My Designs"</span>
+                        <span class="logo-card-outline">
+                            <span class="logo-card">
+                                <img src="" id="logoPreviewImg">
+                                <span class="flip-card-template"></span>
+                            </span>
+                        </span>
+                                    <button type="button" class="clr button-dwnld buy-now-card custom23" id="buyLogo">
+                                        Buy Now for
+                                        <b class="purchase-discount-limit custom30">...</b><i class="fa fa-info"></i>
+                                    </button>
+                                    <button type="button" class="clr button-dwnld download-jpg" id="createAnotherLogo">
+                                        CREATE ANOTHER LOGO<i class="fa fa-info"></i></button>
+                                </div>
+                            </div>
+                            <div class="col-md-6 custom04">
+                                <div class="unlimited-use custom24">
+                                    <span class="logo-text">Use your logo unlimited times</span><span
+                                            class="purchase-text" style="padding: 0px">Purchase the original source files for only
+                    <strike>
+                        <span class="purchase-limit">...</span>
+                    </strike>
+                        &nbsp;<span class="purchase-discount-limit">...</span>
+                    </span>
+                                    <label class="percentage_label">Save upto <b><%= config.FLAT_DISCOUNT_LOGO %>%</b>
+                                        today!</label> <br/>
+                                   
+                                    <span class="use-text"><i class="fa fa-circle"></i>The high resolution file can be used for large scale and high resolution print applications like signs, billboards, ads, packaging, mailers, silk-screening, and business cards.</span>
+                                    <span class="use-text bold-text"><i class="fa fa-circle"></i>Once you purchase the logo,  that logo would be removed from our website and no one else will be able to use or purchase it.</span>
+                                    <!--
+                                    <span class="use-text"> 
+                                        We have been striving for excellence ever since our
+                                        inception and our eye for perfection has always helped us
+                                        build long lasting relationships with our clients that we
+                                        value. In addition to that we also offer:
+                                    </span>
+                                    <span style="padding-top: 0px;padding-bottom: 0px" class="use-text bold-text"><i class="fa fa-circle"></i>The best quality products.</span>
+                                    <span style="padding-top: 0px;padding-bottom: 0px" class="use-text bold-text"><i class="fa fa-circle"></i>A professional design team.</span>
+                                    <span style="padding-top: 0px;padding-bottom: 0px" class="use-text bold-text"><i class="fa fa-circle"></i>Quick, efficient and cost effective services.</span>
+                                    <span style="padding-top: 0px;padding-bottom: 0px" class="use-text bold-text"><i class="fa fa-circle"></i>Premium print quality.</span>
+                                    -->
+                                    <div class="arrow-left"></div>
+                                    <div class="" style="display: none">
+                                        <img src="" id="logoPreviewImg2" >
+                                    </div>
+                                </div>
+                                <div class="unlimited-use-download custom31">
+                                    <span class="purchase-text-new">All designed logo gets saved in �My designs".</span>
+                                    <div class="div-arrow-create"></div>
+                                    <div class="" style="display: none">
+                                        <img src="" id="logoPreviewImg2">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 business-card-logo comm-bg">
+                            <div class="col-md-6">
+                                <div class="buss-card-logo-img">
+                                    <img class="buss-card-image1 custom25" src="/img/business_card_3.png">
+                                    <div class="buss-card-image"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <span class="buss-card-pdt">Congratulations on your online free logo.</span>
+                                <span class="buss-card-create">Would you also like to design business card for <b
+                                            class="card-company-name">company</b> ?</span>
+                <span class="business-card-button"><a href="#" id="createBusinessCardOnBottom">Start Now
+                    </a></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<% include myFooter.ejs %>
+<script type="text/javascript">
+    $(function () {
+        $('.template-list li').hover(function () {
+            $(this).addClass('active');
+            $(this).find('.flip-template').fadeIn(300);
+        }, function () {
+            $(this).find('.flip-template').fadeOut(100);
+            $(this).removeClass('active');
+        });
+        $('.template-filter-li').on('click', function () {
+            $('.template-filter-li').removeClass('active');
+            $(this).addClass('active');
+        });
+        $("#e1").select2();
+        $('.panel-title-active a').on('click', function () {
+            $('#company-name').val("");
+            $(this).parents(':eq(1)').next().slideDown();
+            $(this).parents(':eq(1)').next().addClass('in');
+            if ($('#accordionOne .panel-body').is(':visible')) {
+                $('.identity-next').hide();
+                $('.identity-cancel').css('display', 'inline-block');
+                $('.wizard-steps li').removeClass('active');
+                $('.wiz-one').addClass('active');
+                $('#company-name').focus();
+            }
+            else if ($('#accordionTwo .panel-body').is(':visible')) {
+                $('.wizard-steps li').removeClass('active');
+                $('.wizard-steps li.wiz-two').addClass('active');
+                $('#industry-key-search').val("");
+                $('.keyword-lists li').show();
+                $('#industry-key-search').focus();
+            }
+            else if ($('#search .panel-body').is(':visible')) {
+                $('.wizard-steps li').removeClass('active');
+                $('.wizard-steps li.wiz-two').addClass('active');
+                $('#industry-sub-key-search').val("");
+                $('.keyword-lists li').show();
+                $('#industry-sub-key-search').focus();
+            }
+            else if ($('#accordionThreeaccordionThree .panel-body').is(':visible')) {
+                $('.wizard-steps li').removeClass('active');
+                $('.wizard-steps li.wiz-three').addClass('active');
+            }
+            else if ($('#accordionFour .panel-body').is(':visible')) {
+                $('.wizard-steps li').removeClass('active');
+                $('.wiz-four').addClass('active');
+            }
+        });
+
+        var windowH = $(window).height();
+        $(window).scroll(function () {
+            $('.create-logo-footer').show();
+        });
+    });
+</script>
+
+<div class="modal fade" id="bcardListModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content new-modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Create a business card associated with this logo</h4>
+            </div>
+            <div class="modal-body">
+                <p class="bg-success custom26">Click on the business cards to customize</p>
+
+                <div class="overflow-auto">
+                    <div id="cards-list" class="col-md-12">
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" style="display: none" id="checkoutNow">No, Just checkout
+                    this Logo
+                </button>
+                <button type="button" class="btn btn-success" style="display: none" id="downloadNow"
+                        data-dismiss="modal">
+                    No, Just Download this Logo
+                </button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function logalert() {
+        console.log("template-test");
+        alert("Hey User! Please login or create an account to proceed");
+    }
+</script>
+
+

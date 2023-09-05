@@ -1,0 +1,791 @@
+<script type='text/plain' id='allFonts'>
+    <style type='text/css' id='fonts'>
+        @font-face {
+            font-family: 'Space-text';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/SpaceText-Light.otf');
+        }
+
+        @font-face {
+            font-family: 'Viga';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Viga-Regular.otf');
+        }
+        @font-face {
+            font-family: 'Titillium';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Titillium-Black.otf');
+        }
+        @font-face {
+            font-family: 'Decalotype';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Decalotype-Black.ttf');
+        }
+        @font-face {
+            font-family: 'Inknut-antiqua';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/InknutAntiqua-Black.ttf');
+        }
+
+        @font-face {
+            font-family: Arial-BoldMT;
+            src: local('Arial');
+        }
+
+        @font-face {
+            font-family: ArialMT;
+            src: local('Arial');
+        }
+
+        @font-face {
+            font-family: 'Neuton';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Neuton-Light.ttf');
+        }
+        @font-face {
+            font-family: 'Aladin';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Aladin-Regular.ttf');
+        }
+        @font-face {
+            font-family: 'Aleo';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Aleo-Light.otf');
+        }
+        @font-face {
+            font-family: 'Amita';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/amita-bold.ttf');
+        }
+        @font-face {
+            font-family: 'Archivo';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Archivo-Medium.ttf');
+        }
+        @font-face {
+            font-family: 'Stag Medium';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/STAG-MEDIUM_0.otf');
+        }
+        @font-face {
+            font-family: 'Stag Sans Medium';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/STAGSANS-MEDIUM_0.otf');
+        }
+        @font-face {
+            font-family: 'ArimaKoshi';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/ArimaKoshi-Light.otf');
+        }
+        @font-face {
+            font-family: 'Asul';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Asul-Bold.ttf');
+        }
+        @font-face {
+            font-family: 'Baloo';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Baloo-Regular.ttf');
+        }
+        @font-face {
+            font-family: 'Museo Slab';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Museo_Slab.otf');
+        }
+        @font-face {
+            font-family: 'Blackout';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Blackout-Midnight.ttf');
+        }
+        @font-face {
+            font-family: 'Cabin';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Cabin-Regular.ttf');
+        }
+        @font-face {
+            font-family: 'Museo Sans';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/museosans-webfont.woff2') format('woff2'), url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/museosans-webfont.woff') format('woff'), url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/MuseoSans.otf');
+        }
+        @font-face {
+            font-family: 'Condiment';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Condiment-Regular.ttf');
+        }
+        @font-face {
+            font-family: 'Corben';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Corben-Regular.ttf');
+        }
+        @font-face {
+            font-family: 'Cormorant';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Cormorant-Regular.ttf');
+        }
+        @font-face {
+            font-family: 'CroissantOne';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/CroissantOne-Regular.ttf');
+        }
+        @font-face {
+            font-family: 'DeliusSwashCaps';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/DeliusSwashCaps-Regular.ttf');
+        }
+        @font-face {
+            font-family: 'Devonshire';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Devonshire-Regular.ttf');
+        }
+        @font-face {
+            font-family: 'Changa';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Changa-Light.ttf');
+        }
+
+        @font-face {
+            font-family: 'Zapf ChanceC';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Zapf.otf');
+        }
+        @font-face {
+            font-family: 'Digitalt';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Digitalt.ttf');
+        }
+        @font-face {
+            font-family: 'DrSugiyama';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/DrSugiyama-Regular.ttf');
+        }
+        @font-face {
+            font-family: 'Elsie';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Elsie-Black.otf');
+        }
+        @font-face {
+            font-family: 'ElsieSwashCaps';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/ElsieSwashCaps-Black.otf');
+        }
+        @font-face {
+            font-family: 'Fanwood Text';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Fanwood Text.otf');
+        }
+        @font-face {
+            font-family: 'Fondamento';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Fondamento-Italic.ttf');
+        }
+        @font-face {
+            font-family: 'Fascinate';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Fascinate-Regular.ttf');
+        }
+        @font-face {
+            font-family: 'FredokaOne';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/FredokaOne-Regular.ttf');
+        }
+        @font-face {
+            font-family: 'Gill Sans MT Ext Condensed Bold';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/GLSNECB.otf');
+        }
+        @font-face {
+            font-family: 'HelveticaCnd-Normal';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/HELVETIA.otf');
+        }
+        @font-face {
+            font-family: 'Gabriela';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Gabriela-Regular.ttf');
+        }
+        @font-face {
+            font-family: 'Galada';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Galada-Regular.ttf');
+        }
+        @font-face {
+            font-family: 'GermaniaOne';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/GermaniaOne-Regular.ttf');
+        }
+        @font-face {
+            font-family: 'GlacialIndifference';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/GlacialIndifference-Italic.otf');
+        }
+        @font-face {
+            font-family: 'Gnomon-Foreground';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Gnomon-Foreground.ttf');
+        }
+        @font-face {
+            font-family: 'Heuristica';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Heuristica-Regular.otf');
+        }
+        @font-face {
+            font-family: 'HKGrotesk';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/HKGrotesk-Light.ttf');
+        }
+        @font-face {
+            font-family: 'HKVenetian';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/HKVenetian-Italic.ttf');
+        }
+        @font-face {
+            font-family: 'IAWriterDuospace';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/iAWriterDuospace-BoldItalic.otf');
+        }
+        @font-face {
+            font-family: 'IBMPlexMono';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/IBMPlexMono-Light.otf');
+        }
+        @font-face {
+            font-family: 'Comic Neue';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/cursive.otf');
+        }
+        @font-face {
+            font-family: 'CG-OmegaC';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/cgor45w.otf');
+        }
+        @font-face {
+            font-family: 'Eurostile LT Bold';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/STAGSANS-MEDIUM_0.otf');
+        }
+        @font-face {
+            font-family: ArialMT;
+            src: local('Arial');
+        }
+        @font-face {
+            font-family: 'IBMPlexSans';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/IBMPlexSans-SemiBold.otf');
+        }
+        @font-face {
+            font-family: 'IBMPlexSerif';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/IBMPlexSerif-ExtraLight.otf');
+        }
+        @font-face {
+            font-family: 'Istok';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Istok-Regular.ttf');
+        }
+        @font-face {
+            font-family: 'Jellee';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Jellee-Roman.ttf');
+        }
+        @font-face {
+            font-family: 'Judson';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Judson-Bold.ttf');
+        }
+        @font-face {
+            font-family: 'Kameron';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Kameron-Regular.ttf');
+        }
+        @font-face {
+            font-family: 'Karla';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Karla-BoldItalic.ttf');
+        }
+        @font-face {
+            font-family: 'Kavivanar';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Kavivanar-Regular.ttf');
+        }
+        @font-face {
+            font-family: 'KaushanScript';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/KaushanScript-Regular.ttf');
+        }
+        @font-face {
+            font-family: Adventure;
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Adventure.otf');
+        }
+        @font-face {
+            font-family: ChopinScript;
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/ChopinScript.otf');
+        }
+        @font-face {
+            font-family: 'LeagueMono';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/LeagueMono-Medium.ttf');
+        }
+        @font-face {
+            font-family: 'Lekton';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Lekton-Regular.ttf');
+        }
+        @font-face {
+            font-family: 'LinguisticsPro';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/LinguisticsPro-Regular.otf');
+        }
+        @font-face {
+            font-family: 'MarkoOne';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/MarkoOne-Regular.ttf');
+        }
+        @font-face {
+            font-family: 'Michroma';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Michroma.ttf');
+        }
+        @font-face {
+            font-family: 'Montserrat';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Montserrat-ExtraLight.ttf');
+        }
+        @font-face {
+            font-family: 'NanumGothicCoding';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/NanumGothicCoding-Regular.ttf');
+        }
+        @font-face {
+            font-family: 'Nautilus';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Nautilus.otf');
+        }
+        @font-face {
+            font-family: 'Nevis';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/nevis.ttf');
+        }
+        @font-face {
+            font-family: 'Norwester';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/norwester.ttf');
+        }
+        @font-face {
+            font-family: 'Giddyup Std';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/GiddyupStd.otf');
+        }
+        @font-face {
+            font-family: 'Kleymissky';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Kleymissky_0283.otf');
+        }
+        @font-face {
+            font-family: 'Now';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Now-Medium.otf');
+        }
+        @font-face {
+            font-family: 'Officecodeprod';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/officecodeprod-regular.otf');
+        }
+        @font-face {
+            font-family: 'OldStandard';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/OldStandard-Bold.ttf');
+        }
+        @font-face {
+            font-family: 'OstrichSans';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/OstrichSans-Light.otf');
+        }
+        @font-face {
+            font-family: 'Philosopher';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Philosopher-Bold.ttf');
+        }
+        @font-face {
+            font-family: 'Prociono';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Prociono.ttf');
+        }
+        @font-face {
+            font-family: 'Questrial';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Questrial-Regular.otf');
+        }
+        @font-face {
+            font-family: 'Rajdhani-Light';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Rajdhani-Light.ttf');
+        }
+        @font-face {
+            font-family: 'Renner';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Renner-LightItalic.otf');
+        }
+        @font-face {
+            font-family: 'Rubik';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Rubik-Light.ttf');
+        }
+        @font-face {
+            font-family: 'Orial_';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/ORIAL_BOLD.otf');
+        }
+
+        @font-face {
+            font-family: 'Rosewood Std Regular';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/RosewoodStd-Regular.otf');
+        }
+        @font-face {
+            font-family: 'Sansation';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Sansation_Regular.ttf');
+        }
+        @font-face {
+            font-family: 'SedgwickAve';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/SedgwickAve-Regular.ttf');
+        }
+        @font-face {
+            font-family: 'Sen';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/sen-regular.otf');
+        }
+        @font-face {
+            font-family: 'SixCaps';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/SixCaps.ttf');
+        }
+        @font-face {
+            font-family: 'SquadaOne';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/SquadaOne-Regular.ttf');
+        }
+        @font-face {
+            font-family: 'TenorSans';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/TenorSans-Regular.ttf');
+        }
+        @font-face {
+            font-family: 'TruenoBd';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/TruenoBd.otf');
+        }
+        @font-face {
+            font-family: 'WorkSans';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/WorkSans-Bold.ttf');
+        }
+        @font-face {
+            font-family: 'Yesteryear';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Yesteryear-Regular.ttf');
+        }
+        @font-face {
+            font-family: 'Sriracha';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Sriracha-Regular.ttf');
+        }
+        @font-face {
+            font-family: 'Stencil Std';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/StencilStd.otf');
+        }
+
+        @font-face {
+            font-family: 'Scriptina Pro';
+            src: url('<%= config.APP_DOMAIN.replace('http:', '').replace('https:', '') %>/fonts/Scriptina-Pro.otf');
+        }
+    </style>
+</script>
+<script type='text/javascript'>
+    function getSupportedFonts() {
+        return [
+            {
+                name: 'Serif',
+                value: 'Times',
+                aliases: ['Times']
+            },
+            'Sans-Serif',
+            'Monospace',
+            'Neuton', {
+                name: 'Cursive',
+                value: 'Comic Neue',
+                aliases: ['Cursive1', 'Cursive']
+            }, {
+                name: 'Arial',
+                value: 'Arial',
+                aliases: ['ArialMT', 'Arial-BoldMT']
+            }, {
+                name: 'Museo Slab',
+                value: 'Museo Slab',
+                aliases: ['MuseoSlab']
+            }, {
+                name: 'Museo Sans',
+                value: 'Museo Sans',
+                aliases: ['MuseoSans']
+            }, {
+                name: 'Stag Medium',
+                value: 'Stag Medium',
+                aliases: ['Stag-Medium', 'Eurostile LT Bold']
+            }, {
+                name: 'Stag Sans Medium',
+                value: 'Stag Sans Medium',
+                aliases: ['STAGSANS']
+            }, {
+                name: 'Zapf ChanceC',
+                value: 'Zapf ChanceC',
+                aliases: ['Zapf']
+            }, {
+                name: 'Gill Sans MT Ext Condensed Bold',
+                value: 'Gill Sans MT Ext Condensed Bold',
+                aliases: ['GLSNECB']
+            }, {
+                name: 'Helvetica',
+                value: 'HelveticaCnd-Normal',
+                aliases: ['HELVETIA']
+            }, {
+                name: 'CG-OmegaC',
+                value: 'CG-OmegaC',
+                aliases: ['CG Omega']
+            }, {
+                name: 'Space-text',
+                value: 'Space-text',
+                alias: ['Space-text']
+            }, {
+                name: 'Viga',
+                value: 'Viga',
+                alias: ['Viga']
+            }, {
+                name: 'Decalotype',
+                value: 'Decalotype',
+                alias: ['Decalotype']
+            }, {
+                name: 'Titillium',
+                value: 'Titillium',
+                alias: ['Titillium']
+            }, {
+                name: 'Inknut-antiqua',
+                value: 'Inknut-antiqua',
+                alias: ['Inknut-antiqua']
+            }, {
+                name: 'Neuton',
+                value: 'Neuton',
+                alias: ['Neuton']
+            }, {
+                name: 'Aladin',
+                value: 'Aladin',
+                alias: ['Aladin']
+            }, {
+                name: 'Aleo',
+                value: 'Aleo',
+                alias: ['Aleo']
+            }, {
+                name: 'Amita',
+                value: 'Amita',
+                alias: ['Amita']
+            }, {
+                name: 'Archivo',
+                value: 'Archivo',
+                alias: ['Archivo']
+            }, {
+                name: 'ArimaKoshi',
+                value: 'ArimaKoshi',
+                alias: ['ArimaKoshi']
+            }, {
+                name: 'Asul',
+                value: 'Asul',
+                alias: ['Asul']
+            }, {
+                name: 'Baloo',
+                value: 'Baloo',
+                alias: ['Baloo']
+            }, {
+                name: 'Blackout',
+                value: 'Blackout',
+                alias: ['Blackout']
+            }, {
+                name: 'Cabin',
+                value: 'Cabin',
+                alias: ['Cabin']
+            }, {
+                name: 'Changa',
+                value: 'Changa',
+                alias: ['Changa']
+            }, {
+                name: 'Condiment',
+                value: 'Condiment',
+                alias: ['Condiment']
+            }, {
+                name: 'Corben',
+                value: 'Corben',
+                alias: ['Corben']
+            }, {
+                name: 'Cormorant',
+                value: 'Cormorant',
+                alias: ['Cormorant']
+            }, {
+                name: 'CroissantOne',
+                value: 'CroissantOne',
+                alias: ['CroissantOne']
+            }, {
+                name: 'DeliusSwashCaps',
+                value: 'DeliusSwashCaps',
+                alias: ['DeliusSwashCaps']
+            }, {
+                name: 'Devonshire',
+                value: 'Devonshire',
+                alias: ['Devonshire']
+            }, {
+                name: 'Digitalt',
+                value: 'Digitalt',
+                alias: ['Digitalt']
+            }, {
+                name: 'DrSugiyama',
+                value: 'DrSugiyama',
+                alias: ['DrSugiyama']
+            }, {
+                name: 'Elsie',
+                value: 'Elsie',
+                alias: ['Elsie']
+            }, {
+                name: 'ElsieSwashCaps',
+                value: 'ElsieSwashCaps',
+                alias: ['ElsieSwashCaps']
+            }, {
+                name: 'Fanwood Text',
+                value: 'Fanwood Text',
+                alias: ['Fanwood Text']
+            }, {
+                name: 'Fondamento',
+                value: 'Fondamento',
+                alias: ['Fondamento']
+            }, {
+                name: 'Fascinate',
+                value: 'Fascinate',
+                alias: ['Fascinate']
+            }, {
+                name: 'FredokaOne',
+                value: 'FredokaOne',
+                alias: ['FredokaOne']
+            }, {
+                name: 'Gabriela',
+                value: 'Gabriela',
+                alias: ['Gabriela']
+            }, {
+                name: 'Galada',
+                value: 'Galada',
+                alias: ['Galada']
+            }, {
+                name: 'GermaniaOne',
+                value: 'GermaniaOne',
+                alias: ['GermaniaOne']
+            }, {
+                name: 'GlacialIndifference',
+                value: 'GlacialIndifference',
+                alias: ['GlacialIndifference']
+            }, {
+                name: 'Gnomon-Foreground',
+                value: 'Gnomon-Foreground',
+                alias: ['Gnomon-Foreground']
+            }, {
+                name: 'Heuristica',
+                value: 'Heuristica',
+                alias: ['Heuristica']
+            }, {
+                name: 'HKGrotesk',
+                value: 'HKGrotesk',
+                alias: ['HKGrotesk']
+            }, {
+                name: 'HKVenetian',
+                value: 'HKVenetian',
+                alias: ['HKVenetian']
+            }, {
+                name: 'IAWriterDuospace',
+                value: 'IAWriterDuospace',
+                alias: ['IAWriterDuospace']
+            }, {
+                name: 'IBMPlexMono',
+                value: 'IBMPlexMono',
+                alias: ['IBMPlexMono']
+            }, {
+                name: 'IBMPlexSans',
+                value: 'IBMPlexSans',
+                alias: ['IBMPlexSans']
+            }, {
+                name: 'IBMPlexSerif',
+                value: 'IBMPlexSerif',
+                alias: ['IBMPlexSerif']
+            }, {
+                name: 'Istok',
+                value: 'Istok',
+                alias: ['Istok']
+            }, {
+                name: 'Jellee',
+                value: 'Jellee',
+                alias: ['Jellee']
+            }, {
+                name: 'Judson',
+                value: 'Judson',
+                alias: ['Judson']
+            }, {
+                name: 'Kameron',
+                value: 'Kameron',
+                alias: ['Kameron']
+            }, {
+                name: 'Karla',
+                value: 'Karla',
+                alias: ['Karla']
+            }, {
+                name: 'Kavivanar',
+                value: 'Kavivanar',
+                alias: ['Kavivanar']
+            }, {
+                name: 'KaushanScript',
+                value: 'KaushanScript',
+                alias: ['KaushanScript']
+            }, {
+                name: 'LeagueMono',
+                value: 'LeagueMono',
+                alias: ['LeagueMono']
+            }, {
+                name: 'Lekton',
+                value: 'Lekton',
+                alias: ['Lekton']
+            }, {
+                name: 'LinguisticsPro',
+                value: 'LinguisticsPro',
+                alias: ['LinguisticsPro']
+            }, {
+                name: 'MarkoOne',
+                value: 'MarkoOne',
+                alias: ['MarkoOne']
+            }, {
+                name: 'Michroma',
+                value: 'Michroma',
+                alias: ['Michroma']
+            }, {
+                name: 'Montserrat',
+                value: 'Montserrat',
+                alias: ['Montserrat']
+            }, {
+                name: 'NanumGothicCoding',
+                value: 'NanumGothicCoding',
+                alias: ['NanumGothicCoding']
+            }, {
+                name: 'Nautilus',
+                value: 'Nautilus',
+                alias: ['Nautilus']
+            }, {
+                name: 'Nevis',
+                value: 'Nevis',
+                alias: ['Nevis']
+            }, {
+                name: 'Norwester',
+                value: 'Norwester',
+                alias: ['Norwester']
+            }, {
+                name: 'Now',
+                value: 'Now',
+                alias: ['Now']
+            }, {
+                name: 'Officecodeprod',
+                value: 'Officecodeprod',
+                alias: ['Officecodeprod']
+            }, {
+                name: 'OldStandard',
+                value: 'OldStandard',
+                alias: ['OldStandard']
+            }, {
+                name: 'OstrichSans',
+                value: 'OstrichSans',
+                alias: ['OstrichSans']
+            }, {
+                name: 'Philosopher',
+                value: 'Philosopher',
+                alias: ['Philosopher']
+            }, {
+                name: 'Prociono',
+                value: 'Prociono',
+                alias: ['Prociono']
+            }, {
+                name: 'Questrial',
+                value: 'Questrial',
+                alias: ['Questrial']
+            }, {
+                name: 'Rajdhani',
+                value: 'Rajdhani',
+                alias: ['Rajdhani']
+            }, {
+                name: 'Renner',
+                value: 'Renner',
+                alias: ['Renner']
+            }, {
+                name: 'Rubik',
+                value: 'Rubik',
+                alias: ['Rubik']
+            }, {
+                name: 'Sansation',
+                value: 'Sansation',
+                alias: ['Sansation']
+            }, {
+                name: 'SedgwickAve',
+                value: 'SedgwickAve',
+                alias: ['SedgwickAve']
+            }, {
+                name: 'Sen',
+                value: 'Sen',
+                alias: ['Sen']
+            }, {
+                name: 'SixCaps',
+                value: 'SixCaps',
+                alias: ['SixCaps']
+            }, {
+                name: 'SquadaOne',
+                value: 'SquadaOne',
+                alias: ['SquadaOne']
+            }, {
+                name: 'TenorSans',
+                value: 'TenorSans',
+                alias: ['TenorSans']
+            }, {
+                name: 'TruenoBd',
+                value: 'TruenoBd',
+                alias: ['TruenoBd']
+            }, {
+                name: 'WorkSans',
+                value: 'WorkSans',
+                alias: ['WorkSans']
+            }, {
+                name: 'Yesteryear',
+                value: 'Yesteryear',
+                alias: ['Yesteryear']
+            }, {
+                name: 'Sriracha',
+                value: 'Sriracha',
+                alias: ['Sriracha']
+            },
+            'Adventure',
+            'ChopinScript',
+            'Giddyup Std', {
+                name: 'Orial_',
+                value: 'Orial_',
+                aliases: ['Orial']
+            },
+            'Rosewood Std Regular',
+            'Stencil Std',
+            'Scriptina Pro'
+        ];
+    }
+</script>

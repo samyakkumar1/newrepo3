@@ -1,0 +1,261 @@
+<% include myHeader.ejs %>
+<script type="text/javascript">
+  $(function(){
+    $('.tooltip1').tooltip();
+    $('a[data-toggle="tab"]').on('show.bs.tab', function (e) { 
+      var $target = $(e.target); 
+      if ($target.parent().hasClass('active'))
+      { 
+        return false;
+      } 
+    });
+  });
+</script>
+<style type="text/css">
+.panel-body{border-radius: 0;}
+.page-top,.wizard-tabs-column{margin-bottom: 0;}
+.create-mug{padding-top: 35px;background: #fafafa;}
+.panel-one,.panel-two,.panel-five,.panel-four{display: none;}
+.menuItm-edit i{cursor: pointer;padding: 7px;background: #ededed;}
+.menuItm-edit i:hover{color: #00cccb;}
+.menuItm-edit{margin-top: 10px;}
+.menuItm-img{height: 250px;width: auto;clear: both;display: block;margin: 60px auto 10px;}
+.menuItm-details{padding: 0 5px;background: #ededed;}
+.menuItm-options label{font-weight: 500;color: #5e5e5e;font-size: 13px;margin-bottom: 0;}
+.menuItm-options-span input[type="text"]{display: inline-block;width: 50px;height: 30px;}
+.color-preview{height: 25px;width: 25px;display: inline-block;border-radius: 3px;cursor: pointer;margin-right: 2px;}
+.menuItm-options{background: #ededed;padding: 10px;border-bottom: 2px solid #ffffff;margin: 0 -5px;}
+.menuItm-options:nth-of-type(5){border-bottom: none;}
+.menuItm-options-span{margin-left: 15px;}
+.menuItm-clors{position: relative;top: 9px;}
+.menuItm-options-span select{border-radius: 3px;height: 25px;width: 50px;}
+.material-options select{height: 30px;width: auto;}
+table{background: #ffffff;}
+table tbody td{font-size: 12px;}
+table thead th{color: #ffffff;background: #00cccb;font-weight: normal;font-size: 13px;}
+table tbody td:nth-of-type(2){text-decoration: line-through;}
+table tbody td:nth-of-type(3){color: #00cccb;}
+.no-padding-left{padding-left:0;}
+.item-free-shipping{font-size: 13px;display: block;margin-top: 100px;}
+.item-free-shipping span{color: #00cccb;font-size: 20px;display: block;}
+.menu-itm-cart{font-size: 12px;background: #00cccb;border: 1px solid #00cccb;margin: 10px auto;display: block;}
+.menu-itm-cart:hover,.menu-itm-cart:active,.menu-itm-cart:focus{background: #00a5a4;border: 1px solid #00a5a4;}
+.total-itm-cost{margin-top: 90px;font-weight: 700;color: #00cccb;font-size: 16px;}
+.itm-discount-cost{text-decoration: line-through;color: #5e5e5e;margin-right: 5px;margin-left: 5px;}
+.menuItm-header{color: #00cccb;}
+</style>
+<section class="page-top page-top-logo">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="page-common-header">Create your Mug</h1>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="wizard-tabs-column">
+  <div class="wizard-tabs wizard-tabs-ul">
+    <ul class="wizard-steps">
+      <li class="active wiz-one">
+        <a href="" class="text-center" aria-expanded="false">
+          <span class="badge hidden-xs">1</span>
+          Choose from the purchased logos
+        </a>
+      </li>
+      <li class="wiz-two">
+        <a class="text-center link" aria-expanded="false">
+          <span class="badge hidden-xs">2</span>
+          Choose design
+        </a>
+      </li>
+      <li class="wiz-three">
+        <a class="text-center link" aria-expanded="false">
+          <span class="badge hidden-xs">3</span>
+          Customize your Mug
+        </a>
+      </li>
+      <li class="wiz-four">
+        <a class="text-center link" aria-expanded="false" href="#step4" data-toggle="tab">
+          <span class="badge hidden-xs">4</span>
+          Customize Purchase options
+        </a>
+      </li>
+      <li class="wiz-five">
+        <a class="text-center link" aria-expanded="false">
+          <span class="badge hidden-xs">5</span>
+          Save & Buy your Mug
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+<div role="main" class="main create-mug">
+  <div class="container create-mug-main">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel-group" >
+          <div class="panel panel-one">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion"
+                   href="#" class="edit-inactive">
+                  Choose from the purchased logos
+                </a>
+              </h4>
+            </div>
+            <div id="accordionOne" class="panel-collapse collapse in">
+              <div class="panel-body custom01">
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-four">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#" class="edit-inactive">
+                  Choose design
+                </a>
+              </h4>
+            </div>
+            <div id="accordionFour" class="">
+              <div class="panel-body"> 
+                
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-two">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#" class="edit-inactive">
+                  Customize your Mug
+                </a>
+              </h4>
+            </div>
+            <div id="accordionTwo" class="panel-collapse collapse">
+              <div class="panel-body">
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-three" id="step4">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#">
+                  Customize Purchase options
+                </a>
+              </h4>
+            </div>
+            <div id="accordionThree" class="panel-collapse">
+              <div class="panel-body">
+                <div class="col-md-12 no-padding-left">
+                  <div class="menuItm-header">Preview</div>
+                  <div class="col-md-4 col-sm-4 no-padding-left">
+                    <img src="/img/Tshirt.png" class="menuItm-img"/>
+                    <span class="menuItm-edit pull-right">
+                      <a class="tooltip1" data-toggle="tooltip" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil "></i></a>
+                      <!-- a class="tooltip1" data-toggle="tooltip" data-placement="top" data-original-title="Search"><i class="fa fa-search"></i></a -->
+                    </span>
+                  </div>
+                  <div class="col-md-4 col-sm-4 menuItm-details">
+                    <div class="menuItm-options">
+                      <label>Choose a Color :</label>
+                      <span class="menuItm-options-span menuItm-clors">
+                        <span class="color-preview" style="background-color:white"></span>
+                        <span class="color-preview" style="background-color:black"></span>
+                        <span class="color-preview" style="background-color:red"></span>
+                      </span>
+                    </div>
+                    <div class="menuItm-options">
+                      <label>Pick your Sizes :</span>
+                      <span class="menuItm-options-span">
+                        <select class="selectpicker">
+                          <option>XL</option>
+                          <option>L</option>
+                          <option>M</option>
+                          <option>S</option>
+                          <option>XS</option>
+                        </select>
+                      </span>
+                    </div>
+                    <div class="menuItm-options">
+                      <label>Choose Material :</span>
+                      <span class="menuItm-options-span material-options">
+                       <select class="selectpicker">
+                          <option>Classic Cotton</option>
+                          <option>Ultra-soft Cotton</option>
+                        </select>
+                      </span>
+                    </div>
+                    <div class="menuItm-options">
+                      <label>Print on Back :</span>
+                      <span class="menuItm-options-span material-options">
+                       <select class="selectpicker">
+                          <option>Blank Back</option>
+                          <option>Print Back</option>
+                        </select>
+                      </span>
+                    </div>
+                    <div class="menuItm-options">
+                      <label>Enter Quantity :</span>
+                      <span class="menuItm-options-span"><input type="text" class="form-control" id=""></span>
+                    </div>
+                    <table id="" class="table-responsive menuItm-table table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Quantity</th>
+                          <th class="text-center">Price</th>
+                          <th class="text-right">Save 40%</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>1-5</td>
+                          <td class="text-center">$ 25.00</td>
+                          <td class="text-right">$ 15.00</td>
+                        </tr>
+                        <tr>
+                          <td>5-15</td>
+                          <td class="text-center">$ 20.00</td>
+                          <td class="text-right">$ 12.00</td>
+                        </tr>
+                        <tr>
+                          <td>15-30</td>
+                          <td class="text-center">$ 15.00</td>
+                          <td class="text-right">$ 9.00</td>
+                        </tr>
+                        <tr>
+                          <td>More than 30</td>
+                          <td class="text-center">$ 10.00</td>
+                          <td class="text-right">$ 6.00</td>
+                        </tr> 
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="col-md-4 col-sm-4">
+                    <div class="item-free-shipping text-center">This order qualifies for <span class="text-center">FREE SHIPPING!</span></div>
+                    <div class="total-itm-cost text-center">
+                      Total :<span class="itm-discount-cost">$ 135.00</span><span class="after-discount-cost">$ 81.00</span>
+                    </div>
+                    <button type="button" class="btn btn-success text-center menu-itm-cart">Add to Cart</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-five">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#" class="edit-inactive">
+                  Save & Buy your Mug
+                </a>
+              </h4>
+            </div>
+            <div id="accordionFive" class="panel-collapse collapse">
+              <div class="panel-body">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% include myFooter.ejs %>

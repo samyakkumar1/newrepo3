@@ -1,0 +1,36 @@
+<% include header.ejs %>
+<script src="/js/logomaker/helpers/list-logos.js"></script>
+<style>
+    .tableRow td {
+        text-align: center;
+    }
+</style>
+<script>
+    $(document).on("mouseover", '.cardItems', function () {
+        $(this).find('a img').stop().animate({'margin-top': '-300px'});
+        $(this).find('.card_details').stop().animate({top: '0'});
+    })
+    $(document).on('mouseout', '.cardItems', function () {
+        $(this).find('a img').stop().animate({'margin-top': '0px'});
+        $(this).find('.card_details').stop().animate({top: '240px'});
+    });
+</script>
+<section class="page_top">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Logos</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container admin_container table_card">
+    <div class="row">
+        <div class="col-md-12 logosContainer">
+        </div>
+
+
+    </div>
+</div>
+<% include footer.ejs %>

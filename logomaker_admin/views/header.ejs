@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title><%= title %></title>
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/bootstrap.css" rel="stylesheet">
+    <link href="/js/thirdparty/toast/jquery.toast.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/adminConsole.css">
+    <link rel="stylesheet" href="../vendor/fontawesome/css/font-awesome.css">
+    <link type="text/css" href="../css/jquery.msgbox.css" rel="stylesheet">
+    <link type="text/css" href="../css/select2.css" rel="stylesheet">
+    <link type="text/css" href="../css/select2-bootstrap.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="/vendor/jquery/jquery.js"></script>
+    <!--<script src="../js/jquery-1.10.2.min.js"></script>-->
+    <script src="/vendor/bootstrap/bootstrap.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="/js/thirdparty/ie10-viewport-bug-workaround.js"></script>
+    <script src="/js/thirdparty/toast/jquery.toast.js"></script>
+    <script src="/js/thirdparty/bootbox.js"></script>
+    <script src="/js/select2.min.js"></script>
+    <script src="/js/logomaker/lib.js"></script>
+    <script src="/js/logomaker/common.js"></script>
+    <script src="../js/bootstrap-filestyle.js"></script>
+    <script src="/js/logomaker/helpers/admin_console.js"></script>
+    <script src="/js/thirdparty/jquery.svg/jquery.svg.js"></script>
+    <script src="/js/thirdparty/jquery.svg/jquery.svgdom.js"></script>
+    <script src="/js/multiselect.js"></script>
+    <script src="/js/thirdparty/md5.js"></script>
+
+
+    <style>
+      body {
+          padding-top: 50px;
+      }
+
+      .starter-template {
+          padding: 40px 15px;
+          text-align: center;
+      }
+      .custom-class{
+        overflow: scroll;
+      height: 200px;
+      padding: 15px;
+      }
+    </style>
+    <script>
+      $(document).ready(function () {
+        doPost("/getprocatsubcat", {}, function (resp) {
+            if (resp.status == 200) {
+                var object = resp.items;
+                var optiongrp = '';
+                for (const property in object) {
+                    optiongrp += '<optgroup label="'+property+'">';
+                    var objprop = object[property];
+                    optiongrp +='<option value="'+objprop[0]["id"]+'.0">All-'+property+'</option>';
+                    for(var j=0;j<objprop.length;j++){
+                        optiongrp +='<option value="'+objprop[0]["id"]+'.'+objprop[j]["image_id"]+'" style="background-color:'+objprop[j]["color"]+'">'+objprop[j]["name"]+'-'+objprop[j]["color"]+'</option>';
+                    }
+                    optiongrp += '</optgroup>';
+                }
+                $("#example39").append(optiongrp);
+                $('#example39').multiselect();
+            } else if (resp.status == 201) {
+                
+            } else {
+                console.log(resp);
+                bootbox.alert("Can't list products.");
+            }
+        });
+      });
+      $(function () {
+          $(".dropdown-menu a[href='" + window.location.pathname + "']").parent().addClass("active");
+          $(".dropdown-menu > li[class='active']").parent().parent().addClass("active");
+          $("li a[href='" + window.location.pathname + "']").parent().addClass("active");
+
+          var timer;
+
+          function delayHover(element) {
+              //timer = setTimeout(function () {
+              $(element).addClass("open");
+              //}, 500);
+          }
+        ;
+          $('#navbar ul li.dropdown').hover(function () {
+
+              my_element = $(this);
+              delayHover(my_element);
+          }, function () {
+              $('#navbar ul li.dropdown').removeClass('open');
+              //clearTimeout(timer);
+              $('#navbar ul li.dropdown').removeClass('open');
+
+          })
+
+
+      });
+
+    </script> 
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                  aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Tagbit Admin</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/">Home</a></li>
+            <li class="dropdown">
+              <a class="dropdown-toggle link" role="button" aria-expanded="false">Admin Tools<span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="/admin/viewOtherCustomOrders">Products Printing Orders</a></li>
+                <li><a href="/admin/viewCashoutRequest">Cashout Requests</a></li>
+                <li><a href="/admin/pricingAdmin">Pricing Administration</a></li>
+                <li><a href="/admin/shippingAdmin">Shipping Administration</a></li>
+                <li><a href="/admin/orderReturns">Return Orders</a></li>
+                <li><a href="/admin/orderCancel">Cancel Orders</a></li>
+                <li><a href="/admin/new-reports">Reports</a></li>
+                <li><a href="/admin/transactions">Transactions</a></li>
+                <li><a href="/admin/invoice">Invoice</a></li>
+                <li><a href="/users">Users</a></li>
+              </ul>
+            </li>
+            <!--<li class="dropdown">
+              <a class="dropdown-toggle link" role="button" aria-expanded="false">Logos <span
+                    class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="/logo/listLogos">List Logos</a></li>
+                <li><a data-toggle="modal" data-target="#addLogoModal">Add Logo</a></li>
+                <li><a href="/logo/logoParams">Logo Parameters</a></li>
+                <li><a href="/logo/purchasedLogos">Purchased Logos</a></li>
+              </ul>
+            </li>-->
+            <li class="dropdown">
+              <a class="dropdown-toggle link" role="button" aria-expanded="false">Apparel Products <span
+                    class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="/other-products/list">List products</a></li>
+                <li><a href="/other-products/add">Add product</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a class="dropdown-toggle link" role="button" aria-expanded="false">Categories
+                <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="/category/listCategories">List Categories</a></li>
+                <li><a data-toggle="modal" data-target="#addCategoryModal">Add Category</a></li>
+                <!--  <li><a data-toggle="modal" data-target="#addKeywordModal">Add Keyword</a></li> -->
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a class="dropdown-toggle link" role="button" aria-expanded="false">Vendors
+                <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="/vendors/listvendors">List Vendors</a></li>
+                <li><a data-toggle="modal" data-target="#addVendorModal">Add Vendors</a></li>
+                <!--  <li><a data-toggle="modal" data-target="#addKeywordModal">Add Keyword</a></li> -->
+              </ul>
+            </li>
+            <!--
+            <li><a href="#" onclick="deleteAllCookies()">Logout</a></li>
+            -->
+          </ul>
+        </div>
+        <!--/.nav-collapse -->
+      </div>
+    </nav>
+    <script>
+      function deleteAllCookies() {
+          var cookies = document.cookie.split(";");
+          for (var i = 0; i < cookies.length; i++) {
+              var cookie = cookies[i];
+              var eqPos = cookie.indexOf("=");
+              var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+              document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+          }
+      }
+
+
+     function addvendor(){
+       var vendorCap = $("#vendorCap").val().trim();
+       var vendorAddress1 = $("#vendorAddress1").val().trim();
+       var vendorAddress2 = $("#vendorAddress2").val().trim();
+       var vendorCity = $("#vendorCity").val().trim();
+       var vendorState = $("#vendorState").val().trim();
+       var vendorTech = $("#vendorTech").val();
+       var vendorGSTIN = $("#vendorGSTIN").val().trim();
+       var vendorName = $("#vendorName").val().trim();
+       var vendorPincode = $("#vendorPincode").val().trim();
+       var vendorProduct = $("#example39").val();
+       var vendorStatus = $("#vendorStatus").val();
+       var vendorCompany = $("#vendorCompany").val().trim();
+       var vendorUsername = $("#vendorUsername").val().trim();
+       var vendorPassword = $("#vendorPassword").val().trim();
+       var vendorEmail = $("#vendorEmail").val().trim();
+       var vendorPhone = $("#vendorPhone").val().trim();
+
+       var obj = {
+          capacity:vendorCap,
+          address:vendorAddress1,
+          address2:vendorAddress2,
+          city:vendorCity,
+          state:vendorState,
+          tech:vendorTech,
+          gstin:vendorGSTIN,
+          products:vendorProduct,
+          pincode:vendorPincode,
+          contactname: vendorName,
+          companyname: vendorCompany,
+          username: vendorUsername,
+          password: MD5(vendorPassword),
+          email: vendorEmail,
+          status: vendorStatus,
+          phone:vendorPhone
+        };
+       if(!vendorEmail || !vendorPassword || !vendorUsername || !vendorCompany || !vendorCap || !vendorAddress1 || !vendorCity || !vendorState || !vendorTech || !vendorGSTIN || !vendorName || !vendorPincode || !vendorProduct || !vendorStatus){
+        bootbox.alert("Please fill up all the required fields");
+       }else {
+        doPost("/addVendor", obj, function (resp) {
+          if(resp.status == 200){
+            location.reload('vendors/listvendors');
+          }else{
+            bootbox.alert(resp.msg);
+          }
+        });
+       }
+
+     }
+    </script>
+
+    <!-- AddLogo Modal -->
+    <div class="modal fade container admin_container" id="addLogoModal" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                  aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Logos (only SVG Files)</h4>
+          </div>
+          <div class="modal-body" style="margin-bottom: 0px">
+            <div class="row">
+              <form role="form">
+                <div class="form-group">
+                  <label for="categoryName">Choose Category</label>
+                  <select multiple="multiple" class="form-control js-example-basic-multiple categoryNameList"
+                          id="addLogoCategoryName"></select>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-6">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" id="addLogoTitle" placeholder="Enter Title">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="logoDesc">Description</label>
+                    <input type="text" class="form-control" id="addLogoDesc"
+                           placeholder="Enter Logo Description">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-6">
+                    <label for="logoDesc">SEO URL (Name only, without /)</label>
+                    <input type="text" class="form-control" id="addLogoUrl"
+                           placeholder="Enter SEO URL: eg. travel-logo">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="logoDesc">SEO Title</label>
+                    <input type="text" class="form-control" id="addLogoSeoTitle"
+                           placeholder="Enter SEO title">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-6">
+                    <label for="logoDesc">SEO Description</label>
+                    <input type="text" class="form-control" id="addLogoSeoDescription"
+                           placeholder="Enter SEO description">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="logoDesc">SEO Keywords</label>
+                    <input type="text" class="form-control" id="addLogoSeoKeywords"
+                           placeholder="Enter SEO keywords">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="logo">Upload Logo</label>
+                  <input type="file" class="filestyle" data-buttonName="btn-primary" id="logoFile" accept="image/svg"> 
+                </div> 
+              </form>
+            </div>
+          </div>
+
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary addLogoBtn">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AddCards Modal -->
+    <div class="modal fade container admin_container" id="addCardModal" tabindex="-1" role="dialog" data-backdrop="static"
+         data-keyboard="false"
+         aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                  aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Business Cards (only SVG Files)</h4>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+
+              <form role="form">
+                <div class="form-group ">
+                  <label for="categoryName">Choose Category</label>
+                  <select multiple="multiple" class="form-control js-example-basic-multiple categoryNameList"
+                          id="addBCCategoryName"></select>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-6">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" id="addBCTitle" placeholder="Enter Title">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="cardDesc">Description</label>
+                    <input type="text" class="form-control" id="addBCDesc"
+                           placeholder="Enter Card Description">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-6">
+                    <label for="title">SEO URL (Name only, without /)</label>
+                    <input type="text" class="form-control" id="addBCUrl"
+                           placeholder="Enter SEO URL eg. travel-card">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="title">SEO Title</label>
+                    <input type="text" class="form-control" id="addBCSeoTitle"
+                           placeholder="Enter SEO title">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-6">
+                    <label for="title">SEO Description</label>
+                    <input type="text" class="form-control" id="addBCSeoDescription"
+                           placeholder="Enter SEO description">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="title">SEO Keyword</label>
+                    <input type="text" class="form-control" id="addBCSeoKeyword"
+                           placeholder="Enter SEO keyword">
+                  </div>
+                </div>
+                <div class="form-group ">
+                  <label for="frontCard">Front of Card</label>
+                  <input type="file" class="filestyle form-control" data-buttonName="btn-primary"
+                         id="frontCard"
+                         accept="image/svg">
+                  <!--<input type="file" class="form-control" id="frontCard">-->
+                </div>
+                <div class="form-group ">
+                  <label for="backCard">Back of Card</label>
+                  <input type="file" class="filestyle form-control" data-buttonName="btn-primary"
+                         id="backCard"
+                         accept="image/svg">
+                  <!--<input type="file" class="form-control" id="backCard" >-->
+                </div>
+                <!--<button type="submit" class="btn btn-primary addCardBtn">Add</button>-->
+              </form>
+            </div>
+          </div>
+
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary addCardBtn">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AddCategory Modal -->
+    <div class="modal fade container admin_container" id="addCategoryModal" tabindex="-1" role="dialog"
+         data-backdrop="static" data-keyboard="false"
+         aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                  aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Categories</h4>
+          </div>
+          <div class="modal-body">
+            <form role="form">
+              <div class="form-group">
+                <label for="categoryName">Category Name</label>
+                <input type="text" class="form-control" id="addCatCategoryName"
+                       placeholder="Enter Category Name">
+              </div>
+              <div class="form-group">
+                <label for="categoryDesc">Description</label>
+                <input type="text" class="form-control" id="addCatCategoryDesc"
+                       placeholder="Enter Category Description">
+              </div>
+              <div class="form-group">
+                <label for="addCategoryKeyWord">Choose Keywords (For searching)</label>
+                <!-- <select multiple="multiple" class="form-control" id="addCatCategoryKeyWord"></select> -->
+                <input type="text" class="form-control" id="addCatCategoryKeyWord"/>
+              </div>
+
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label for="categoryDesc">SEO URL (Name only, without /)</label>
+                  <input type="text" class="form-control" id="addCatCategoryUrl"
+                         placeholder="Enter SEO url: eg. travel-category">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="categoryDesc">SEO Title</label>
+                  <input type="text" class="form-control" id="addCatCategorySeoTitle"
+                         placeholder="Enter SEO Title">
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label for="categoryDesc">SEO Description</label>
+                  <input type="text" class="form-control" id="addCatCategorySeoDesc"
+                         placeholder="Enter SEO Description">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="categoryDesc">SEO Keyword</label>
+                  <input type="text" class="form-control" id="addCatCategorySeoKeyword"
+                         placeholder="Enter SEO Keyword">
+                </div>
+              </div>
+                <h5>Category Type</h5> 
+              <div class="row">
+                <div class="form-group col-md-4">
+                  <input type="checkbox" id="logoCategory">
+                  <label for="logoCategory">Logo</label>
+                </div>
+                <div class="form-group col-md-4">
+                  <input type="checkbox" id="cardCategory">
+                  <label for="cardCategory">Card</label>
+                </div>
+                <div class="form-group col-md-4">
+                  <input type="checkbox" id="otherCategory">
+                  <label for="otherCategory">Other Products</label>
+                </div>
+              </div>
+              <!--<button type="submit" class="btn btn-primary addCategoryBtn">Add</button>-->
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <button class="btn btn-primary addCategoryBtn">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+        <!-- AddVendor Modal -->
+    <div class="modal fade container admin_container" id="addVendorModal" tabindex="-1" role="dialog"
+    data-backdrop="static" data-keyboard="false"
+    aria-labelledby="myModalLabel" aria-hidden="true">
+     <div class="modal-dialog">
+       <div class="modal-content">
+         <div class="modal-header">
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                 aria-hidden="true">&times;</span></button>
+           <h4 class="modal-title" id="myModalLabel">Vendor</h4>
+         </div>
+         <div class="modal-body">
+          
+           <form role="form">
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label for="vendorName">Vendor Name</label>
+                 <input type="text" class="form-control" id="vendorName"
+                        placeholder="Enter Vendor Name">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="vendorName">Company Name</label>
+                <input type="text" class="form-control" id="vendorCompany" 
+                       placeholder="Enter Company Name">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label for="vendorUsername">Username</label>
+                <input type="text" class="form-control" id="vendorUsername"
+                       placeholder="Enter Username">
+              </div>
+              <div class="form-group col-md-6">
+               <label for="vendorEmail">Email</label>
+               <input type="text" class="form-control" id="vendorEmail"
+                      placeholder="Enter Email">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label for="vendorPassword">Password</label>
+                <input type="password" class="form-control" id="vendorPassword"
+                       placeholder="Enter Password">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="vendorCap">Capacity (pcs/Day)</label>
+                <input type="text" class="form-control" id="vendorCap"
+                       placeholder="Enter Capicity">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label for="vendorTech">Centre Technology</label>
+                <select id="vendorTech">
+                  <option value="dtg">Direct to Garment (D2G)</option>
+                  <option value="screenprint">Screen Printing</option>
+                  <option value="sublimation">Sublimation</option>
+                </select>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="vendorStatus">Status</label>
+               <select id="vendorStatus">
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+              </select>
+              </div>
+            </div>
+             <div class="form-group">
+              <label for="addVendorProduct">Choose Products (select from list)</label>
+              <select id="example39" multiple="multiple" style="display: none;">
+              </select>
+             </div>
+             <div class="row">
+              <div class="form-group col-md-12">
+                <label for="VendorLoc">Address 1</label>
+                 <input type="text" class="form-control" id="vendorAddress1"
+                        placeholder="Enter Address">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label for="vendorGSTIN">Address 2</label>
+                <input type="text" class="form-control" id="vendorAddress2"
+                       placeholder="Enter Address">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="vendorGSTIN">Mobile</label>
+                <input type="text" class="form-control" id="vendorPhone"
+                       placeholder="10 digit mobile number">
+              </div>
+            </div>
+             <div class="row">
+               <div class="form-group col-md-6">
+                 <label for="vendorGSTIN">GSTIN</label>
+                 <input type="text" class="form-control" id="vendorGSTIN"
+                        placeholder="Enter GSTIN">
+               </div>
+               <div class="form-group col-md-6">
+                <label for="VendorLoc">Pincode</label>
+                <input type="text" class="form-control" id="vendorPincode"
+                       placeholder="Enter Pincode">
+               </div>
+             </div>
+             <div class="row">
+              <div class="form-group col-md-6">
+                <label for="VendorLoc">City</label>
+                <input type="text" class="form-control" id="vendorCity"
+                       placeholder="Enter City">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="vendorGSTIN">State</label>
+                <input type="text" class="form-control" id="vendorState"
+                       placeholder="Enter State">
+              </div>
+            </div>
+            
+             
+           </form>
+         </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-default close" data-dismiss="modal">Cancel</button>
+           <button class="btn btn-primary addVendorBtn" onclick="addvendor()">Save</button>
+         </div>
+       </div>
+     </div>
+   </div>
+
+

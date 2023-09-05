@@ -1,0 +1,77 @@
+<% include header.ejs %>
+<script type="text/javascript" src="/js/thirdparty/jquery-ui/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/js/moment.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="/js/logomaker/helpers/shipping_console.js"></script>
+<script type="text/javascript" src="/js/thirdparty/papaparse.min.js"></script>
+<link rel="stylesheet" href="/css/bootstrap-datetimepicker.min.css"/>
+<link rel="stylesheet" href="/js/thirdparty/jquery-ui/jquery-ui.min.css"/>
+<link rel="stylesheet" href="/js/thirdparty/jquery-ui/jquery-ui.theme.min.css"/>
+<section class="page_top">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Shipping administration</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                <label for="uploadShippingInfo">Upload Shipping File (ONLY .csv files with order id, tracking no and shipping carrier)</label>
+                <input type="file" id="uploadShippingInfo"/> <br/>
+            </div>
+            <table class="table table-responsive tblShippingTable">
+                <tr>
+                    <th class="col-md-1">Order ID</th>
+                    <th class="col-md-2">Shipping Address</th>
+                    <th class="col-md-2">Shipper Name</th>
+                    <th class="col-md-1">Status</th>
+                    <th class="col-md-2">Expected Delivery Date</th>
+                    <th class="col-md-2">Order Date</th>
+                    <th class="col-md-1">Tracking ID</th>
+                    <th class="col-md-1">Actions</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="shippingModel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Shipping</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="shipperName">Shipper Name</label>
+                        <input type="text" class="form-control" id="shipperName" placeholder="Shipper Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="shipperStatus">Status</label>
+                        <input type="text" class="form-control" id="shipperStatus" placeholder="Status">
+                    </div>
+                    <div class="form-group">
+                        <label for="shipperExpectedDate">Expected Delivery</label>
+                        <input type="text" class="form-control" id="shipperExpectedDate" placeholder="Expected Delivery">
+                    </div>
+                    <div class="form-group">
+                        <label for="shipperTrackingId">Tracking ID</label>
+                        <input type="text" class="form-control" id="shipperTrackingId" placeholder="Tracking ID">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="saveCountry">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<% include footer.ejs %>

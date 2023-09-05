@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   width="597.737px"
+   height="345.361px"
+   viewBox="0 0 597.737 345.361"
+   enable-background="new 0 0 597.737 345.361"
+   xml:space="preserve"
+   inkscape:version="0.48.5 r10040"
+   sodipodi:docname="cardPreview1.svg"><metadata
+   id="metadata3032"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs3030">
+	
+</defs><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="1366"
+   inkscape:window-height="715"
+   id="namedview3028"
+   showgrid="false"
+   inkscape:zoom="1.30677"
+   inkscape:cx="334.68871"
+   inkscape:cy="163.88029"
+   inkscape:window-x="-8"
+   inkscape:window-y="-8"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="Layer_1" />
+
+<path
+   d="M290.957,0.367c39.222,46.557,62.871,106.67,62.871,172.317c0,65.644-23.649,125.756-62.869,172.313h306.778  V0.367H290.957z"
+   id="color1"
+   fill="#EA9815"
+   inkscape:label="#path2998" />
+<path
+   style="fill:#0963ce"
+   inkscape:connector-curvature="0"
+   id="color2"
+   d="m 259.93,345.361 h 10.095 c 42.09,-45.363 67.869,-106.065 67.869,-172.68 0,-66.615 -25.779,-127.315 -67.864,-172.682 h -10.104 c 43.681,44.546 70.657,105.52 70.657,172.682 -0.001,67.164 -26.978,128.133 -70.653,172.68 z"
+   inkscape:label="#path3002" />
+<text
+   transform="scale(1.00015,0.99985003)"
+   font-size="23.438"
+   id="name"
+   x="452.64975"
+   y="50.974564"
+   style="font-size:23.44151497px;font-family:Arial-BoldMT"
+   inkscape:label="#text3004">Your Name</text>
+
+
+
+<text
+   transform="scale(1.00015,0.99985003)"
+   font-size="18.7504"
+   id="designation"
+   x="472.52469"
+   y="74.234848"
+   style="font-size:18.75321198px;font-family:ArialMT"
+   inkscape:label="#text3006">Designation</text>
+
+
+
+<text
+   transform="scale(1.00015,0.99985003)"
+   font-size="16.4066"
+   id="website"
+   x="511.73654"
+   y="102.98335"
+   style="font-size:16.40906143px;font-family:ArialMT"
+   inkscape:label="#text3008">Website</text>
+
+
+
+<text
+   transform="scale(1.00015,0.99985003)"
+   font-size="16.4066"
+   id="mobile"
+   x="539.06635"
+   y="218.92456"
+   style="font-size:16.40906143px;font-family:ArialMT"
+   inkscape:label="#text3010">Mob</text>
+
+
+
+<text
+   transform="scale(1.00015,0.99985003)"
+   font-size="16.4066"
+   id="email"
+   x="512.20929"
+   y="251.02698"
+   style="font-size:16.40906143px;font-family:ArialMT"
+   inkscape:label="#text3012">Email Id</text>
+
+
+
+<text
+   transform="scale(1.00015,0.99985003)"
+   font-size="16.4066"
+   id="address1"
+   x="463.81537"
+   y="283.12357"
+   style="font-size:16.40906143px;font-family:ArialMT"
+   inkscape:label="#text3014">Address Line 1</text>
+
+
+
+<text
+   transform="scale(1.00015,0.99985003)"
+   font-size="16.4066"
+   id="address2"
+   x="461.66809"
+   y="303.48703"
+   style="font-size:16.40906143px;font-family:ArialMT"
+   inkscape:label="#text3016">Address Line 2</text>
+
+
+
+
+
+
+
+<g
+   id="logo"
+   inkscape:label="#g3037"
+   transform="matrix(1.3656336,0,0,1.5249544,-74.901404,-86.23681)"><path
+   inkscape:label="#path3018"
+   id="Color3"
+   d="M 215.34,151.464 C 207.76,138.418 192.594,112.324 185.008,99.285 178.159,87.482 168.03,84.55 159.56,90.469 c 7.563,-2.893 13.801,0.125 16.762,5.889 6.769,13.134 15.964,38.028 21.526,55.258 5.227,16.229 2.496,26.992 -13.365,28.438 l 14.27,-0.009 c 18.259,-0.004 25.712,-12.867 16.587,-28.581 z"
+   style="fill:none"
+   inkscape:connector-curvature="0" /><path
+   id="path3020"
+   d="m 151.852,99.243 c -7.564,13.054 -22.699,39.164 -30.272,52.218 -6.832,11.799 -4.325,22.001 5.065,26.336 -6.306,-5.078 -6.781,-11.955 -3.262,-17.39 8.056,-12.396 25.136,-32.765 37.348,-46.171 11.52,-12.618 22.256,-15.666 31.443,-2.714 l -7.141,-12.296 c -9.135,-15.714 -24.062,-15.709 -33.181,0.017 z"
+   style="fill:none"
+   inkscape:connector-curvature="0" /><path
+   id="path3022"
+   d="m 138.129,180.13 c 15.143,0.021 45.437,0.046 60.582,0.058 13.689,0.012 21.333,-7.234 20.423,-17.5 -1.276,7.977 -7.022,11.816 -13.522,11.486 -14.818,-0.754 -41.083,-5.322 -58.85,-9.18 -16.742,-3.631 -24.741,-11.368 -18.043,-25.756 l -7.16,12.3 c -9.129,15.706 -1.682,28.572 16.57,28.592 z"
+   style="fill:none;stroke:none"
+   inkscape:connector-curvature="0" /><text
+   inkscape:label="#text3024"
+   id="Tagline"
+   font-size="19.262"
+   transform="translate(118.1172,242.2842)"
+   style="font-size:19.26199913px;fill:none;font-family:ArialMT">tagline here</text>
+
+
+<text
+   inkscape:label="#text3026"
+   id="Company_Name"
+   font-size="23.438"
+   transform="translate(67.9795,217.9453)"
+   style="font-size:23.43799973px;fill:none;font-family:Arial-BoldMT">COMPANY NAME</text>
+
+
+</g>
+</svg>

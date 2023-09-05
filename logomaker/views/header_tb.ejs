@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- base href="<%= base %>/" target="_self" -->
+    <meta charset="utf-8">
+    <title><%= typeof meta_title == "undefined" ? "Company Logo Online|Free Design &amp; Download|Tagbit.co" : meta_title %></title>
+    <meta name="msvalidate.01" content="CBFBD15F3AA384DFE8ACFB943BF145C2" />
+    <meta name="keywords" content="<%= typeof keyword == "undefined" ? "online free logo, download logo free, free logo generator, logo templates" : keyword %>"/>
+    <meta name="description" content="<%= typeof desc == "undefined" ? "Create logo for company online for free, logo designed by professionals only at Tagbit.co. Create logo in 4 simple steps. Online logo making software" : desc %>">
+    <meta name="author" content="https://plus.google.com/+Tagbitmake-logo-online">
+    <meta name="alt" content="<%= typeof alt_text == "undefined" ? "Online Free Logo" : alt_text %>">
+    <meta property="fb:admins" content="789476301119897" />
+    <meta property="og:title" content="Free Logo Maker: Design Your Logo's with Logo Generator Online" />
+    <meta property="og:type" content="image" />
+    <meta property="og:url" content="www.Tagbit.co" />
+    <meta property="og:image" content="https://www.tagbit.co/img/Tagbit.jpg" />
+    <meta property="og:description" content="Create a logo is essential part of your company marketing efforts. Tagbit is a free logo maker helps you to design you logo, business card, and mug free. Our logo maker and branding tool kits helps you create a unique identity to present your business qualities." />
+    <meta property="og:site_name" content="Online Free Logo " />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@FreeLogoOnline" />
+    <meta name="twitter:title" content="Free Logo Maker: Design Your Logo's with Logo Generator Online" />
+    <meta name="twitter:description" content="Create a logo is essential part of your company marketing efforts. Tagbit is a free logo maker helps you to design you logo, business card, and mug free. Our logo maker and branding tool kits helps you create a unique identity to present your business qualities." />
+    <meta name="twitter:image:src" content="https://www.tagbit.co/img/Tagbit.jpg" />
+
+    <meta itemprop="name" content="Online Free Logo" />
+    <meta itemprop="description" content="Create a logo is essential part of your company marketing efforts. Tagbit is a free logo maker helps you to design you logo, business card, and mug free. Our logo maker and branding tool kits helps you create a unique identity to present your business qualities." />
+    <meta itemprop="image" content="https://www.tagbit.co/img/Tagbit.jpg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/img/freelogo_favicon.ico" type="image/x-icon">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CShadows+Into+Light"
+          rel="stylesheet" type="text/css">
+    <!--[if IE]>
+    <link rel="stylesheet" href="/css/ie.css">
+    <![endif]-->
+    <script>
+        //var currentCountryFromServer = '<%= geoip %>';
+    </script>
+    <%if (global.config.USE_MIN_FILES == true) { %>
+    <link rel="stylesheet" href="/css/header.min.css?v=<%= options.version %>">
+    <% } else { %>
+    <link rel="stylesheet" href="/js/thirdparty/toast/jquery.toast.css">
+    <link rel="stylesheet" href="/vendor/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="/vendor/fontawesome/css/font-awesome.css">
+    <link rel="stylesheet" href="/vendor/owlcarousel/owl.carousel.css" media="screen">
+    <link rel="stylesheet" href="/vendor/owlcarousel/owl.theme.css" media="screen">
+    <link rel="stylesheet" href="/vendor/magnific-popup/magnific-popup.css" media="screen">
+    <link rel="stylesheet" href="/css/theme.css">
+    <link rel="stylesheet" href="/css/theme-elements.css">
+    <link rel="stylesheet" href="/css/theme-blog.css">
+    <link rel="stylesheet" href="/css/theme-shop.css">
+    <link rel="stylesheet" href="/css/theme-animate.css">
+    <link rel="stylesheet" href="/vendor/rs-plugin/css/settings.css" media="screen">
+    <link rel="stylesheet" href="/vendor/circle-flip-slideshow/css/component.css" media="screen">
+    <link rel="stylesheet" href="/css/skins/blue.css">
+    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" href="/css/jquery.fancybox.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="/css/jquery.fancybox-buttons.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="/css/jquery.fancybox-thumbs.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="/css/select2.css" media="screen">
+    <link rel="stylesheet" href="/css/bootstrap-formhelpers.css" media="screen">
+    <link rel="stylesheet" href="/css/jquery.feedback_me.css" media="screen">
+    <link rel="stylesheet" href="/css/jquery.accordion.css">
+    <link rel="stylesheet" href="/css/theme-admin-extension.css" media="screen">
+    <link rel="stylesheet" href="/css/animate.min.css">
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="/css/sprite.css"/>
+	<link rel="stylesheet" href="/css/fontawesome.min.css">
+    <link rel="stylesheet" href="/css/flaticon.css">
+    <link rel="stylesheet" href="/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/vendor/animate.css">
+    <link rel="stylesheet" href="/css/vendor/nice-select.css">
+    <link rel="stylesheet" href="/css/lightcase.css">
+    <link rel="stylesheet" href="/css/vendor/slick.css">
+    <link rel="stylesheet" href="/css/vendor/chart.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <% } %>
+    <script src="/vendor/jquery/jquery.js"></script>
+    <script>
+        var currentCountryFromServer = "<%= JSON.stringify(geoip) %>";
+    </script>
+    <!--[if lte IE 8]>
+    <script src="/vendor/respond/respond.js"></script>
+    <script src="/vendor/excanvas/excanvas.js"></script>
+    <![endif]-->
+    <% include fonts.ejs %>
+	
+	<!-- Facebook Pixel Code -->
+	<!-- <script>
+		!function(f,b,e,v,n,t,s)
+		{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+		n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+		if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+		n.queue=[];t=b.createElement(e);t.async=!0;
+		t.src=v;s=b.getElementsByTagName(e)[0];
+		s.parentNode.insertBefore(t,s)}(window,document,'script',
+		'https://connect.facebook.net/en_US/fbevents.js');
+		 fbq('init', '1521667134566723'); 
+		fbq('track', 'PageView');
+	</script> -->
+</head>
+
+<body>
+<div class="dark-version">
+  <!-- header section  -->
+  <div class="preloader">
+  <div class="preloader-box">
+    <div>L</div>
+    <div>O</div>
+    <div>A</div>
+    <div>D</div>
+    <div>I</div>
+    <div>N</div>
+    <div>G</div>
+  </div>
+</div>

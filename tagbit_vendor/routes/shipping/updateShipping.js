@@ -1,0 +1,91 @@
+
+exports.index = function (req, res) {
+    var db = easydb(dbPool);
+    var insertId;
+    if (req.body.id){
+        insertId = req.body.id;
+        db
+            .query(function () {
+                return {
+                    query: "UPDATE `shipping` SET shipper_name = ?, status = ?, expected_date = ?, tracking_id = ? WHERE `id` = ?",
+                    params: [req.body.shipper_name, req.body.status, req.body.expected_date, req.body.tracking_id, req.body.id]
+                };
+            });
+    } else {
+        db
+            .query(function () {
+                return {
+                    query: "INSERT INTO `shipping` SET shipper_name = ?, status = ?, expected_date = ?, tracking_id = ?",
+                    params: [req.body.shipper_name, req.body.status, req.body.expected_date, req.body.tracking_id]
+                };
+            })
+            .success(function (rows) {
+                insertId = rows.insertId;
+            })
+            .query(function () {
+                return {
+                    query: "UPDATE purchased_items SET shipping_info_id = ? WHERE id IN (?)",
+                    params: [insertId, req.body.purchased_item_ids]
+                };
+            })
+    }
+    db
+        .query(function () {
+            return {
+                query: "SELECT shipping_address.email_address, shipping_address.first_name, shipping_address.last_name, shipping.id FROM shipping_address INNER JOIN shopping_carts ON shopping_carts.shipping_address_id = shipping_address.id INNER JOIN purchased_items ON purchased_items.shopping_cart_id = shopping_carts.id INNER JOIN shipping ON purchased_items.shipping_info_id = shipping.id WHERE shipping.id = ?",
+                params: [insertId]
+            };
+        })
+        .success(function (rows) {
+            if (rows.length > 0) {
+                var sendInvoice = function (){
+                    sendMail("invoice", {
+                        name: rows[0].first_name + " " + rows[0].last_name,
+                        order_id: fillIfNull(req.body.tracking_id, "Not Available"),
+                        date: fillIfNull(req.body.expected_date, "Not Available"),
+                        invoice_url: config.REAL_APP_DOMAIN + "/invoice?id=" + insertId
+                    }, {
+                        to: rows[0].email_address,
+                        subject: "Invoice - Tagbit.co"
+                    }, function () {
+                        res.send({status: 200});
+                    }, function (err) {
+                        logger.error(err);
+                        res.send({status: 500, msg: err.message});
+                    });
+                };
+                if (req.body.id){
+                    sendMail("shippingMail", {
+                        name: rows[0].first_name + " " + rows[0].last_name,
+                        shipper_name: fillIfNull(req.body.shipper_name, "Not Available"),
+                        order_id: fillIfNull(req.body.tracking_id, "Not Available"),
+                        expected_date: fillIfNull(req.body.expected_date, "Not Available")
+                    }, {
+                        to: rows[0].email_address,
+                        subject: "Your items has been shipped."
+                    }, function () {
+                        sendInvoice();
+                    }, function (err) {
+                        res.send({status: 500, msg: err.message});
+                        logger.error(err);
+                    });
+                } else {
+                    sendInvoice();
+                }
+            } else {
+                res.send({status: 500, msg: "Invalid Message."});
+            }
+        })
+        .error(function (err) {
+            logger.error(err);
+            res.send({msg: err.message, status: 500});
+        }).execute();
+};
+
+function fillIfNull(item, fill) {
+    if (item == null || item == undefined || item.trim().length <= 0 || item == "NA") {
+        return fill == undefined ? "NA" : fill;
+    } else {
+        return item;
+    }
+}

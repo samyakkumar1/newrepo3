@@ -1,0 +1,8 @@
+.form-group em{color: #db2144;}
+.edit-profile-header{padding-left: 0;padding-bottom: 15px;}
+.edit-profile-header h4{color: #777777;font-size: 16px;}
+.form-group input[type="email"],.form-group input[type="text"],.form-group input[type="password"]{height: 36px;font-size: 13px;}
+.form-group textarea{font-size: 13px;}
+#country{height: 36px;font-size: 13px;}
+label[for="current_password"],label[for="new_password"],label[for="confirm_new_password"]{font-weight: 500;}
+.pwd-error{color: #db2144;display: block;font-size: 13px;padding-left: 5px;display: none;}

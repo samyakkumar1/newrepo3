@@ -1,0 +1,160 @@
+<html> 
+    <head>
+        <style>
+            #previewDiv{
+                height: 2000px;
+                position: relative;
+            }
+            body { 
+                padding: 0px;
+                margin: 0px;
+                overflow: hidden;
+            }
+            #canvas { 
+                z-index: 9999;
+                position: absolute;
+                max-height: 100%;   
+                left: 0px;
+                top: 0px;
+                width: 100px;
+                height: 100px;
+            }
+            #previewCanvas{
+                z-index: 9999; 
+                left: 0px;
+                top: 0px;
+                width: 2000px;
+                height: 2000px;
+            }
+            #canvasBgFront {
+                width:100%;
+            } 
+            #img-out{
+                width:70px !important;
+                margin-left: 40%;
+                margin-top: 40%;
+                position: absolute;
+            }
+            .logozoom{
+                left: 165px !important;
+                top: 170px !important;
+                width: 130px !important;
+                height: 135px !important;
+                cursor:zoom-in;
+            }
+
+            .zoom-area
+		{
+			
+			cursor: none
+		}
+		/* for create magnify glass */
+		.large
+		{
+			width: 175px;
+			height: 175px;
+			position: absolute;
+			border-radius: 100%;
+		
+			/* for box shadow for glass effect */
+			box-shadow: 0 0 0 7px rgba(255, 255, 255, 0.85), 
+			0 0 7px 7px rgba(0, 0, 0, 0.25), 
+			inset 0 0 40px 2px rgba(0, 0, 0, 0.25);
+			
+			/*for hide the glass by default*/
+			display: none;
+		}
+		.small
+		{
+			display: block;
+		}
+        </style> 
+        <script>
+
+
+       
+
+
+        function modifyCss1(e){
+            var sub_width = 0;
+			var sub_height = 0;
+            //$("#canvas").addClass("logozoom");
+            if(!sub_width && !sub_height)
+				{
+					var image_object = new Image();
+					image_object.src = $(".small").attr("src");
+					sub_width = image_object.width;
+					sub_height = image_object.height;
+				}
+				else
+				{
+					var magnify_position = $(this).offset();
+
+					var mx = e.pageX - magnify_position.left;
+					var my = e.pageY - magnify_position.top;
+					
+					if(mx < $(this).width() && my < $(this).height() && mx > 0 && my > 0)
+					{
+						$(".large").fadeIn(100);
+					}
+					else
+					{
+						$(".large").fadeOut(100);
+					}
+					if($(".large").is(":visible"))
+					{
+						var rx = Math.round(mx/$(".small").width()*sub_width - $(".large").width()/2)*-1;
+						var ry = Math.round(my/$(".small").height()*sub_height - $(".large").height()/2)*-1;
+
+						var bgp = rx + "px " + ry + "px";
+						
+						var px = mx - $(".large").width()/2;
+						var py = my - $(".large").height()/2;
+
+						$(".large").css({left: px, top: py, backgroundPosition: bgp});
+					}
+				}
+        }
+        function resetCss(){
+            $("#canvas").removeClass("logozoom")
+        }
+        function downloadimg(callback){
+            domtoimage.toBlob(document.getElementById('previewDiv'))
+                .then(function(blob) {
+                    saveBlobAsFile(blob,function(base64){
+                            callback(base64);
+                    });
+                });
+               
+        }
+
+        
+
+        // this function is to convert blob to base64 img
+        function saveBlobAsFile(blob,callback) {
+            var reader = new FileReader();
+            reader.onloadend = function() {
+            var base64 = reader.result;
+            callback(base64)
+            };
+            reader.readAsDataURL(blob);
+        }
+        </script>
+        <link rel="stylesheet" href='/product-preview/magnify.css' />  
+        <script src='/product-preview/product-preview.js'></script>  
+        <script src='/product-preview/html2canvas.js'></script> 
+        <script src='/product-preview/domtoimage.js'></script>
+        <script src="../vendor/jquery/jquery.js"></script>
+        <script src="../js/logomaker/common.js"></script>
+    </head>
+    <body>
+        <div style="position: absolute;">
+            <div id="previewDiv">
+                <img src="" id="canvasBgFront"/>
+                <canvas id="canvas"></canvas>
+            </div>
+        </div>
+       
+        <img style="width: 100%" src="/img/loading.gif" id="img-out" style="margin:auto;width:30px" class="zoom" data-magnify-src="" /> 
+    </body>
+</html>

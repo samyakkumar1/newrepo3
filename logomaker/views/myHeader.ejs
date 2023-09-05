@@ -1,0 +1,542 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="msvalidate.01" content="CBFBD15F3AA384DFE8ACFB943BF145C2" />
+  <meta name="robots" content="noindex">
+
+  <!-- Chrome, Firefox OS and Opera -->
+<meta name="theme-color" content="#505BDA">
+<!-- Windows Phone -->
+<meta name="msapplication-navbutton-color" content="#505BDA">
+<!-- iOS Safari -->
+<meta name="apple-mobile-web-app-status-bar-style" content="#505BDA">
+
+<meta property="og:image" content="https://www.tagbit.co/images/tagbit-ogimage.png" />
+<title><%= typeof meta_title == "undefined" ? "Tagbit | Create &amp; Sell custom apparels online" : meta_title %></title>
+<meta name="keywords" content="<%= typeof keyword == "undefined" ? "tagbit.co , download logo free, free logo generator, logo templates" : keyword %>"/>
+<meta name="description" content="<%= typeof desc == "undefined" ? "Create logo for company online for free, logo designed by professionals only at tagbit.co. Create logo in 4 simple steps. Online logo making software" : desc %>">
+  <link rel="icon" type="image/png" href="/images/favicon.png" sizes="16x16">
+  <link rel="stylesheet" href="/css/fontawesome.min.css">
+  <link rel="stylesheet" href="/css/flaticon.css">
+  <link rel="stylesheet" href="/css/vendor/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/vendor/animate.css">
+  <link rel="stylesheet" href="/css/lightcase.css">
+  <link rel="stylesheet" href="/css/vendor/slick.css">
+  <!-- <link rel="stylesheet" href="/css/vendor/chart.min.css"> -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/jquery.feedback_me.css" media="screen">
+  <link rel="stylesheet" href="/css/custom.css">
+<!-- <link rel="stylesheet" href="/css/theme-admin-extension.css" media="screen"> -->
+<!-- <link rel="stylesheet" href="/css/easyzoom.css"> -->
+ <!-- <link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CShadows+Into+Light"
+        rel="stylesheet" type="text/css"> -->
+ <link href="https://fonts.googleapis.com/css?family=Roboto|Work+Sans:400,600" rel="stylesheet">
+
+<%if (global.config.USE_MIN_FILES == true) { %>
+  <link rel="stylesheet" href="/css/header.min.css?v=<%= options.version %>">
+  <% } else { %>
+  <link rel="stylesheet" href="/js/thirdparty/toast/jquery.toast.css">
+  <link rel="stylesheet" href="/vendor/bootstrap/bootstrap.css">
+  <link rel="stylesheet" href="/vendor/fontawesome/css/font-awesome.css">
+  <link rel="stylesheet" href="/vendor/owlcarousel/owl.carousel.css" media="screen">
+  <link rel="stylesheet" href="/vendor/owlcarousel/owl.theme.css" media="screen">
+  <link rel="stylesheet" href="/vendor/magnific-popup/magnific-popup.css" media="screen">
+  <link rel="stylesheet" href="/css/theme.css">
+  <link rel="stylesheet" href="/css/theme-elements.css">
+  <link rel="stylesheet" href="/css/theme-blog.css">
+  <link rel="stylesheet" href="/css/theme-shop.css">
+  <link rel="stylesheet" href="/css/theme-animate.css">
+  <link rel="stylesheet" href="/vendor/rs-plugin/css/settings.css" media="screen">
+  <link rel="stylesheet" href="/vendor/circle-flip-slideshow/css/component.css" media="screen">
+  <link rel="stylesheet" href="/css/skins/blue.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/jquery.fancybox.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/css/jquery.fancybox-buttons.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/css/jquery.fancybox-thumbs.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/css/select2.css" media="screen">
+  <link rel="stylesheet" href="/css/bootstrap-formhelpers.css" media="screen">
+  <link rel="stylesheet" href="/css/jquery.accordion.css">
+  <link rel="stylesheet" href="/css/theme-admin-extension.css" media="screen">
+  <link rel="stylesheet" href="/css/animate.min.css">
+  <link rel="stylesheet" href="/css/style.css"/>
+  <link rel="stylesheet" href="/css/sprite.css"/>
+  <% } %>
+  <style>
+    #overlay {
+      position: fixed;
+      display: none;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0,0,0,0.5);
+      z-index: 2;
+      cursor: pointer;
+    }
+    
+    #text{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      font-size: 50px;
+      color: white;
+      transform: translate(-50%,-50%);
+      -ms-transform: translate(-50%,-50%);
+    }
+    </style>
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+  <script>
+      var currentCountryFromServer = "<%= JSON.stringify(geoip) %>";
+  </script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QT1W3TPMR3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QT1W3TPMR3');
+</script>
+
+<!-- Facebook Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1138022040046508');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1138022040046508&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Facebook Pixel Code -->
+
+
+
+</head>
+
+<div class="dark-version">
+<!-- header section  -->
+<div id="overlay">
+  <div id="text">Please Wait..</div>
+</div>
+<div class="preloader">
+<div class="preloader-box">
+  <div>T</div>
+  <div>A</div>
+  <div>G</div>
+  <div>B</div>
+  <div>I</div>
+  <div>T</div>
+</div>
+</div>
+
+  <header class="header-section">
+      <div class="header-bottom" style="max-height:90px">
+        <div class="container">
+          <nav class="navbar navbar-expand-xl align-items-center" style="border-bottom-left-radius:25px;border-bottom-right-radius:25px;">
+            <a class="site-logo site-title" href="/"><img src="/images/logo.png" alt="site-logo"/><span class="logo-icon"><i class="flaticon-fire"></i></span></a>
+            <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="menu-toggle-main"></span>
+            </button>
+              <div class="mini-cart header-cart" style="margin-right: 10px;"><button class="header-cart-btn"><a href="/checkout" style="margin-top: 4px;"><i class="flaticon-commerce-and-shopping"></i></a></button></div>
+            <div class="menu-header-right">
+            <nav role="navigation" id="nav-mobile">
+            <div id="menuToggle">
+              <input type="checkbox" />
+                <span></span>
+                <span></span>
+                <span></span>
+            <ul id="menu">
+              <li><a href="/">Home</a></li>
+              <li><a href="/aboutUs">About</a></li>
+              <li><a href="/blog">Blog</a></li>
+              <li><a href="/contact-us">Contact</a></li>
+              <% if (!user) { %>
+                <li><button class="signup-open-btn" style="font-weight:500;font-family:Roboto,sana-serif;color:#212529;margin-top:5px;padding:0px">Sign Up</button></li>
+                  <li><button class="login-open-btn" style="font-weight:500;font-family:Roboto,sana-serif;color:#212529;margin-top:5px;padding-left:0px;">Sign In</button></li>
+              <% } %>
+              
+
+
+              <% if (user) { %>
+              <li id="headerAccountLogout"
+                          class="dropdown mega-menu-item mega-menu-signin signin logged pull-right">
+                          <a class="dropdown-toggle disabled" >
+                              <i class="fa fa-user"></i>&nbsp<span id="logoutLabel">My account</span>
+                              <!-- <%= user ? user.email : "" %> -->
+
+                          </a>
+                          <ul class="dropdown-menu user-profile-details" style="background-color:#505bda;border-color:#505bda;">
+                              <li><a class="profile" href="/editProfile" style="margin-left:-12px;color:white;">Profile</a></li>
+                              <li><a class="changePwd" href="/change-password" style="margin-left:-22px;color:white;">Change Password</a></li>
+                              <li><a class="logoutBtn link" style="margin-left:-20px;color:white;">Logout</a></li>
+                          </ul>
+                  </li>
+              <% } %>
+            </ul>
+           </div>
+          </nav></div>
+            <div class="collapse navbar-collapse">
+              <ul class="navbar-nav main-menu ml-auto" style="padding-left: 20px;">
+                <li><a href="/">Home</a></li>
+                <li><a href="/aboutUs">about</a></li>
+                <li><a href="/blog">blog</a></li>
+                <li><a href="/contact-us">contact</a></li>
+              </ul>
+              <div class="nav-right d-flex align-items-center" style="float:right;align-items:center;">
+
+                <ul class="nav-right-menu" style="margin-left:10px;margin-bottom:1px;">
+                  <li>
+                    <div class="bfh-selectbox bfh-countries top-countries-list bfh-main" style="display:none;" data-country="<%= geoip ? geoip.country : "IN" %>" data-flags="true"
+                      data-filter="true"></div>
+                  </li>
+                  <li>
+                    <div class="header-cart" style="margin-left: 10px;">
+                  <button class="header-cart-btn"> 
+                   <a href="/checkout"><i class="flaticon-commerce-and-shopping" ></i>
+                    </a>
+                  </button>
+                </div>
+                    </li>
+              
+              <% if (!user) { %>
+                <li><button class="signup-open-btn" style="font-weight:500;font-family:Roboto,sana-serif;color:#212529;margin-top:5px;padding:0px">Sign Up</button></li>
+                  <li><button class="login-open-btn" style="font-weight:500;font-family:Roboto,sana-serif;color:#212529;margin-top:5px;padding-left:0px;">Sign In</button></li>
+              <% } %>
+
+              <% if (user) { %>
+              <li id="headerAccountLogout"
+                          class="dropdown mega-menu-item mega-menu-signin signin logged pull-right">
+                          <a class="dropdown-toggle disabled" >
+                              <i class="fa fa-user"></i>&nbsp<span id="logoutLabel">My Account</span>
+                              <!-- <%= user ? user.email : "" %> -->
+
+                          </a>
+                          <ul class="dropdown-menu user-profile-details" style="background-color:#505bda;border-color:#505bda;">
+                              <li><a class="profile" href="/editProfile" style="margin-left:-12px;color:white;">Profile</a></li>
+                              <li><a class="changePwd" href="/change-password" style="margin-left:-22px;color:white;">Change Password</a></li>
+                              <li><a class="logoutBtn link" style="margin-left:-20px;color:white;">Logout</a></li>
+                          </ul>
+                  </li>
+              <% } %>
+
+                </ul>
+              </div>
+            </div><!-- navbar-collapse end -->
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <div class="login-section">
+      <div class="section-bg-image" style="background-image: url('/images/bg/inner-hero.jpg');"></div>
+      <div class="login-area">
+        <div class="login-close"></div>
+        <div class="login-wrapper">
+          <div class="text-center">
+            <h3 class="title text-center" style="font-family:Quicksand,sana-serif;color:#292929;font-weight:600;">Hi, Welcome to Tagbit</h3>
+            <p style="color:#777777;line-height:1.3;">Enter your credentials below and sign in now</p>
+          </div>
+          <div class="signin-form" id="loginFormOnTop" novalidate="novalidate">
+            <div class="form-row justify-content-between">
+              <div class="col-lg-12 custom-form-field">
+                <i class="fa fa-user"></i>
+                <input type="text" value="" id="emailid" name="emailid" required="true" email="true" placeholder="Email or User Name" style="color:gray;">
+              </div>
+              <div class="col-lg-12 custom-form-field">
+                <i class="fa fa-user"></i>
+                <input type="password" value="" id="password" name="password" required="true" minlength="5" placeholder="Password" style="color:gray;">
+              </div>
+              <div class="col-lg-3" style="width:100px;margin-left: 20px;">
+                <span class="remember-box checkbox" style="margin-top: 0px;font-size: 14px;">
+                    <label for="rememberme" style="padding-left: 0px;">
+                        <input type="checkbox" id="rememberme" name="rememberme" checked="true" style="min-height:20px;">Remember Me
+                    </label>
+                </span>
+            </div>
+              <div class="col-lg-12 text-center mt-4">
+                <button id="loginBtn" class="btn btn-primary" style="background-color:#505bda;font-size:14px;font-weight:400;white-space:nowrap;height:50px;width:100px;font-family:Roboto,sana-serif;font-size:18px;">Login</button> 
+              </div>
+            </div>
+          </div>
+          <div class="form-footer text-center mt-20">
+              <a class="forget-pass" id="headerRecover" style="font-size:16px;" href="https://www.tagbit.co/forgot-password">Forgot My Password?</a>
+            <span class="mt-40">Or sign in with</span>
+            <ul class="d-flex justify-content-center">
+              <li><a href="#0"><img src="/images/icon/signin-signup/google.png" alt="image"></a></li>
+              <li><a href="#0"><img src="/images/icon/signin-signup/facebook.png" alt="image"></a></li>
+              <li><a href="#0"><img src="/images/icon/signin-signup/twitter.png" alt="image"></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="signup-section">
+      <div class="section-bg-image" style="background-image: url('/images/bg/inner-hero.jpg');"></div>
+      <div class="signup-area">
+        <div class="signup-close">
+        </div>
+        <div class="signup-wrapper">
+          <div class="text-center">
+            <h3 class="title text-center" style="font-family:Quicksand,sana-serif;color:#292929;font-weight:600;">Hi, Welcome to Tagbit</h3>
+            <p><b>"A journey of a thousand miles must begin with a single step"</b></p>
+            
+          </div>
+          <div class="signup-form"  id="signupForm" novalidate="novalidate">
+            <div class="form-row justify-content-between">
+              <div class="col-lg-12 custom-form-field">
+                <i class="fa fa-user"></i>
+                <input id="pageSignupUserName" name="signup_email" type="text" placeholder="Email" class="form-control input-lg" required="true" email="true" placeholder="Email or User Name">
+              </div>
+              <div class="col-lg-12 custom-form-field">
+                <i class="fa fa-user"></i>
+                <input id="pageSignupPassword" name="signup_password" type="password" placeholder="Password" class="input-lg form-control" required="true" minlength="5">
+              </div>
+              <div class="col-lg-12 custom-form-field">
+                <i class="fa fa-user"></i>
+                <input name="confirm_password" type="password" placeholder="Confirm Password" class="form-control input-lg" required="true" minlength="5" equalTo="[name=signup_password]">
+              </div>
+              <div class="col-lg-12 custom-form-field">
+                <input type="checkbox" name="termandcondiction1" id="termandcondiction1" required="true">&nbsp;&nbsp;
+                <label class="pod-labels" for="termandcondiction1" style="color:#444">I have read and agree to the terms and conditions as well as the privacy
+                    policy, cookie policy and community guidelines</label>
+              </div>
+              <div class="col-lg-12 text-center mt-4">
+                <button id="pageCreateAccountBtn" class="btn btn-primary" style="background-color:#505bda;font-size:14px;font-weight:400;white-space:nowrap;height:50px;width:150px;font-family:Roboto,sana-serif;font-size:18px;"><i class="fa fa-circle-o-notch fa-spin" id="signup_loader" style="display: none;"></i>&nbsp Sign up Now</button>
+              </div>
+            </div>
+          </div>
+          <div class="form-footer text-center mt-20">
+            <p>Already have an account here : <a href="#0">Sign in</a></p>
+            <span class="mt-40">Or sign in with</span>
+            <ul class="d-flex justify-content-center">
+              <li><a href="#0"><img src="/images/icon/signin-signup/google.png" alt="image"></a></li>
+              <li><a href="#0"><img src="/images/icon/signin-signup/facebook.png" alt="image"></a></li>
+              <li><a href="#0"><img src="/images/icon/signin-signup/twitter.png" alt="image"></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+<div class="container logomaker-menu">
+                              <div class="row logomaker-row">
+                                  <div class="logomaker-img">
+                                      <div class="logomaker-img-steps">4 Easy steps to create logos</div>
+                                      <ul>
+                                          <li><img alt="tagbit.co" src="/img/logo-enter.png" class=""><span class="">Enter Identity</span></li>
+                                          <li class="curved-image">
+                                              <span class="orange-curve"></span>
+                                              <!--<img alt="tagbit.co" src="/img/top-curve-01.png">-->
+                                          </li>
+                                          <li><img alt="tagbit.co" src="/img/logo-select.png"><span class="">Select logo</span></li>
+                                          <li class="curved-image">
+                                              <span class="red-curve"></span>
+                                              <!--<img alt="tagbit.co" src="/img/top-curve-02.png">-->
+                                          </li>
+                                          <li><img alt="tagbit.co" src="/img/logo-customize.png"><span class="">Customize logo</span>
+                                          </li>
+                                          <li class="curved-image">
+                                              <span class="green-curve"></span>
+                                              <!--<img alt="tagbit.co" src="/img/top-curve-03.png">-->
+                                          </li>
+                                          <li><img alt="tagbit.co" src="/img/logo-save.png"><span class="">Save & Download</span></li>
+                                      </ul>
+                                  </div>
+                                  <div class="clr">
+                                      <div class="get-started">
+                                          <a href="/logo-design-online" class="get-started-btn">Get Started</a>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="container visitingCard-menu">
+                              <div class="row logomaker-row">
+                                  <div class="logomaker-img-steps">4 Easy steps to create business cards</div>
+                                  <ul class="visitingCard-ul">
+                                      <li><img alt="tagbit.co"  src="/img/card-choose.png"><span class="">Choose Card</span></li>
+                                      <li class="curved-image">
+                                          <span class="orange-curve"></span>
+                                          <!--<img alt="tagbit.co"  src="/img/top-curve-01.png">-->
+                                      </li>
+                                      <li><img alt="tagbit.co"  src="/img/card-edit.png"><span class="">Edit Card</span></li>
+                                      <li class="curved-image">
+                                          <span class="red-curve"></span>
+                                          <!--<img alt="tagbit.co"  src="/img/top-curve-02.png">-->
+                                      </li>
+                                      <li><img alt="tagbit.co"  src="/img/card-customize.png"><span class="">Customize Card</span></li>
+                                      <li class="curved-image curved-image-download">
+                                          <span class="green-curve"></span>
+                                          <!--<img alt="tagbit.co"  src="/img/top-curve-03.png">-->
+                                      </li>
+                                      <li class="card-dwld-list"><img alt="tagbit.co" src="/img/logo-save.png"><span class="">Save & Download</span>
+                                      </li>
+                                  </ul>
+                                  <div class="clr">
+                                      <div class="get-started">
+                                          <a href="/design-business-card-online" class="get-started-btn">Get Started</a>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+    </div>
+
+
+    <script>
+        var currentCountryFromServer = "<%= JSON.stringify(geoip) %>";
+        function on() {
+          document.getElementById("overlay").style.display = "block";
+        }
+
+        function off() {
+          document.getElementById("overlay").style.display = "none";
+        }
+    </script>
+    <!-- <script src="/js/vendor/bootstrap.min.js"></script> -->
+    <!-- <script src="/js/indexprice.js"></script> -->
+    <script>
+// Get the input field
+var input = document.getElementById("password");
+
+// Execute a function when the user releases a key on the keyboard
+input.addEventListener("keyup", function(event) {
+  // Number 13 is the "Enter" key on the keyboard
+  if (event.keyCode === 13) {
+    // Cancel the default action, if needed
+    event.preventDefault();
+    // Trigger the button element with a click
+    document.getElementById("loginBtn").click();
+  }
+});
+
+    /*var console = {};
+    console.log = function(str){
+    return;
+    }*/
+
+    </script>
+   
+<!--
+  <script>
+      var currentCountryFromServer = "<%= JSON.stringify(geoip) %>";
+  </script>
+  <script src="/js/vendor/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.fancybox.js"></script>
+    <script type="text/javascript" src="/js/jquery.fancybox.pack.js"></script>
+    <script type="text/javascript" src="/js/jquery.fancybox-buttons.js"></script>
+    <script type="text/javascript" src="/js/jquery.fancybox-media.js"></script>
+    <script type="text/javascript" src="/js/jquery.fancybox-thumbs.js"></script>
+    <script src="/vendor/modernizr/modernizr.js"></script>
+    <script src="/vendor/jquery-cookie/jquery-cookie.js"></script>
+    <script src="/js/thirdparty/jquery.cookie.js"></script>
+    <script src="/js/thirdparty/mustache.js"></script>
+    <script src="/js/thirdparty/bootbox.js"></script>
+    <script src="/js/thirdparty/jquery-validate/jquery.validate.js"></script>
+    <script src="/js/thirdparty/toast/jquery.toast.min.js"></script>
+    <script src="/js/thirdparty/md5.js"></script>
+    <script src="/vendor/jquery.appear/jquery.appear.js"></script>
+    <script src="/vendor/jquery.easing/jquery.easing.js"></script>
+    <script src="/vendor/bootstrap/bootstrap.js"></script>
+    <script src="/vendor/jquery.validation/jquery.validation.js"></script>
+    <script src="/vendor/jquery.stellar/jquery.stellar.js"></script>
+    <script src="/vendor/jquery.easy-pie-chart/jquery.easy-pie-chart.js"></script>
+    <script src="/vendor/jquery.gmap/jquery.gmap.js"></script>
+    <script src="/vendor/twitterjs/twitter.js"></script>
+    <script src="/vendor/isotope/jquery.isotope.js"></script>
+    <script src="/vendor/owlcarousel/owl.carousel.js"></script>
+    <script src="/vendor/jflickrfeed/jflickrfeed.js"></script>
+    <script src="/vendor/magnific-popup/jquery.magnific-popup.js"></script>
+    <script src="/vendor/vide/vide.js"></script>
+    <script src="/js/bootstrap-formhelpers.js"></script>
+    <script src="/js/jquery.feedback_me.js"></script>
+    <script src="/js/bootstrap-formhelpers-colorpicker.js"></script>
+    <script src="/vendor/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+    <script src="/vendor/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+    <script src="/vendor/circle-flip-slideshow/js/jquery.flipshow.js"></script>
+    <script src="/js/views/view.home.js"></script>
+    <script src="/js/jquery.cycle2.js"></script>
+    <script src="/js/jquery.cycle2.shuffle.js"></script>
+    <script src="/js/thirdparty/jquery.svg/jquery.svg.js"></script>
+    <script src="/js/thirdparty/jquery.svg/jquery.svgdom.js"></script>
+    <script src="/js/thirdparty/jquery.sticky.js"></script>
+    <script type="text/javascript" src="/js/expand.js"></script>
+
+    <script src="/js/vendor/jquery.nice-select.min.js"></script>
+    <script src="/js/vendor/slick.min.js"></script>
+    <script src="/js/vendor/wow.min.js"></script>
+    <script src="/js/vendor/lightcase.js"></script>
+    <script src="/js/vendor/jquery.countdown.min.js"></script>
+    <script src="/js/vendor/jquery.easing.min.js"></script>
+    <script src="/js/vendor/TweenMax.min.js"></script>
+    <script src="/js/vendor/jquery.paroller.min.js"></script>
+    <script src="/js/vendor/tilt.jquery.min.js"></script>
+    <script src="/js/thirdparty/html5.js"></script>
+    <script src="/js/select2.min.js"></script>
+   
+    <script src="/js/theme.init.js"></script>
+    <script src="/js/custom.js"></script>
+    <script src="/js/logomaker/Base64.js"></script>
+    <script src="/js/logomaker/common.js"></script>
+    <script src="/js/logomaker/authenticate.js"></script>
+    <script src="/js/contact.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/logomaker/helpers/header.js"></script>
+    <script src="/js/logomaker/helpers/footer.js"></script>
+  
+
+
+
+
+
+  <script>
+    $(document).load(function(){
+      console.log("document loaded");
+    })
+    // $(function () {
+        $("#loginBtn").click(function (e) {
+            e.preventDefault();
+            addWaitingOverlay();
+            console.log("login-start")
+            signin($("#emailid").val(), $("#password").val(), function (resp) {
+                var from = getURLParameterByName("from");
+                if(from){
+                    window.location = "/" + from;
+                } else {
+                    window.location = "/";
+                }
+                alert("You have successfully logged in.");
+            }, function (err) {
+                removeWaitingOverlay();
+                console.log(err);
+                alert(typeof err == "string" ? err : "Server Error: " + err.error);
+            });
+          
+          
+        });
+    // });
+    // $(function () {
+      //  $("#signupForm").validate();
+      $("#pageCreateAccountBtn").click(function (e) {
+          e.preventDefault();
+          console.log($("#pageSignupUserName").val());
+            //$('#signupForm').valid()
+          if (true) {
+              signup({email: $("#pageSignupUserName").val(), password: $("#pageSignupPassword").val()});
+            console.log("success");
+            } else {
+              console.log("failure");
+             alert("Please enter the valid values");
+          }
+      });
+  // });
+</script> -->

@@ -1,0 +1,69 @@
+<% include myHeader.ejs %>
+<script src="/js/thirdparty/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+<script src="/js/moment.min.js"></script>
+<link rel="stylesheet" href="/js/thirdparty/bootstrap-datepicker/bootstrap-datepicker3.min.css"/>
+<script src="/js/logomaker/helpers/reports.js"></script>
+<style>
+    input[type=date] {
+        line-height: normal !important;
+    }
+</style>
+<section class="page_top">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Orders</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="container">
+    <div class="row">
+        <div>
+            Search by Order #: <input type="text" id="serialNum" />
+            <span class="pull-right">
+                Product:
+                <select id="productCmb">
+                    <option value="">All</option>
+                    <option value="LOGO">Logo</option>
+                    <option value="BC">Card</option>
+                </select>
+                Status:
+                <select id="statusCmb">
+                    <option value="">All</option>
+                    <option value="PRINTING">Printing</option>
+                    <option value="PRINTED">Printed</option>
+                    <option value="NOT_PRINTED">Not printed</option>
+                </select>
+                From Date: <input type="date" id="startDate"/> To Date:  <input type="date" id="endDate" />
+                <button class="btn btn-sm btn-primary" id="applyBtn" data-toggle="tooltip" data-placement="top" data-original-title="Apply Filter">Apply</button>
+                <button class="btn btn-sm btn-primary" id="clearFilterBtn" data-toggle="tooltip" data-placement="top" data-original-title="Clear Filter">Clear</button>
+                <button class="btn btn-sm btn-primary" id="downloadBtn" data-toggle="tooltip" data-placement="top" data-original-title="Download Report" ><i class="fa fa-download"></i></button>
+            </span>
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <table class="table table-responsive table-striped table-bordered table-hover table-condensed tblOrderList" id="tblOrders">
+            <thead>
+                <tr>
+                    <th class="col-md-1"><a class="link" data-field="shopping_carts.id,shopping_cart_items.id">Order #</a></th>
+                    <th class="col-md-1">Name / Email<a class="link" data-field="shipping_address.first_name, shipping_address.last_name, shipping_address.email_address"></a></th>
+                    <th class="col-md-1">Contact #<a class="link" data-field="shipping_address.phone_number"></a></th>
+                    <th class="col-md-2">Address<a class="link" data-field="shipping_address.address1, shipping_address.address2, shipping_address.city, shipping_address.state,  shipping_address.country, shipping_address.postal_code"></a></th>
+                    <th class="col-md-1"><a class="link" data-field="shopping_carts.payement_type">Payment</a></th>
+                    <th class="col-md-1"><a class="link" data-field="purchased_items.qty">Qty</a></th>
+                    <th class="col-md-1"><a class="link" data-field="shopping_cart_items.item_type">Product</a></th>
+                    <th class="col-md-1"><a class="link" data-field="purchased_items.paper_stock">Paper</a></th>
+                    <th class="col-md-1"><a class="link" data-field="shopping_carts.price">Price</a></th>
+                    <th class="col-md-1"><a class="link" data-field="shopping_carts.currency">Currency</a></th>
+                    <th class="col-md-1"><a class="link" data-field="shopping_carts.date_purchased">Date</a></th>
+                    <th class="col-md-1"><a class="link" data-field="purchased_items.status">Status</a></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <a class="link" id="showAllRecords">Click here to show all records.</a>
+    </div>
+</div>
+<% include myFooter.ejs %>

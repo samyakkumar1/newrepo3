@@ -1,0 +1,61 @@
+<% include header.ejs %>
+<script src="/js/thirdparty/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="/js/thirdparty/bootstrap-datepicker/bootstrap-datepicker3.min.css"/>
+<script>
+  $(function () {
+      $("#startDate").datepicker({
+          format: 'yyyy-mm-dd',
+          endDate: new Date()
+      });
+      $("#endDate").datepicker({
+          format: 'yyyy-mm-dd',
+          endDate: new Date()
+      });
+  })
+</script>
+<section class="page_top">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Download reports</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <form action="/purchasedCards" method="POST" class="col-md-3"> 
+    <button class="btn btn-lg btn-success col-md-12">Purchased Cards</button>  
+  </form> 
+  <form action="/purchasedLogos" method="POST" class="col-md-3">
+    <input type="hidden" name="type" value="xls"/> 
+    <button class="btn btn-lg btn-success col-md-12">Purchased Logos</button> 
+  </form>
+
+  <!--
+  <form action="/downloadedLogos" method="POST">
+  <div class="form-group">
+  <div class="col-md-6">
+  <label for="exampleInputEmail1">Start Date</label>
+  <input type="text" id="startDate" name="startDate" class="form-control">
+  </div>
+  <div class="col-md-6">
+  <label for="exampleInputEmail1">End Date</label>
+  <input type="text" id="endDate" name="endDate" class="form-control">
+  </div>
+  </div>
+  <div class="form-group">
+  <div class="col-md-12">
+  <br/>
+  <button class="btn btn-lg btn-success">Logo Downloads</button>
+  </div>
+  </div>
+  </form>
+  <button class="btn btn-lg btn-success" id="generateBasedOnOrderValue">Order value</button>
+  <button class="btn btn-lg btn-success" id="generateBasedOnProduct">Product ordered</button>
+  <button class="btn btn-lg btn-success" id="generateBasedOnDesignation">Designation </button>
+  <button class="btn btn-lg btn-success" id="generateBasedOnCategory">Category from which order was made</button>
+  <button class="btn btn-lg btn-success" id="generateBasedOnCity">City</button>
+  -->
+</div> 
+<% include footer.ejs %>

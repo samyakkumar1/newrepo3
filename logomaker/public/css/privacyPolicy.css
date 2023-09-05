@@ -1,0 +1,17 @@
+.privacy-policy-page span{
+	display: block;
+}
+.top-section-header{
+	font-size: 18px;
+	font-weight: 700;
+	padding-bottom: 10px;
+	color: #00a5a4;
+}
+.content-header{
+	font-weight: 700;
+	padding: 10px 0;
+	color: #00a5a4;
+}
+.body-content{
+	padding-bottom: 10px;
+}

@@ -1,0 +1,35 @@
+<% include header.ejs %>
+<script>
+    var realAppDomain = "<%= hostName %>"
+</script>
+<script type="text/javascript" src="/js/logomaker/helpers/view_orders_other_products.js"></script>
+<script type="text/javascript" src="/js/logomaker/Base64.js"></script>
+<script type="text/javascript" src="/js/thirdparty/canvg/rgbcolor.js"></script>
+<script type="text/javascript" src="/js/thirdparty/canvg/StackBlur.js"></script>
+<script type="text/javascript" src="/js/thirdparty/canvg/canvg.js"></script>
+<section class="page_top">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Merch products printing</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-responsive tblPurchasedCards">
+                <tr>
+                    <th class="col-md-3">Front</th>
+                    <th class="col-md-2">Back</th>
+                    <th class="col-md-2">Address</th>
+                    <th class="col-md-3">Properties</th>
+                    <th class="col-md-1">Status</th>
+                    <th class="col-md-1">Download</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<% include footer.ejs %>

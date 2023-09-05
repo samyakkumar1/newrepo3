@@ -1,0 +1,992 @@
+/**
+ * Created by DesignerBe on 08-12-2020.
+ */
+
+$(function () {
+    var totalItems = 0;
+    var loadedItems = 0;
+    var showRefiralButton = false;
+    var refiral_cart_items = [];
+    var cartCurrency;
+
+    function init() {
+        /*
+        setTimeout(function (){
+            jQuery.ajax({
+                url: "https://checkout.stripe.com/checkout.js",
+                dataType: 'script',
+                success: setupStripe,
+                async: true
+            });
+        }, 1024);
+        */
+
+        $("head").append($("#allFonts").children());
+        updateCarts();
+        $("#checkout-counry").select2();
+        $('#payment-type').select2().on("change", function (e) {
+            var type = $('#s2id_payment-type .select2-chosen').text();
+            if (type == "Credit/Debit Card") {
+                $('.radio-wrapper').slideDown();
+                $("#cardDetails").show();
+            } else {
+                $('.radio-wrapper').slideUp();
+                $('.cardDetails').slideUp();
+            }
+        });
+        $('#province').select2();
+        $('.tooltip1').tooltip();
+        $(".card-type").click(function () {
+            var val = $('input[name=card-type]:checked').val();
+            if (val == "visa") {
+                $("#billingAddr").show();
+            } else {
+                $("#billingAddr").hide();
+            }
+        });
+        $("#proceedToPayment").click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var showPanel = function () {
+                $('.checkout-tab-pane').removeClass('active');
+                $('#w1-payment').addClass('active');
+                $('.wizard-li').removeClass('active');
+                $('li.li-payment').addClass('active');
+                window.scrollTo(0, 0);
+            };
+
+            if ($("#editProfileForm").valid()) {
+                var proccedToPayment = function () {
+                    addWaitingOverlay();
+                    var data = {
+                        email_id: $("#emailId", $("#editProfileForm")).val(),
+                        phone_num: $("#phone_num", $("#editProfileForm")).val(),
+                        first_name: $("#first_name", $("#editProfileForm")).val(),
+                        last_name: $("#last_name", $("#editProfileForm")).val(),
+                        address_1: $("#address1", $("#editProfileForm")).val(),
+                        address_2: $("#address2", $("#editProfileForm")).val(),
+                        country: $("#country", $("#editProfileForm")).val(),
+                        city: $("#city", $("#editProfileForm")).val(),
+                        state: $("#state", $("#editProfileForm")).val(),
+                        postal_code: $("#postal_code", $("#editProfileForm")).val(),
+                        password: $("#current_password", $("#editProfileForm")).val(),
+                        show_in_list: $("#save_addr", $("#editProfileForm")).is(":checked")
+                    };
+                    data.salt = getNewRandomNumber(1000, 9999);
+                    data.md5_password = MD5(data.salt + ":" + data.password);
+                    delete data.password;
+                    doPost("/updateCheckoutDetails", data, function (resp) {
+                        removeWaitingOverlay();
+                        if (resp.status == 200) {
+                            $(".paymentGatewayLogo").attr("src", $('.top-countries-list').val() == "IN" ? "/img/high-resolution-original.png" : "/img/paypal.jpg");
+                            if (isLoggedIn()) {
+                                showPanel();
+                            } else {
+                                bootbox.alert("An account is created for you with the specified email and password. You can login with the credentials.", function () {
+                                    signin($("#emailId").val(), $("#current_password").val(), function () {
+                                        doPost("/updateCheckoutDetails", data, function (resp) {
+                                            if (resp.status == 200) {
+                                                showPanel();
+                                            } else {
+                                                console.log(resp);
+                                                bootbox.alert("Error: " + resp.msg);
+                                            }
+                                        }, function (err) {
+                                            console.log(err);
+                                            bootbox.alert(err);
+                                        });
+                                    });
+                                });
+                            }
+                        } else {
+                            console.log(resp);
+                            bootbox.alert("Error: " + resp.msg);
+                        }
+                    }, function (err) {
+                        removeWaitingOverlay();
+                        console.log(err);
+                        bootbox.alert("Server error: communication failure.");
+                    });
+                };
+                if ($("#use_coupon").is(":checked")) {
+                    bootbox.prompt("Enter your coupon code: ", function (result) {
+                        if (result != null) {
+                            var customer_name = $("#first_name").val() + " " + $("#last_name").val(); // Replace CUSTOMER_NAME with the customer name
+                            var customer_email = $("#emailId").val(); // Replace CUSTOMER_NAME with the customer email
+                            var grandTotal = $(".totalPrice:first").val(); // Replace GRAND_TOTAL with the total amount of the bill of customer
+                            var subTotal = $(".totalPrice:first").val(); // Replace SUBTOTAL with the subtotal amount of the bill of customer
+                            var couponCode = result; // Replace COUPON_CODE with the coupon code applied by customer. Leave it blank if no coupon code is applied.
+                            var order_id = "ORDER_ID"; // Optional
+                            var currency = $($(".currencyField")[0]).text(); //Optional
+
+                            invoiceRefiral(subTotal, grandTotal, couponCode, refiral_cart_items, customer_name, customer_email, order_id, currency);
+                            proccedToPayment();
+                        } else {
+                            bootbox.alert("Please enter a valid cupon code");
+                        }
+                    });
+                } else {
+                    proccedToPayment();
+                }
+            }
+        });
+        $('#proceed-pay-back').on('click', function (e) {
+            e.preventDefault();
+            $('.checkout-tab-pane').removeClass('active');
+            $('#w1-delivery').addClass('active');
+            $('.wizard-li').removeClass('active');
+            $('li.li-delivery').addClass('active');
+        });
+        $("#proceedBack").click(function (e) {
+            $(".mainContainer").show();
+            $(".details").hide();
+
+            $('.checkout-tab-pane').removeClass('active');
+            $('#w1-preview').addClass('active');
+            $('.wizard-li').removeClass('active');
+            $('li.li-preview').addClass('active');
+            $("body").scrollTop( 1 );
+        });
+        $('#proceed-third-party').on('click', function (e) {
+            e.preventDefault();
+            doPayment();
+        });
+        $("#procceedBtn").click(function (e) {
+            e.preventDefault(); 
+			//if (fbq){
+			//	fbq('track', 'InitiateCheckout');
+			//}
+            if (isLoggedIn(false) == false){
+                bootbox.alert("Please login before you make a purchase.", function (e){
+                    window.location = "/login?from=checkout";
+                });
+            } else {
+                $("#editProfileForm").validate({
+                    debug: true,
+                    messages: {
+                        terms: "<b>You must accept the Terms and Conditions</b>",
+                        emailId: "Email ID is required.",
+                        first_name: "First name is required",
+                        phone_num: "Phone number is required",
+                        last_name: "Last name is required",
+                        address1: "Address Line 1 is required",
+                        city: "City is required",
+                        state: "State is required",
+                        country: "Country is required",
+                        postal_code: "Postal Code is required",
+                        current_password: "Password is reqired",
+                        confirm_password: "You must confirm the password"
+                    },
+                    showErrors: function (errorMap, errorList) {
+                        if (submitted) {
+                            if (errorList.length > 0) {
+                                var summary = "<b>Pleae fix the following errors: </b><br/><br/><ul>";
+                                $.each(errorList, function () {
+                                    summary += "<li>" + this.message + "</li>";
+                                });
+                                summary += "</ul>";
+                                $("#validationError").show();
+                                $("#validationError").html(summary);
+                            } else {
+                                $("#validationError").hide();
+                            }
+                            submitted = false;
+                        }
+                        this.defaultShowErrors();
+                    },
+                    invalidHandler: function (form, validator) {
+                        submitted = true;
+                    }
+                });
+                //if (!$("#countryNotSupported").is(":visible")) {
+                    if ($(".shoppingCartItem").length > 0) {
+                        var submitted;
+                        $(".mainContainer").hide();
+                        $(".details").show();
+                        var addrList = $("#savedAddress");
+                        var user = getUser();
+                        addrList.children().remove();
+                        $(".checkoutCountrySelector").val($(".top-countries-list").val());
+                        if (user != undefined) {
+                            doPost("/listAddresses", {}, function (resp) {
+                                if (resp.status == 200) {
+                                    if (resp.addresses.length == 0) {
+                                        $("#editProfileForm #emailId").val(user.email);
+                                        $("#editProfileForm #phone_num").val(user.phone_num);
+                                        $("#editProfileForm #first_name").val(user.first_name);
+                                        $("#editProfileForm #last_name").val(user.last_name);
+                                        $("#editProfileForm #address1").val(user.address == null ? "" : user.address.split("\n")[0]);
+                                        $("#editProfileForm #address2").val(user.address == null ? "" : user.address.split("\n")[1]);
+                                        $("#editProfileForm #country").val($(".top-countries-list").val());
+                                        $("#editProfileForm #state").val(user.state);
+                                        $("#editProfileForm #city").val(user.city);
+                                        $("#editProfileForm #postal_code").val(user.postal_code);
+                                        $("#editProfileForm .pwd").hide();
+                                        $("#editProfileForm #savedAddresses").hide();
+                                    } else {
+                                        for (var i = 0; i < resp.addresses.length; i++) {
+                                            var addr = resp.addresses[i];
+                                            addrList.append('<option value="' + addr.id + '" data-email="' + addr.email_address + '" data-ph="' + addr.phone_number + '" data-fname="' + addr.first_name + '" data-lname="' + addr.last_name + '" data-addr1="' + addr.address1 + '" data-addr2="' + addr.address2 + '" data-city="' + addr.city + '" data-state="' + addr.state + '" data-country="' + addr.country + '" data-postal_code="' + addr.postal_code + '">' +
+                                            addr.email_address + ', ' + addr.phone_number + ', ' + addr.first_name + ', ' + addr.last_name + ', ' + addr.address1 + ', ' + addr.address2 + ', ' + addr.city + ', ' + addr.state + ', ' + addr.country + ', ' + addr.postal_code +
+                                            '</option>');
+                                        }
+                                        $("#editProfileForm #emailId").val(resp.addresses[resp.addresses.length - 1].email_address);
+                                        $("#editProfileForm #phone_num").val(resp.addresses[resp.addresses.length - 1].phone_number);
+                                        $("#editProfileForm #first_name").val(resp.addresses[resp.addresses.length - 1].first_name);
+                                        $("#editProfileForm #last_name").val(resp.addresses[resp.addresses.length - 1].last_name);
+                                        $("#editProfileForm #address1").val(resp.addresses[resp.addresses.length - 1].address1);
+                                        $("#editProfileForm #address2").val(resp.addresses[resp.addresses.length - 1].address2);
+                                        $("#editProfileForm #country").val($(".top-countries-list").val());
+                                        $("#editProfileForm #state").val(resp.addresses[resp.addresses.length - 1].state);
+                                        $("#editProfileForm #city").val(resp.addresses[resp.addresses.length - 1].city);
+                                        $("#editProfileForm #postal_code").val(resp.addresses[resp.addresses.length - 1].postal_code);
+                                        $("#editProfileForm #savedAddresses").show();
+                                    }
+                                } else {
+                                    bootbox.alert("Can't list saved addresses.");
+                                }
+                            });
+                        } else {
+                            $("#savedAddresses").hide();
+                            $(".pwd").show();
+                        }
+                        addrList.select2({
+                            formatResult: function (state) {
+                                var originalOption = state.element;
+                                if (!state.id) {
+                                    return state.text;
+                                }
+                                return $(originalOption).data("email") + " (Ph: " + $(originalOption).data("ph") + ") <br/>" + $(originalOption).data("fname") + " " + $(originalOption).data("lname") + ", " + $(originalOption).data("addr1") + ", " + $(originalOption).data("addr2") + ", " + $(originalOption).data("city") + ", " + $(originalOption).data("state") + ", " + $(originalOption).data("country") + ", PIN: " + $(originalOption).data("postal_code");
+                            },
+                            escapeMarkup: function (m) {
+                                return m;
+                            }
+                        }).on("select2-selecting", function (e) {
+                            var obj = $(e.choice.element);
+                            var form = $("#editProfileForm");
+                            $("#editProfileForm #emailId", form).val(obj.data("email"));
+                            $("#editProfileForm #phone_num", form).val(obj.data("ph"));
+                            $("#editProfileForm #first_name", form).val(obj.data("fname"));
+                            $("#editProfileForm #last_name", form).val(obj.data("lname"));
+                            $("#editProfileForm #address1", form).val(obj.data("addr1"));
+                            $("#editProfileForm #address2", form).val(obj.data("addr2"));
+                            $("#editProfileForm #city", form).val(obj.data("city"));
+                            $("#editProfileForm #state", form).val(obj.data("state"));
+                            $(".checkoutCountrySelector", form).val($(".top-countries-list").val());
+                            $("#editProfileForm #postal_code", form).val(obj.data("postal_code"));
+                        });
+                        $(".checkoutCountrySelector").val($(".top-countries-list").val());
+                        $(".price2").text($(".currencyField:first").text() + " " + $(".totalPrice:first").text());
+                        $('.checkout-tab-pane').removeClass('active');
+                        $('#w1-delivery').addClass('active');
+                        $('.wizard-li').removeClass('active');
+                        $('li.li-delivery').addClass('active');
+                    } else {
+                        bootbox.alert("No items in the checkout list. Please add some items and come back.");
+                    }
+                //} else {
+                //    bootbox.alert("The country is not supported.");
+                //}
+            }
+        });
+        $("#btnDeleteAddr").click(function (e) {
+            e.preventDefault();
+        });
+        $('.top-countries-list').on('change.bfhselectbox', function () {
+            $(".checkoutCountrySelector").val($('.top-countries-list').val());
+            updatePricingForCountry();
+        });
+        $('#country').on('change.bfhselectbox', function () {
+            $(".top-countries-list").val($('#country').val());
+            $('.top-countries-list').trigger('change.bfhselectbox');
+        });
+        updatePricingForCountry();
+    }
+
+    function draw(frame, base_url, url, attrs, base) { 
+        var     x = parseFloat(attrs[0]),
+                y = parseFloat(attrs[1]), 
+                amplitude = parseFloat(attrs[2]),
+                crop = parseFloat(attrs[3]),
+                crop_left = parseFloat(attrs[4]),
+                crop_right = parseFloat(attrs[5]),
+                rotate = parseFloat(attrs[6]),
+                width = parseFloat(attrs[7]),
+                height = parseFloat(attrs[8]);
+        frame.window.init($);
+        frame.window.setImage("/getOtherProductImage?id=" + base_url, function (){
+            frame.window.draw("/getUserOtherProductImage?id=" + url, x, y, amplitude, crop, crop_left, crop_right, rotate, width, height);
+        });      
+    }
+
+    function updateCarts()
+    {
+        var addLogo = function (logo_resp){
+            var imgSrc;
+            var name;
+            if (typeof logo_resp.item_id == "string" && logo_resp.item_id.indexOf("logo_") == 0){
+                imgSrc = 'data:image/svg+xml;base64,' + Base64.encode(logo_resp.url);
+                name = logo_resp.item_id;
+            } else {
+                imgSrc = '/getUserLogoImage?id=' + logo_resp.logo.s3_logo_url+ '&random=' + Math.random();
+                name = logo_resp.logo.s3_logo_url;
+            }
+            var item = $('<div style="display: inline-block;width:100%;" class="shoppingCartItems' + logo_resp.item_id + ' logoItem">' +
+            '<div class="col-md-8 fms-bulb-header" id="cartLogoItem' +logo_resp.item_id+ '"><span class="flip-card-template" ></span></div>' +
+            '  <div class="col-md-4 column-spacing logo-section">' +
+            '  <div class="checkout-buy-text">Buy Now <span class="currencyField">...</span> <span data-type="logo" data-id='+logo_resp.item_id+'  class="shoppingCartItem discountedMoneyField moneyField logoPrice' + logo_resp.item_id + '">...</span></div>' +
+            '  <div><small>compare at <strike><b><span class="currencyField">...</span> <span data-type="logo" data-id='+logo_resp.item_id+' class="logoPrice' + logo_resp.item_id + '">...</span></b></strike>.<br/>Save upto <b>'+flatDiscountPercentageLogo+'%</b> Today!</small></div>' +
+            '  <div class=""></div>' +
+            '  <div class="remove-link">' +
+            '      <a href="#" class="tooltip2 removeLogo'+logo_resp.item_id+'" data-toggle="tooltip" data-placement="bottom" data-original-title="Remove"><i class="fa fa-trash-o"></i>Remove</a> ' +
+            '      <a href="/logo-designer/edit/' + logo_resp.item_id + '/mydesigns" data-placement="bottom" data-original-title="Edit"><i class="fa fa-pencil-square-o"></i>Edit</a>' +
+            '      <a href="/design-business-card-online/use/'+ name +'"  class="action-header" data-placement="bottom" data-original-title="Create Card"><i class="fa fa-plus"></i>Create Card</a>' +
+            '  </div>' +
+            '</div>' +
+            '</div>');
+            $("#checkoutList").append(item);
+            updateJQSvgImage('#cartLogoItem' +logo_resp.item_id, imgSrc);
+            $(".removeLogo"+logo_resp.item_id).click(function (e){
+                e.preventDefault();
+                removeFromShoppingCart(logo_resp.item_id + "", "LOGO");
+            });
+            $('.shoppingCartItems' + logo_resp.item_id).hide();
+
+            loadedItems++;
+            if (loadedItems == totalItems){
+                updatePricingForCountry();
+            }
+        };
+        var addOtherProduct = function (card_resp){
+            var item = $('<div style="display: inline-block;width: 100%;" class="shoppingCartItems' + card_resp.product.id + ' productItem">' +
+            '  <div class="col-md-8 fms-bulb-header other-product-bulb">' +
+            '  <!--div class="otherProductCartItem" id="cartProductItem' +card_resp.product.id + '"></div-->'  +
+            '  <iframe data-url="' + card_resp.product.image_url + '" id="cartProductItem' +card_resp.product.id + '" name="cartProductItem' +card_resp.product.id + '" data-id="' +card_resp.product.id + '" data-base-url="' + card_resp.product.base_image_url + '" data-base-params-front="' + card_resp.product.base_params_front + '" data-front-logo-params="' + card_resp.product.front_logo_params + '" src="/product-preview/big-preview.html" class="otherProductCartItem otherProductIframe"></iframe>'+
+            '  <span class="flip-card-template"></span>'+
+            '  </div>' +
+            '  <div class="col-md-4 column-spacing">' +
+            '  <div class="checkout-buy-text">Buy Now <span class="currencyField">...</span> <span data-type="other"  data-id='+card_resp.product.id+' class="shoppingCartItem discountedMoneyField moneyField productPrice' + card_resp.product.id + '">...</span></div>' +
+            '  <div><small>compare at <b><strike><span class="currencyField">...</span> <span data-type="other" data-id='+card_resp.product.id+' class="productPrice' + card_resp.product.id + '">...</span></strike></b>.<br/>Save upto <b>'+flatDiscountPercentageOther+'%</b> Today!</small></div>' +
+            '  <div><small>Total <b id="otherProductQty' +card_resp.product.id+ '">...</b> ' + card_resp.product.product_name + "s" + '</small></div>' + 
+            '  </div>' +
+            '       <div class="col-md-4 remove-link">' +
+            '           <a class="removeProduct' + card_resp.product.id +'" href="#"><i class="fa fa-trash-o"></i> Remove</a>' +
+            '           <a href="/other/' + card_resp.product.seo_url + '/edit/' + card_resp.product.id + '/mydesigns"><i class="fa fa-pencil-square-o"></i> Edit</a>' +
+            '       </div>' +
+            '</div>' +
+            '</div>');
+            $("#checkoutList").append(item);
+            
+            $('#cartProductItem' +card_resp.product.id).on("load", function (){  
+                window["cartProductItem" + card_resp.product.id].window.initScalablePreview($, "/getOtherProductImage?id=" + $(this).attr("data-base-url"), "/getUserOtherProductImage?id=" + $(this).attr("data-url"), $(this).attr("data-base-params-front").split(";"), true, 330);
+            });
+                
+            $('#cartProductItem' +card_resp.product.id).on("load", function (){ 
+                draw(window['cartProductItem' +card_resp.product.id], $(this).attr("data-base-url"), $(this).attr("data-url"), $(this).attr("data-front-logo-params").split(";"), $(this).attr("data-base-params-front").split(";")); 
+            }); 
+            $(".removeProduct" + card_resp.product.id).click(function (e){
+                e.preventDefault();
+                removeFromShoppingCart(card_resp.product.id + "", "OTHER");
+            });
+            $('.shoppingCartItems' + card_resp.product.id).hide();
+            loadedItems++;
+            if (loadedItems == totalItems){
+                updatePricingForCountry();
+            }
+        }
+        var addOtherCustomProduct = function (card_resp){
+            var item = $('<div style="display: inline-block;width: 100%;" class="shoppingCartItems' + card_resp.product.id + ' customProductItem">' +
+            '  <div class="col-md-8 fms-bulb-header other-product-bulb">' +
+            '  <img  src="/getMyOtherProductImage?id='+card_resp.product.front_image+'" class="image_stack__image" style="height: inherit !important;">'+
+            '  <span class="flip-card-template"></span>'+
+            '  </div>' +
+            '  <div class="col-md-4 column-spacing">' +
+            '  <div class="checkout-buy-text">Buy Now <span class="currencyField">...</span> <span data-type="custom"  data-id='+card_resp.product.id+' class="shoppingCartItem discountedMoneyField moneyField customproductPrice' + card_resp.product.id + '">...</span></div>' +
+            '  <div><small>Total <b id="customotherProductQty' +card_resp.product.id+ '">...</b> ' + card_resp.product.title + "s" + '</small></div>' + 
+            '  </div>' +
+            '       <div class="col-md-4 remove-link">' +
+            '           <a class="removeCustomProduct' + card_resp.product.id +'" href="#"><i class="fa fa-trash-o"></i> Remove</a>' +
+            '       </div>' +
+            '</div>' +
+            '</div>');
+            $("#checkoutList").append(item);
+            
+            $(".removeCustomProduct" + card_resp.product.id).click(function (e){
+                e.preventDefault();
+                removeFromShoppingCart(card_resp.product.id + "", "CUSTOM");
+            });
+            $('.shoppingCartItems' + card_resp.product.id).hide();
+            loadedItems++;
+            if (loadedItems == totalItems){
+                updatePricingForCountry(card_resp);
+            }
+        }
+        var addCard = function (card_resp) {
+            var imgSrc;
+            if (typeof card_resp.card.id == "string" && card_resp.card.id.indexOf("card_") == 0){
+                if (typeof card_resp.card.url == "string"){
+                    imgSrc = 'data:image/svg+xml;base64,' + Base64.encode(card_resp.card.url);
+                } else {
+                    
+                }
+            } else {
+                imgSrc = '/getUserCardImage?id=' + card_resp.card.s3_front_card_url+ '&random=' + Math.random();
+            }
+            var item = $('<div style="display: inline-block;width: 100%;" class="shoppingCartItems' + card_resp.card.id + ' cardItem">' +
+            '  <div class="col-md-8 fms-bulb-header">' +
+            '  <div id="cartCardItem' +card_resp.card.id + '"></div>'  +
+            '  <span class="flip-card-template"></span>'+
+            '  </div>' +
+            '  <div class="col-md-4 column-spacing">' +
+            '  <div class="checkout-buy-text">Buy Now <span class="currencyField">...</span> <span data-type="bc"  data-id='+card_resp.card.id+' class="shoppingCartItem discountedMoneyField moneyField cardPrice' + card_resp.card.id + '">...</span></div>' +
+            '  <div><small>compare at <b><strike><span class="currencyField">...</span> <span data-type="bc" data-id='+card_resp.card.id+' class="cardPrice' + card_resp.card.id + '">...</span></strike></b>.<br/>Save upto <b>'+flatDiscountPercentageCard+'%</b> Today!</small></div>' +
+            '  <div class="purchase-header">Purchase Details</div><div class="checkout-purchase-details">'+ 
+            (card_resp.card.purchase_design == true && card_resp.card.dont_print_card == true ? "" : '  <span class="order-labels">Quantity : <span class="order-list qty">' +card_resp.card.qty+ '</span></span>'+ 
+            '  <span class="order-labels">Finish : <span class="order-list finish">' + (card_resp.card.finish == "GLOSS" ? "Glossy" : "Matte") + '</span></span>'+ 
+            '  <span class="order-labels">Stock : <span class="order-list stock">'+(card_resp.card.paper_stock == "UltraPremium" ? "Superior" : "Executive")+'</span></span>'+ 
+            '  <span class="order-labels">Delivery : <span class="order-list shipping">'+(card_resp.card.shipping_type == "Std" ? " Standard Shipping" : "Express Shipping")+'</span></span>')+ 
+            '  <span class="order-labels">Card Design : <span class="order-list shipping">'+(card_resp.card.purchase_design == true ? " Included" : "Not Included")+'</span></span>'+ 
+            (card_resp.card.dont_print_card == true ? '  <span class="order-labels">Want Printed Cards : <span class="order-list shipping">No</span></span>' : "")+
+            '  </div>' +
+            '       <div class="remove-link">' +
+                (isLoggedIn() ? '           <a href="/duplicate-card?id=' + card_resp.card.id +'"><i class="fa fa-plus"></i> Duplicate Card</a>' : "") +
+                '           <a class="removeCard' + card_resp.card.id +'" href="#"><i class="fa fa-trash-o"></i> Remove</a>' +
+            '           <a href="/design-business-card-online/edit/' + card_resp.card.id + '/mydesigns"><i class="fa fa-pencil-square-o"></i> Edit</a>' +
+            '       </div>' +
+            '</div>' +
+            '</div>');
+            $("#checkoutList").append(item); 
+            if (!card_resp.card.design_type || card_resp.card.design_type == "SystemDesign"){
+                updateJQSvgImage('#cartCardItem' +card_resp.card.id, imgSrc);
+            } else { 
+                updateJQSvgImage('#cartCardItem' +card_resp.card.id, "/img/customCard.svg");
+            }
+            $(".removeCard" + card_resp.card.id).click(function (e){
+                e.preventDefault();
+                removeFromShoppingCart(card_resp.card.id + "", "BC");
+            });
+            $('.shoppingCartItems' + card_resp.card.id).hide();
+            loadedItems++;
+            if (loadedItems == totalItems){
+                updatePricingForCountry();
+            }
+        };
+        if (isLoggedIn(true) == true) {
+                addWaitingOverlay();
+                doPost("/listCartItems", {}, function (resp) {
+                    removeWaitingOverlay();
+                    if (resp.status == 200) {
+                        console.log("hiiii",resp.length)
+                        totalItems = resp.items.length;
+                        for (var i = 0; i < resp.items.length; i++) {
+                            refiral_cart_items.push({
+                                product_id: resp.items[i].item_id, // Product ID
+                                quantity: "1", // Quantity
+                                name: "Item "+resp.items[i].item_id // Name of product
+                            });
+                            (function (){
+                                var itemid = resp.items[i].item_id;
+                                if (resp.items[i].item_type == "LOGO") {
+                                    addWaitingOverlay();
+                                    doPost("/getUserLogoDetails", {id: itemid}, function (logo_resp) {
+                                        removeWaitingOverlay();
+                                        if (logo_resp.status == 200) {
+                                            logo_resp.item_id = itemid;
+                                            addLogo(logo_resp);
+                                        } else {
+                                            bootbox.alert(logo_resp.msg);
+                                        }
+                                    }, function (err) {
+                                        removeWaitingOverlay();
+                                        console.log(err);
+                                        bootbox.alert("Error contacting server");
+                                    });
+                                } else if (resp.items[i].item_type == "BC") {
+                                    addWaitingOverlay();
+                                    doPost("/getUserCardDetails", {id: resp.items[i].item_id}, function (card_resp) {
+                                        removeWaitingOverlay();
+                                        if (card_resp.status == 200) {
+                                            card_resp.item_id = itemid;
+                                            addCard(card_resp);
+                                        } else {
+                                            bootbox.alert(card_resp.msg);
+                                        }
+                                    }, function (err) {
+                                        removeWaitingOverlay();
+                                        console.log(err);
+                                        bootbox.alert("Error contacting server");
+                                    });
+                                } else if(resp.items[i].item_type == "CUSTOM"){
+                                    doGet("/getUserOtherCustomProductDetails", {id: resp.items[i].item_id, from: "mydesigns"}, function (card_resp) {
+                                        removeWaitingOverlay();
+                                        if (card_resp.status == 200) {
+                                            card_resp.item_id = itemid;
+                                            console.log("card_resp",card_resp);
+                                            addOtherCustomProduct(card_resp);
+                                        } else {
+                                            console.log("Hello world");
+                                            bootbox.alert(card_resp.msg);
+                                        }
+                                    }, function (err) {
+                                        removeWaitingOverlay();
+                                        console.log(err);
+                                        bootbox.alert("Error contacting server");
+                                    });
+                                    } else {
+                                    addWaitingOverlay();
+                                    doGet("/getUserOtherProductDetails", {id: resp.items[i].item_id, from: "mydesigns"}, function (card_resp) {
+                                        removeWaitingOverlay();
+                                        if (card_resp.status == 200) {
+                                            card_resp.item_id = itemid;
+                                            addOtherProduct(card_resp);
+                                        } else {
+                                            bootbox.alert(card_resp.msg);
+                                        }
+                                    }, function (err) {
+                                        removeWaitingOverlay();
+                                        console.log(err);
+                                        bootbox.alert("Error contacting server");
+                                    });
+                                }
+                            })()
+                        }
+                    } else if (resp.status == 201) {
+                        $("#checkoutList").append("<h5 style='padding: 20px'>No items has been added to the cart yet.</h5>");
+                    } else {
+                        bootbox.alert("Error: " + resp.msg);
+                    }
+                }, function (err) {
+                    removeWaitingOverlay();
+                    bootbox.alert("Error contacting server.");
+                });
+            } else {
+                var cart  = retrieveJson("carts");
+                if (cart != null && cart.length > 0) {
+                    totalItems = cart.length;
+                    cart.forEach(function (val, idx) {
+                        var cartItem = retrieveJson(val);
+                        if (cartItem.itemType == "BC"){
+                            var cardItem = retrieveJson("card_" + cartItem.item_id);
+                            var card = {};
+                            card.card = cardItem;
+                            card.card.id = "card_" + cartItem.item_id;
+                            addCard(card);
+                        } else {
+                            var logoItem = retrieveJson("logo_" + cartItem.item_id);
+                            logoItem.item_id = "logo_" + cartItem.item_id;
+                            addLogo(logoItem);
+                        }
+                    });
+                } else {
+                    $("#checkoutList").append("<h5 style='padding: 20px'>No items has been added to the cart yet.</h5>");
+                }
+            }
+    }
+
+    function updateSVGImage(id, url, height, width) {
+        $("#" + id).svg();
+        var svg = $("#" + id).svg('get');
+        addWaitingOverlay();
+        svg.load(url, {
+            onLoad: function (svg, error) {
+                removeWaitingOverlay();
+                $(svg.root()).attr("height", height);
+                $(svg.root()).attr("width", width);
+                loadedItems++;
+                if (loadedItems == totalItems){
+                    updatePricingForCountry();
+                }
+            }, changeSize: true
+        });
+    }
+
+    function updatePricingForCountry(defaultval= null){ 
+        if ($('.top-countries-list').val()){
+            var items = $(".shoppingCartItem");
+            var itemLength = items.length;
+            var hasErrorOccurred = false;
+            var finishFn = function (err){ 
+                if (err){
+                    if (!hasErrorOccurred){
+                        //bootbox.alert(err);
+                    }
+                    $("#procceedBtn").hide();
+                    $("#countryNotSupported").hide();
+                    $("#multiCurrencies").show();
+                    hasErrorOccurred = true;
+                } else {
+                    if (!hasErrorOccurred){
+                        $("#procceedBtn").show(); 
+                        $("#multiCurrencies").hide();
+                    }
+                    itemLength --;
+                    if (itemLength == 0){
+                        updateTotalPrice ();
+                    }
+                }
+            };
+            $("#procceedBtn").show();
+            if (items.length > 0) {
+                cartCurrency = undefined;
+                items.each(function (idx, val) {
+                    var id = $(val).data("id");
+                    var type = $(val).data("type");
+                    if (type == "bc") {
+                        updateCardPrice(id, ".cardPrice" + id, finishFn);
+                    } else if (type == "logo") { 
+                        updateLogoPrice(id, ".logoPrice" + id, finishFn);
+                    } else if (type == "custom") { 
+                        updateCustomProdcutPrice(defaultval,id, ".customproductPrice" + id, finishFn);
+                    } else {
+                        updateProdcutPrice(id, ".productPrice" + id, finishFn);
+                    }
+                });
+            }
+            if ($('.top-countries-list').val() == "IN"){
+                $("#customButton").hide();
+            } else { 
+                /* TODO: Uncomment for stripe $("#customButton").show();*/
+            } 
+            $("#paymentGatewayName").text($('.top-countries-list').val() == "IN" ? "PayTM" : "PayPal"); 
+            $(".paymentGatewayLogo").attr("src", $('.top-countries-list').val() == "IN" ? "/img/high-resolution-original.png" : "/img/paypal.jpg");
+        }
+    }
+
+    function updateCardPrice(itemId, spanId, finishCallback){ 
+        addWaitingOverlay();
+        var request = {type: "BC", itemId: itemId, country: $('.top-countries-list').val()};
+        if (typeof itemId == "string" && itemId.indexOf("card_") == 0){
+            var card = retrieveJson(itemId);
+            request.cardObj = {};
+            request.cardObj.qty = card.qty;
+            request.cardObj.finish = card.finish;
+            request.cardObj.paper_stock = card.paper_stock;
+            request.cardObj.back_of_card = card.back_of_card;
+            request.cardObj.back_side_super_premium = card.back_side_super_premium;
+            request.cardObj.shipping_type = card.shipping_type;
+            request.cardObj.shipping_type = card.shipping_type;
+            request.cardObj.dont_print_card = card.dont_print_card;
+            request.cardObj.purchase_design = card.purchase_design;
+        }
+        doPost("/getPriceForItem", request, function (resp){
+            removeWaitingOverlay();
+            $("#countryNotSupported").hide(); 
+            if (resp.status == 200){
+                $(spanId).text(Number((parseFloat(resp.price)).toFixed(2)));
+                $(spanId + ".discountedMoneyField").text(discountAmt(flatDiscountPercentageCard, resp.price));
+                $(".totalPriceCurrency").text(resp.currency);
+                $(spanId).siblings(".currencyField").text(resp.currency);
+            } else if (resp.status == 201) { 
+                $("#countryNotSupported").show();
+                var actualAmt = Number((parseFloat(resp.price)).toFixed(2));
+                $(spanId).text(actualAmt);
+                $(spanId+ ".discountedMoneyField").text(discountAmt(flatDiscountPercentageCard, actualAmt));
+                $(".totalPriceCurrency").text(resp.currency);
+                $(spanId).siblings(".currencyField").text(resp.currency);
+            } else {
+                console.log(resp);
+                $("#proceedBack").click();
+                $("#countryNotSupported").show();
+            }
+            if (resp.currency){
+                if (cartCurrency == undefined) {
+                    cartCurrency = resp.currency;
+                } else {
+                    if (cartCurrency != resp.currency){ 
+                        finishCallback("Multiple currencies in a single shopping cart is not supported.");
+                    }
+                }
+            }
+            $('.shoppingCartItems' + itemId).show();
+            finishCallback();
+        }, function (err) {
+            $(spanId).text("...");
+            removeWaitingOverlay();
+            console.log(err);
+            finishCallback();
+            $("#proceedBack").click();
+            $("#countryNotSupported").show();
+        });
+    }
+    
+    function updateProdcutPrice(itemId, spanId, finishCallback){
+        addWaitingOverlay();
+        doPost("/getPriceForItem", {type: "OTHER", itemId: itemId, country: $('.top-countries-list').val()}, function (resp){
+            removeWaitingOverlay();
+            $("#countryNotSupported").hide();
+            if (resp.status == 200){
+                $(spanId).text(Number((parseFloat(resp.price)).toFixed(2)));
+                $(spanId+ ".discountedMoneyField").text(discountAmt(flatDiscountPercentageCard, resp.price));
+                $(".totalPriceCurrency").text(resp.currency);
+                $(spanId).siblings(".currencyField").text(resp.currency); 
+                $("#otherProductQty" + itemId).text(resp.qty);
+            } else if (resp.status == 201) {
+                $("#countryNotSupported").show();
+                //var actualAmt = Number(fx.convert(resp.price, {from: resp.currency, to: resp.currency})).toFixed(2);
+                $(spanId).text(Number((parseFloat(resp.price)).toFixed(2)));
+                $(spanId+ ".discountedMoneyField").text(discountAmt(flatDiscountPercentageCard, resp.price));
+                $(".totalPriceCurrency").text(resp.currency);
+                $(spanId).siblings(".currencyField").text(resp.currency); 
+                $("#otherProductQty" + itemId).text(resp.qty);
+            } else {
+                $(".otherProductQty" + itemId).text("0");
+                console.log(resp);
+                $("#proceedBack").click();
+                $("#countryNotSupported").show();
+            }
+            if (resp.currency){
+                if (cartCurrency == undefined) {
+                    cartCurrency = resp.currency;
+                } else {
+                    if (cartCurrency != resp.currency){
+                        finishCallback("Multiple currencies in a single shopping cart is not supported.");
+                    }
+                }
+            }
+            $('.shoppingCartItems' + itemId).show();
+            finishCallback();
+        }, function (err) {
+            $(spanId).text("...");
+            removeWaitingOverlay();
+            $("#proceedBack").click();
+            $("#countryNotSupported").show();
+            console.log(err);
+            finishCallback();
+        });
+    }
+
+    function updateCustomProdcutPrice(resp,itemId, spanId, finishCallback){
+            removeWaitingOverlay();
+            console.log("Response",resp);
+            console.log("Itemid",itemId);
+            console.log("spanid",spanId);
+            $("#countryNotSupported").hide();
+                var quantity = (parseInt(resp.product.small)+parseInt(resp.product.medium)+parseInt(resp.product.large)+parseInt(resp.product.xl)+parseInt(resp.product.doublexl));
+                $(spanId).text(Number((parseFloat(resp.product.price)).toFixed(2)));
+                //$(spanId+ ".discountedMoneyField").text(discountAmt(flatDiscountPercentageCard, resp.price));
+                $(".totalPriceCurrency").text("INR");
+                $(spanId).siblings(".currencyField").text("INR"); 
+                $("#customotherProductQty" + itemId).text(quantity);
+            $('.shoppingCartItems' + itemId).show();
+            finishCallback();
+    }
+    function updateLogoPrice(itemId, spanId, finishCallback){
+        addWaitingOverlay();
+        doPost("/getPriceForItem", {type: "LOGO", itemId: itemId, country: $('.top-countries-list').val()}, function (resp){
+            removeWaitingOverlay();
+            $("#countryNotSupported").hide(); 
+            if (resp.status == 200){
+                $(spanId).text(Number((parseFloat(resp.price)).toFixed(2)));
+                $(spanId+ ".discountedMoneyField").text(discountAmt(flatDiscountPercentageLogo, resp.price));
+                $(".totalPriceCurrency").text(resp.currency);
+                $(spanId).siblings(".currencyField").text(resp.currency);
+            } else if (resp.status == 201) {
+                $("#countryNotSupported").show();
+                //var actualAmt = Number(fx.convert(resp.price, {from: resp.currency, to: resp.currency})).toFixed(2);
+                $(spanId).text(Number((parseFloat(resp.price)).toFixed(2)));
+                $(spanId+ ".discountedMoneyField").text(discountAmt(flatDiscountPercentageLogo, resp.price));
+                $(".totalPriceCurrency").text(resp.currency);
+                $(spanId).siblings(".currencyField").text(resp.currency);
+            } else {
+                console.log(resp);
+                $("#proceedBack").click();
+                $("#countryNotSupported").show();
+            }
+            if (resp.currency){
+                if (cartCurrency == undefined) {
+                    cartCurrency = resp.currency;
+                } else {
+                    if (cartCurrency != resp.currency){
+                        finishCallback("Multiple currencies in a single shopping cart is not supported.");
+                    }
+                }
+            }
+            $('.shoppingCartItems' + itemId).show();
+            finishCallback();
+        }, function (err) {
+            $(spanId).text("...");
+            removeWaitingOverlay();
+            $("#proceedBack").click();
+            $("#countryNotSupported").show();
+            console.log(err);
+            finishCallback();
+        });
+    }
+
+    function doPayment(){
+        var type = $('.top-countries-list').val() == "IN" ? "PayTM" : "Paypal";
+        if (type == "PayTM") {
+            addWaitingOverlay();
+           /* doPost("/payment", {country: $('.top-countries-list').val(), paymentType: "paytm", amt: $(".totalPrice:first").text(), currency: $(".currencyField:first").text()}, function (resp){
+                if(resp.status == 200){
+                    doPost("/fakePaymentSuccess",{email:resp.data.CUST_ID,payment_type:"FakePayment",txn_id:resp.data.ORDER_ID,name:"Test123"},function(resp){
+                        bootbox.alert("Successfully c");
+                    })
+                } else if (resp.status == 500){
+                    removeWaitingOverlay();
+                    bootbox.alert(resp.msg);
+                }
+            },function(err){
+
+            });*/
+            
+            doPost("/payment", {country: $('.top-countries-list').val(), paymentType: "paytm", amt: $(".totalPrice:first").text(), currency: $(".currencyField:first").text()}, function (resp){
+                if (resp.status == 200){
+                    console.log(resp)
+
+                    var myWindow = window.open("", "_self");
+                    myWindow.document.write(resp.html);
+
+                   /* var params = resp.data;
+                    var checksum = resp.checksum;
+                    var url = resp.url;*/
+
+                    /*for (var x in params) {
+                        form_fields += "<input type='hidden' name='" + x + "' value='" + params[x] + "' >";
+                    }
+                    form_fields += "<input type='hidden' name='CHECKSUMHASH' value='" + checksum + "' >";
+                    console.log(form_fields)
+                    res.writeHead(200, { 'Content-Type': 'text/html' });
+                    res.write('<html><head><title>Merchant Checkout Page</title></head><body><center><h1>Please do not refresh this page...</h1></center><form method="post" action="' + txn_url + '" name="f1">' + form_fields + '</form><script type="text/javascript">document.f1.submit();</script></body></html>');
+                    res.end();*/
+
+                    //var urlfinal = "https://securegw-stage.paytm.in/theia/api/v1/initiateTransaction?mid="+resp.data.MID+"&orderId="+resp.data.ORDER_ID;
+                   // var form = $('<form />', {action: resp.url + resp.data.ORDER_ID, method: 'POST'});
+                    //var form = $('<form />', {action: url, method: 'POST'});
+                    //form.append($('<input name="REQUEST_TYPE" value="' + resp.data.REQUEST_TYPE + '"/>'));
+                    /*form.append($('<input name="MID" value="' + resp.data.MID + '"/>'));
+                    form.append($('<input name="ORDER_ID" value="' + resp.data.ORDER_ID + '"/>'));
+                    form.append($('<input name="CUST_ID" value="' + resp.data.CUST_ID + '"/>'));
+                    form.append($('<input name="TXN_AMOUNT" value="' + resp.data.TXN_AMOUNT + '"/>'));
+                    form.append($('<input name="CHANNEL_ID" value="' + resp.data.CHANNEL_ID + '"/>'));
+                    form.append($('<input name="INDUSTRY_TYPE_ID" value="' + resp.data.INDUSTRY_TYPE_ID + '"/>'));
+                    form.append($('<input name="WEBSITE" value="' + resp.data.WEBSITE + '"/>'));
+                    form.append($('<input name="REDIRECT_URL" value="' + resp.data.WEBSITE + '"/>'));
+                    form.append($('<input name="EMAIL" value="' + resp.data.EMAIL + '"/>'));
+                    form.append($('<input name="MOBILE_NO" value="' + resp.data.MOBILE_NO + '"/>'));
+                    form.append($('<input name="CHECKSUMHASH" value="' + checksum + '"/>'));
+                    form.append($('<input type="submit" value="Submit" />'));
+                    form.show().appendTo('body');
+                    form.submit();*/
+                } else if (resp.status == 500){
+                    removeWaitingOverlay();
+                    bootbox.alert(resp.msg);
+                }
+            }, function (err){
+                removeWaitingOverlay();
+                bootbox.alert("Server Error: Communication Failure");
+            });
+        } else {
+            addWaitingOverlay();
+            var form = $('<form />', {action: '/payment', method: 'POST'});
+            form.append($('<input name="amt" value="' + $(".totalPrice:first").text() + '"/>'));
+            form.append($('<input name="currency" value="' + $(".currencyField:first").text() + '"/>'));
+            form.append($('<input name="country" value="' + $('.top-countries-list').val() + '"/>')); 
+            form.append($('<input name="paymentType" value="paypal"/>'));
+            form.hide().appendTo('body');
+            form.submit();
+        }
+    }
+
+    function updateTotalPrice (){
+        var total = 0;
+        var prices = $(".shoppingCartItem.discountedMoneyField");
+        for (var i = 0; i < prices.length; i++){
+            total += parseFloat($(prices[i]).text());
+        }
+        $(".totalPrice").text(Number(total).toFixed(2));
+    }
+
+    function removeFromShoppingCart(itemId, type) {
+        bootbox.confirm("Are you sure to delete this item?", function (result) {
+            if (result == true) {
+                var fn = function () {
+                    if (type == "LOGO"){
+                        $(".shoppingCartItems" + itemId + ".logoItem").remove();
+                    } else if (type == "BC") {
+                        $(".shoppingCartItems" + itemId + ".cardItem").remove();
+                    } else if (type == "CUSTOM") {
+                        $(".shoppingCartItems" + itemId + ".customProductItem").remove();
+                    }else {
+                        $(".shoppingCartItems" + itemId + ".productItem").remove();
+                    }
+                    if ($(".shoppingCartItem").length < 1) {
+                        $("#checkoutList").append("<h5 style='padding: 20px'>No items has been added to the cart yet.</h5>")
+                    }
+                    $(".cart-order").text($(".shoppingCartItem").length);
+                    updateTotalPrice();
+
+                    for (var i = 0; i < refiral_cart_items.length; i++){
+                        if (refiral_cart_items[i].product_id == itemId){
+                            refiral_cart_items.splice(i, 1);
+                            break;
+                        }
+                    }
+                };
+                if (itemId.indexOf("logo_") >= 0 || itemId.indexOf("card_") >= 0){
+                    removeItemLocallyFromShoppingCart(itemId);
+                    fn();
+                } else {
+                    doPost("/removeItem", {item_id: itemId, type: type}, function (resp) {
+                        if (resp.status == 200) {
+                            fn();
+                        } else if (resp.status == 201) {
+                            console.log(resp);
+                            fn();
+                        } else {
+                            console.log(resp);
+                            bootbox.alert("Error: " + resp.msg);
+                        }
+                    });
+                }
+            }
+        });
+    }
+ $('#checkoutList').hover(function(){
+        $(this).find('.flip-card-template').show();
+    }, function(){
+        $(this).find('.flip-card-template').hide();
+    });
+    init();
+});
+
+function setupStripe(){
+    var handler = StripeCheckout.configure({
+        key: stripePublicKey,
+        image: 'img/online-freelogo-128x128.png',
+        locale: 'auto',
+        token: function(token) {
+            addWaitingOverlay();
+            doPost("/payment", {country: $('.top-countries-list').val(), stripeToken: token.id, paymentType: "creditCard", amt: $(".totalPrice:first").text(), currency: $(".currencyField:first").text()}, function (resp){
+                removeWaitingOverlay();
+                if (resp.status == 200){
+                    showToast("Successfull payment.", "success");
+                    window.location = "/thank-you-for-buying-from-us";
+                } else {
+                    console.log(resp);
+                    showToast("Error: " + resp.msg);
+                }
+            }, function (err){
+                removeWaitingOverlay();
+                console.log(err);
+                showToast("Connection Error!!");
+            });
+        }
+    });
+    $('#customButton').on('click', function(e) {
+        if ($("#editProfileForm").valid()) {
+            handler.open({
+                name: 'Tagbit.co',
+                description: $("#checkoutList").children().length + " item(s).",
+                amount: $(".totalPrice:first").val(),
+                currency: $($(".currencyField")[0]).text()
+            });
+            e.preventDefault();
+        }
+    });
+
+    $(window).on('popstate', function() {
+        handler.close();
+    });
+}
+

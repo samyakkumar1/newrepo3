@@ -1,0 +1,238 @@
+<% include header.ejs %>
+<link rel="stylesheet" href="/css/create-logo-bc.css?v=<%= options.version %>">
+<style type="text/css">
+#s2id_checkout-counry,#s2id_payment-type,#s2id_province{width:75%}
+.form-group label{width:25%}
+.form-control{display:inline-block;width:75%}
+.pay-info-text{font-weight:700;font-size:16px;padding-bottom:15px;border-bottom:1px solid gray}
+.bill-info-text{font-size:13px;padding:10px 0 20px}
+.purchase-info{padding-left:18px}
+.purchase-info li{font-size:13px;color:#222}
+.purchase-list-text{color:#222;font-weight:700}
+.remove-link{padding-top:10px}
+.remove-link a{color:#00cccb;text-decoration:none!important;font-size:13px;display:block;padding-bottom:5px}
+.remove-link a:hover{color:#00a5a4!important}
+.remove-link a i{font-size:18px;margin-right:5px}
+.action-header{position:relative}
+.action-title{position:absolute;bottom:0}
+.checkout-buy-text{color:#888;font-weight:700;padding-top:5px}
+.checkout-buy-text span{display:inline-block}
+.checkout-main{background:#fff;padding-top:20px;padding-bottom:20px}
+.combine-two{border:1px solid #a5a5a5;min-height:210px;padding-left:5px}
+.checkout-main-header{padding-left:0;margin-bottom:20px}
+.checkout-header{color:#00008b;font-size:20px;font-weight:700}
+.fms-bulb{display:block;margin:0 auto;text-align:center}
+.fms-bulb-header{min-height:200px;border:1px solid #a5a5a5;margin-top:4px;position:relative}
+.purchase-list-header{min-height:210px}
+.card-number-checkout{width:15%}
+.form-group .fa-question-circle{font-size:18px;cursor:pointer}
+a.tooltip1:hover{color:#aaa}
+.add-continued{position:relative;margin-bottom:20px}
+.add-continued-span{position:absolute;bottom:-19px;width:100%;font-size:13px;left:23%}
+.billing-information{margin-bottom:150px;margin-top:50px;padding-left:30px}
+.radio{display:inline-block;margin-right:25px}
+.radio-wrapper{padding-left:15px;display:none}
+.checkout-proceed,.continue-shopping{padding:5px 40px;border-radius:2px;outline:none;color:#fff;text-align:center;margin-top:20px;background:#00a5a4!important;border:1px solid #00a5a4!important;font-size:15px}
+.continue-shopping:hover{background:#00cccb!important;border:1px solid #00cccb!important;color:#fff!important}
+.checkout-proceed:hover{background:#00cccb!important;border:1px solid #00cccb!important;color:#fff!important}
+.checkout-proceed{margin-left:15px;background:#00a5a4!important;border:1px solid #00a5a4!important;min-width:180px;padding:5px 20px!important}
+.check-billing-left{padding-left:30px}
+.fms-bulb-img{margin:25px auto;display:block}
+.order-labels{width:100%;display:block;font-size:13px}
+.column-spacing{padding-right:0!important;padding-left:5px!important}
+.logo-section{margin-top:40px}
+.purchase-header{font-weight:700;text-decoration:underline;padding-top:5px}
+.login-logo-card{margin:25px auto!important}
+.login-logo-card svg{margin:0 auto!important;display:block}
+.checkout-detail-form{margin-top:30px;padding-left:30px;padding-right:30px}
+.checkout-detail-form input[type="text"],input[type="password"],input[type="datetime"],input[type="datetime-local"],input[type="date"],input[type="month"],input[type="time"],input[type="week"],input[type="number"],input[type="email"],input[type="url"],input[type="search"],input[type="tel"],input[type="color"],textarea{width:100%!important}
+#proceedBack{margin-top:10px;margin-left:-15px}
+#proceedToPayment{margin-top:10px;margin-right:-40px}
+.check-payment-image img{max-height:100%;max-width:100%}
+.checkout-payment-header{margin-top:30px;font-size:18px!important}
+.checkout-payment-body{margin-top:30px;font-size:13px}
+.payment-next{background:#0078c6!important;color:#fff;border:1px solid #0078c6;padding:5px 10px;border-radius:5px}
+.payment-next:hover{background:#00609e!important;border:1px solid #00609e}
+.payment-back{background:#00609e!important;color:#fff;border:1px solid #00609e;padding:5px 10px;border-radius:5px}
+.payment-next:hover{background:#0078c6!important;border:1px solid #0078c6}
+.checkout-congrats-body .fa-check{border:2px solid #c9e173;padding:5px;border-radius:50%;font-size:18px}
+.confirm-checkout-body{margin-top:40px}
+.checkout-congrats{padding-left:5px}
+#continueBtn{width:185px;padding:5px 20px!important}
+.checkout-continue-shop{margin-bottom:50px;margin-left:45px}
+.checkout-pay-verified{color:#a2a2a2;padding-left:55px;margin-top:15px}
+.terms-and-conditions{margin-left:-30px!important;margin-top:25px}
+.checkout-back-proceed{margin-top:10px;margin-bottom:30px;margin-left:-30px!important}
+.delivery-proceed-body{padding-right:0!important}
+.proceed-pay-content{padding-right:0!important}
+</style>
+<section class="page-top page-top-logo">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <span class="page-common-header">Checkout</span>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="panel-body panel-body-nopadding">
+    <div class="wizard-tabs">
+        <ul class="wizard-steps">
+            <li class="wizard-li li-preview">
+                <a href="#w1-preview" class="text-center">
+                    <span class="badge hidden-xs">1</span>
+                    Cart Preview
+                </a>
+            </li>
+            <li class="wizard-li li-delivery">
+                <a href="#w1-delivery" class="text-center">
+                    <span class="badge hidden-xs">2</span>
+                    Delivery Address
+                </a>
+            </li>
+            <li class="wizard-li li-payment">
+                <a href="#w1-payment" class="text-center">
+                    <span class="badge hidden-xs">3</span>
+                    Payment
+                </a>
+            </li>
+            <li class="active wizard-li li-confirm">
+                <a href="#w1-confirm" class="text-center">
+                    <span class="badge hidden-xs">4</span>
+                    Status
+                </a>
+            </li>
+        </ul>
+    </div>
+    <form class="form-horizontal" novalidate="novalidate">
+        <div class="tab-content">
+            <div id="w1-preview" class="tab-pane active checkout-tab-pane">
+                <div role="main" class="main checkout-main">
+                    <div class="container confirm-checkout-body">
+                        <div class="row">
+                            <div class="col-md-6 col-md-offset-3">
+                                <div class="col-md-12 checkout-congrats-body"><i class="fa fa-check"></i> <span class="checkout-congrats">Congratulations!</span></div>
+                                <div class="col-md-12 checkout-pay-verified">Your payment is successfully verified.</div>
+                                <div class="col-md-12 checkout-pay-verified">Thank you for your order. </div>
+                                <div class="col-md-12 checkout-continue-shop">
+                                    <a class="btn btn-primary continue-shopping" href="/my-logo-designs">Continue Shopping</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-58654251-1']);
+    _gaq.push(['_trackPageview']);
+    _gaq.push(['_addTrans',
+        '1000',           // transaction ID - required
+        'Online Free Logo',  // affiliation or store name
+        '720',          // total - required
+        '100.8',           // tax
+        '0',              // shipping
+        'Mumbai',       // city
+        'Maharashtra',     // state or province
+        'India'             // country
+    ]);
+
+    // add item might be called for every item in the shopping cart
+    // where your ecommerce engine loops through each item in the cart and
+    // prints out _addItem for each
+    _gaq.push(['_addItem',
+        '1000',           // transaction ID - required
+        'LG22',           // SKU/code - required
+        'Logo',        // product name
+        '',   // category or variation
+        '720',          // unit price - required
+        '1'               // quantity - required
+    ]);
+    _gaq.push(['_trackTrans']); //submits transaction to the Analytics servers
+
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+</script>
+<!-- Google Code for Conversion Conversion Page -->
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 954904832;
+var google_conversion_language = "en";
+var google_conversion_format = "1";
+var google_conversion_color = "ffffff";
+var google_conversion_label = "Spd_CLOprVkQgOKqxwM";
+var google_remarketing_only = false;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/954904832/?label=Spd_CLOprVkQgOKqxwM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+
+<!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','//connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '949105105183977');
+fbq('track', "PageView"); 
+
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=949105105183977&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+
+
+
+
+<script type="text/javascript">
+
+if (typeof ga == "undefined"){ 
+  (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga'); 
+}
+
+ga('require', 'ecommerce', 'ecommerce.js');
+
+
+ga('ecommerce:addTransaction', {
+  id: '<%= txnInfo ? txnInfo.txn_id : "None" %>', // Transaction ID - this is normally generated by your system.
+  affiliation: 'Tagbit.co', // Affiliation or store name
+  revenue: '<%= txnInfo ? txnInfo.price + " " + txnInfo.currency : "0.0 USD" %>', // Grand Total
+  shipping: '0.00' , // Shipping cost
+  tax: '0.00' 
+});
+
+ga('ecommerce:send');
+
+//Facebook pixel
+
+fbq('track', 'Purchase', {value: '0.00', currency: 'USD'});
+
+</script>
+
+
+<% include footer.ejs %>

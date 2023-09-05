@@ -1,0 +1,40 @@
+.my-cards-list{display: inline-block;border: 1px solid #eaeaea;margin-right: 20px;padding: 15px;cursor: pointer;min-width: 210px;position: relative;margin-bottom: 5px;margin-top: 15px;}
+.my-cards-list span.my-card-company{display: block;text-align: center;padding-top: 15px;padding-bottom: 10px;}
+.my-cards-list object,.my-cards-list .hasSVG,.my-purchases-list object{height: 111px;width: 220px;margin: 0 auto;display: block;}
+.flip-card-remove,.flip-card-edit,.flip-card-buy,.flip-card-add{display: inline-block;color: #00cccb;background: #fff;width: 45px;padding: 5px 5px;position: relative;top: 42%;margin-right: 10px;border-radius: 2px;}
+.flip-card-remove span,.flip-card-edit span,.flip-card-buy span,.flip-card-add span{display: block;font-size: 13px;line-height: 13px;}
+.flip-card-template{display:none;text-align: center;position: absolute;top: 0;background: #bbb;height: 100%;width: 100%;left: 0%;opacity: 0.9;transition: all 0.3s;}
+.my-logos-ul{padding-left: 30px;}
+.flip-card-template i{font-size: 18px;}
+.flip-card-remove-bl,.flip-card-edit-bl,.flip-card-buy-bl,.flip-card-add-bl{display: block;position: relative;top: 15%;font-size: 13px;}
+.flip-card-remove-bl span{border: 1px solid rgb(220, 60, 60);background: rgb(220, 60, 60);border-radius: 50px;color: #fff;padding: 0px 10px;width: 140px;display: block;margin: 0 auto;margin-bottom: 5px;}
+.flip-card-remove-bl span:hover{background:rgb(173, 55, 55);border: 1px solid rgb(173, 55, 55)}
+.flip-card-edit-bl span{border: 1px solid #209ECC;background: #209ECC;border-radius: 50px;color: #fff;padding: 0px 10px;width: 140px;display: block;margin: 0 auto;margin-bottom: 5px;}
+.flip-card-edit-bl span:hover{background:#248AAF;border: 1px solid #248AAF;}
+.flip-card-add-bl span{border: 1px solid  #47A447;background:  #47A447;color: #fff;border-radius: 50px;width: 140px;display: block;margin: 0 auto;}
+.flip-card-add-bl span:hover{background:#3C8B3C;border: 1px solid #3C8B3C;}
+.flip-card-buy-bl span{border: 1px solid rgb(239, 184, 83);background: rgb(239, 184, 83);color: #fff;border-radius: 50px;padding: 0px 10px;width: 140px;display: block;margin: 0 auto;margin-bottom: 5px;}
+.flip-card-buy-bl span:hover{background:rgb(213, 161, 64);border: 1px solid rgb(213, 161, 64);}
+.separate-one{position: absolute!important;top: 50%!important;left:30%!important;}
+.separate-two{position: absolute!important;top: 30%!important;left:30%!important;}
+.expand a{color: #777;padding: 10px;background: #ededed;border-radius: 3px;text-decoration: none;font-size: 16px;text-transform: capitalize;}
+h3.expand{margin-bottom: 3px !important;}
+h3.expand i{font-size: 20px;margin-right: 15px;}
+.fa-minus-circle{display: none;}
+#content .switch{overflow:auto;}
+#content .switch a{float: right;padding: 0px 8px;color: #000;text-decoration: underline;}
+#content .switch a:hover{color: #3b3b3b;text-decoration: none;}
+.card-count,.logo-count{margin-left: 5px;}
+.suggested-products{padding: 0;border-radius: 5px;background: #eee;border: 1px solid #00a5a4;}
+.cards-logos-suggests{text-align: center;padding: 15px 0;color: #ffffff;background: #00a5a4;border-top-right-radius: 5px;border-top-left-radius: 5px;}
+.suggested-business-list{list-style: none;padding-left: 0;}
+.suggested-business-list li{text-align: center;margin: 10px 0;width: 85%;display: block;margin: 15px auto;padding: 15px;background: #ddd;border-radius: 4px;}
+.suggested-business-header{border-bottom: 1px solid #ededed;}
+.suggested-pdts-header{display: block;padding: 7px 15px 0;color: #00a5a4;}
+.suggested-business-header li img{height: 100px;width: 100px;}
+p.switch{margin-bottom: 10px !important;}
+.my-purchases-ul{padding-left: 0 !important;overflow: auto;}
+.my-purchases-list{display: inline-block;cursor: pointer;position: relative;margin-bottom: 5px;margin-top: 15px;}
+.purchase-span{display: block;padding: 10px;border: 1px solid #eaeaea;}
+.my-cards-ul{padding-left: 0 !important;list-style: none;background: #fefefe;}
+.flip-card-download{display: inline-block;color: #00cccb;background: #fff;width: 45px;padding: 5px 5px;position: relative;top: 33% !important;margin-right: 10px;border-radius: 2px;}

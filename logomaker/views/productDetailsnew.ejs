@@ -1,0 +1,87 @@
+<% include myHeader.ejs %>
+
+<link rel="stylesheet" href="/css/productdetail.css" media="screen">
+<script src="/js/productdetail.js"></script>
+
+  <script>
+   // $(document).ready(function() {
+
+// Instantiate EasyZoom instance
+		var $easyzoom = $('.easyzoom').easyZoom();
+
+// Setup thumbnails example
+var api1 = $easyzoom.filter('.easyzoom--with-thumbnails').data('easyZoom');
+
+$('.thumbnails').on('click', 'a', function(e) {
+  var $this = $(this);
+
+  e.preventDefault();
+
+  // Use EasyZoom's `swap` method
+  api1.swap($this.data('standard'), $this.attr('href'));
+});
+
+// Setup toggles example
+var api2 = $easyzoom.filter('.easyzoom--with-toggle').data('easyZoom');
+
+$('.toggle').on('click', function() {
+  var $this = $(this);
+
+  if ($this.data("active") === true) {
+    $this.text("Switch on").data("active", false);
+    api2.teardown();
+  } else {
+    $this.text("Switch off").data("active", true);
+    api2._init();
+  }
+});
+   // });
+  </script>
+
+<body>
+  <!-- inner-hero-section start -->
+  
+  <!-- inner-hero-section end -->
+
+  <!-- privacy-section start -->
+  <section class="privacy-section pt-150 pb-150">
+    <div class="container">
+      <div class="productdetailbox row">
+        <div class="col-xs-4 fig">
+          <div class="easyzoom easyzoom--overlay easyzoom--with-thumbnails">
+            <a href="/getMyOtherProductImage?id=<%=alldata.front_image%>">
+              <img src="/getMyOtherProductImage?id=<%=alldata.front_image%>" alt="" width="640" height="360" />
+            </a>
+          </div>
+    
+          <ul class="thumbnails">
+            <li>
+              <a href="/getMyOtherProductImage?id=<%=alldata.back_image%>" data-standard="/getMyOtherProductImage?id=<%=alldata.back_image%>" style="width: 60px;height: 68px;">
+                <img src="/getMyOtherProductImage?id=<%=alldata.back_image%>" alt="" />
+              </a>
+            </li>
+            
+           
+          </ul>
+        </div>
+        <div class="col-xs-8 main">
+          <!--<div class="socialshare">
+            <span class="fb">f</span>
+            <span class="twitter">t</span>
+            <span class="mail">M</span>
+          </div>-->
+          <h2><%=alldata.title%></h2>
+          <p><%=alldata.description%></p>
+          <h4 class="price-kit">
+            $ <%=alldata.price%>&nbsp;&nbsp;&nbsp;&nbsp;Qty&nbsp;
+            <input class="qtybox" type="number" min="1" max="50" step="1" value="1" required="true" /> 
+          </h4>
+        </div>
+      </div>
+    </div>s
+  </section>
+  <!-- privacy-section end -->
+
+ 
+
+<% include myFooter.ejs %>

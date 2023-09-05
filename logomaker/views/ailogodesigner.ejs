@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="icon" type="image/png" href="/images/favicon.png" sizes="16x16">
+    <link rel="stylesheet" href="/css/fontawesome.min.css">
+    <link rel="stylesheet" href="/css/ai.logofonts.css">
+    <link rel="stylesheet" href="/css/flaticon.css">
+    <link rel="stylesheet" href="/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/vendor/animate.css">
+    <link rel="stylesheet" href="/css/lightcase.css">
+    <link rel="stylesheet" href="/css/jquery.feedback_me.css" media="screen">
+    <link rel="stylesheet" href="/css/theme-admin-extension.css" media="screen">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CShadows+Into+Light"
+            rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Work+Sans:400,600" rel="stylesheet">
+
+    <%if (global.config.USE_MIN_FILES == true) { %>
+    <link rel="stylesheet" href="/css/header.min.css?v=<%= options.version %>">
+    <% } else { %>
+    <link rel="stylesheet" href="/js/thirdparty/toast/jquery.toast.css">
+    <link rel="stylesheet" href="/vendor/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="/vendor/fontawesome/css/font-awesome.css">
+    <link rel="stylesheet" href="/vendor/owlcarousel/owl.carousel.css" media="screen">
+    <link rel="stylesheet" href="/vendor/owlcarousel/owl.theme.css" media="screen">
+    <link rel="stylesheet" href="/vendor/magnific-popup/magnific-popup.css" media="screen">
+    <link rel="stylesheet" href="/css/theme.css">
+    <link rel="stylesheet" href="/css/theme-elements.css">
+    <link rel="stylesheet" href="/css/theme-blog.css">
+    <link rel="stylesheet" href="/css/theme-shop.css">
+    <link rel="stylesheet" href="/css/theme-animate.css">
+    <link rel="stylesheet" href="/vendor/rs-plugin/css/settings.css" media="screen">
+    <link rel="stylesheet" href="/vendor/circle-flip-slideshow/css/component.css" media="screen">
+    <link rel="stylesheet" href="/css/skins/blue.css">
+    <link rel="stylesheet" href="/css/jquery.fancybox.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="/css/jquery.fancybox-buttons.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="/css/jquery.fancybox-thumbs.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="/css/bootstrap-formhelpers.css" media="screen">
+    <link rel="stylesheet" href="/css/jquery.accordion.css">
+    <link rel="stylesheet" href="/css/theme-admin-extension.css" media="screen">
+    <link rel="stylesheet" href="/css/animate.min.css">
+    <link rel="stylesheet" href="/css/sprite.css"/>
+    <% } %>
+    <link rel="stylesheet" href="/css/create-logo.css">
+    <link rel="stylesheet" href="/css/ailogodesigner.theme.css">
+    <% include fonts.ejs %>
+
+</head>
+<style>
+    .modal-backdrop{
+        display: none !important;
+    }
+    .feedback_trigger{
+        background:rgb(44, 44, 44) !important;
+        position: fixed;
+        bottom: 70px !important;
+    }
+</style>
+<body>
+    <nav class="custom-nav">
+        <div class="container">
+            <a href="/"><img src="/img/Black_logo 1.jpg" width="166px" height="43px" alt="logo"></a>
+            <ul>
+                <li><a href="/">home</a></li>
+                <li class="dropdown mega-menu-item mega-menu-signin signin headerAccount-signin" id="headerAccount" style="background: #fff;float: none;top:0px">
+                    <a class="dropdown-toggle login_top_pointer" data-href="#/login" style="background-color: #fff;">login</a>
+                    <ul class="dropdown-menu headerAccount-dropdown" style="min-width: 250px;">
+                        <li style="margin-top:0px;">
+                            <div class="mega-menu-content">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="signin-form">
+                                            <span class="mega-menu-sub-title">Login</span>
+                                            <form id="loginFormOnTop" method="post">
+                                                <div class="row" style="min-width: 200px;">
+                                                    <div class="form-group">
+                                                        <div class="col-md-12">
+                                                            <span class="error-signin"></span>
+                                                            <input type="text" value="" class="form-control input-lg" id="emailid" name="emailid" required="true" email="true" placeholder="E-mail Address">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row" style="min-width: 200px;">
+                                                    <div class="form-group" style="padding-bottom:0px;">
+                                                        <div class="col-md-12">
+                                                            <input type="password" value="" class="form-control input-lg" id="password" name="password" required="true" minlength="5" placeholder="Password">
+                                                                   <a class="pull-right" id="headerRecover" style="font-size: 10px;">Forgot
+                                                                Password?</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <input type="submit" value="Login" id="loginBtnlogo" class="btn btn-primary2 pull-left" data-loading-text="Loading..." style="background-color: #1EA2E4;color:#fff;height: 30px;line-height: 1px;">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <p class="sign-up-info">Don't have an account yet? <a id="headerSignUp">Create Account</a></p>
+                                        </div>
+                                        <div class="signup-form" style="max-width: 220px;">
+                                            <span class="mega-menu-sub-title">Create Account</span>
+                                            <form action="#" id="signupForm" method="post">
+                                                <div class="row" style="max-width: 250px;">
+                                                    <div class="form-group">
+                                                        <div class="col-md-12">
+                                                            <input name="signup_email" type="text" placeholder="Email Address" class="form-control input-lg" required="true" email="true">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row" style="max-width: 250px;">
+                                                    <div class="form-group">
+                                                        <div class="col-md-12">
+                                                            <input name="signup_password" type="password" placeholder="Password" class="input-lg form-control" required="true" minlength="5" style="margin-bottom: 15px;">
+                                                            <input name="confirm_password" type="password" placeholder="Confirm Password" class="form-control input-lg" required="true" minlength="5" equalTo="[name=signup_password]">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <input type="button" id="signUpBtn" value="Create Account" class="btn pull-left" data-loading-text="Loading..." style="background-color: #1EA2E4;color:#fff;height: 30px;line-height: 1px;">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <p class="log-in-info" style="margin-top: 10px;">Already have an account?
+                                                <a href="#/login" id="headerSignIn" class="comm-color">Log In!</a>
+                                            </p>
+                                        </div>
+                                        <div class="recover-form">
+                                            <span class="mega-menu-sub-title">Forgot Password</span>
+                                            <p>Complete the form below to receive an email with the
+                                                authorization code needed to reset your password.</p>
+                                            <form action="#" id="" method="post">
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <div class="col-md-12">
+                                                            <label>E-mail Address</label>
+                                                            <input id="changePwdEmailAddr" type="text" value="" class="form-control input-lg">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <input id="changePasswordBtn" type="button" value="Proceed" class="btn btn-primary2 pull-right push-bottom" data-loading-text="Loading...">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <p class="log-in-info">
+                                                <a href="#" id="headerRecoverCancel">Back to Log In!</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="/" id="myAccount" style="display:none;">My Account</a></li>
+                <li><a href="#">need help?</a></li>
+            
+            </ul>
+        </div>
+    </nav>
+    <section class="slide-wrapper">
+        <div class="container-fluid pl-none pr-none">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                    <li data-target="#myCarousel" data-slide-to="3"></li>
+                </ol>
+    
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="carousel-content">
+                            <div class="container">
+                            <div class="row">
+                                <div class="col-12 col-md-10 col-lg-10 col-xl-10 mx-auto">
+                                    <h1 class="slide-heading">Your journey begins here</h1>
+                                    <p class="slide-sb-heading">what's the name</p>
+                                    <form>
+                                    <input id="company-name" class="text-form" type="text" placeholder="Jill's cafe"/>
+                                    <input id="company-tagline" class="text-form" type="text" placeholder="We are the best coffee around"/>
+                                    <button  id="btnNextStep1" class="btn-next" type="button">Next</button>
+                                    </form>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="carousel-content">
+                        <div class="container">
+                            <h1 class="slide-heading">Description</h1>
+                            <p class="slide-sb-heading">Tell us something about your startup</p>
+                            <div class="row">
+                                <div class="col-12 col-md-6 col-lg-6">
+                                    <p class="slide-sb2-heading">Help us understand your venture</p>
+                                    <form>
+                                        <select name="" id="e1" class="industry-ddl">
+                                            <option value="">-- Choose your industry --</option>
+                                        </select>
+                                        <textarea  id="industry-desc" class="text-form" rows="4" style="font-size: 14px;" placeholder="Your venture in brief..."></textarea>
+                                    </form>
+                                    
+                                </div>
+                                <div class="col-12 col-md-6 col-lg-6">
+                                    <p class="slide-sb2-heading">Your Target Audience <button id="info-btn-ta" class="infoBtn"><i class="fa fa-info"></i></button></p>
+                                    <div class="slider-container">
+                                    <ul>
+                                        <li>Musculine</li>
+                                        <li>Feminine</li>
+                                    </ul>
+                                    <input id="mfcomp" min="0" max="1" step="0.5" class="cust-slider" type="range"/>
+                                    </div>
+                                    <div class="slider-container">
+                                        <ul>
+                                            <li>Luxurious</li>
+                                            <li>Affordable</li>
+                                        </ul>
+                                        <input id="lacomp" min="0" max="1" step="0.5" class="cust-slider" type="range"/>
+                                    </div>
+                                    <div class="slider-container">
+                                        <ul>
+                                            <li>Vintage</li>
+                                            <li>Modern</li>
+                                        </ul>
+                                        <input id="vmcomp" min="0" max="1" step="0.5" class="cust-slider" type="range"/>
+                                    </div>
+
+                                    <!-- Trigger info -->
+                                    <div id="info-model-ta" class="infoclass">
+                                        <div class="info-content">
+                                        <span class="closeInfo" id="closeta">&times;</span>
+                                        <p>Tell us what kind of audience/customers you are trying to reach. 
+                                            While designing a logo it is very important to keep this in mind, as your logo is the face of your service/product.</p>
+                                            <ul>
+                                                <li>Choose Masculine if it is for men and Feminine if it is for Women; else, stay neutral.</li>
+                                                <li>Choose Luxurious if it's premium and expensive, else choose Affordable if it is easy on pocket, or you can remain neutral.</li>
+                                                <li>Choose Vintage or Modern according to the market trends, or you can stay neutral.</li>
+                                            </ul>
+                                        </div>
+                                    </div> 
+                                </div>
+                            
+                            </div>
+                            <button id="btnNextStep2" class="btn-next" type="submit">Next</button>
+                           
+                        </div>
+                    </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="carousel-content">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 col-md-6 col-lg-6 col-xl-6">
+                                <div class="logo-container-left">
+                                    <h1>Tell us what you like</h1>
+                                    <p class="slide-sb-heading">Which of these appeal to you the most</p>
+                                            <ul class="image-checkbox-list" style="margin-right: 35px;">
+                                            </ul>
+                                           
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-lg-6 col-xl-6">
+                                    <div class="palette-container">
+                                <div class="row">
+                                    <div class="col-8 col-md-8 col-lg-8 col-xl-8">
+                                            <h3 class="palette-heading">The color sage
+                                                <span>Says...</span><span id="palettecolor"></span> <button id="info-btn-cl" class="infoBtn" style="padding: 1px 6px;"><i class="fa fa-info"></i></button></h3>
+                                                <p id="palettedesc" class="palette-description">
+                                                </p>
+                                        
+                                    </div>
+                                    <div class="col-4 col-md-4 col-lg-4 col-xl-4">
+                                        <img class="palette-img" src="/img/color-palette.png" alt="image" id="color-img">
+
+                                        <!-- Trigger info -->
+                                        <div id="info-model-cl" class="infoclass">
+                                            <div class="info-content">
+                                            <span class="closeInfo" id="closecl">&times;</span>
+                                            <p>Our color sage selects a great color fit according to the nature of your target audience and your products/services. You may use this color in your logo, business cards, merchandise etc. to produce a positive impact on your customer. </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                </div>
+                            </div>
+                            <button id="btnNextStep3" class="btn-next" type="submit">Next</button>
+                    
+                          </div>
+                    </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="carousel-content">
+                            <div class="container">
+                            <div class="panel-headingLister">
+                                <h1 class="slide-heading">Choose from this collection</h1>
+                                <p class="slide-sb-heading">Pick whichever you like</p>
+                            </div>
+                            <div class="panel-headingEditor" style="display: none;">
+                                <h1 class="slide-heading">Edit or Save your logo</h1>
+                            </div>
+                            <div class="panel-body" style="display: none;" id="actualLogoEditorPanelBody">
+                                <div class="col-md-12">
+                                    <div class="col-md-3" style="display:none;padding: 0px;border: solid 1px #E6E6E6;">
+                                        <div class="editorLayout">
+                                            <div class="lefTPaneHeader">Logo Suggestions</div>
+                                            <div class="col-md-12 leftPanecontents">
+                                                <span class="logos"></span>
+
+                                                <div class="col-md-12" style="padding: 20px">
+                                                    <button class="col-md-12 btn btn-sm btn-default"
+                                                            id="loadMoreLogosBtn">
+                                                        Load More Logos
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="" id="iframeHolder">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-md-6 col-sm-6 col-xs-6" style="text-align: left;">
+                                        <a class="tooltip1" data-toggle="tooltip" data-placement="right"
+                                           data-original-title="Choose a different category">
+                                            <span class="template-back" id="templateBack">Back</span></a>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <a class="tooltip1 pull-right" data-toggle="tooltip" data-placement="left"
+                                           data-original-title="Saves the edited logo in My Designs.">
+                                            <span class="template-save" id="templateSave" >Save & Continue</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-body row" id="logoListerPanelBody">
+                                
+                            <div class="clr"></div>
+                            <div class="template-space"></div>
+                            <span class="logos row">
+                            </span>
+                            <div class="col-md-12">
+                                <div class="col-md-6 col-sm-6 col-xs-6" style="text-align: left;">
+                                    <a class="tooltip1" data-toggle="tooltip" data-placement="right"
+                                       data-original-title="Choose a different category">
+                                        <button class="btn btn-sm btn-primary template-back"
+                                                id="backToChooseCategory">Back
+                                        </button>
+                                    </a>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <a class="tooltip1 pull-right" data-toggle="tooltip" data-placement="left"
+                                       data-original-title="Saves the edited logo in �My Designs�.">
+                                        <button class="btn btn-sm btn-primary template-save" id="loadMoreLogosBtn2">
+                                            Load More Logos
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="pull-left">
+                            </div>
+                        </div>
+                        <div class="panel panel-four">
+                            <h4 class="panel-heading panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion"
+                                   href="#" class="">
+                                    Save and Purchase
+                                </a>
+                            </h4>
+        
+                            <div id="accordionFour" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <div class="col-md-4 free-logo-column custom22">
+                                        <div class="free-logo">
+                                            <span class="logo-text">Your Logo is saved in "My Designs"</span>
+                                <span class="logo-card-outline">
+                                    <span class="logo-card">
+                                        <img src="" id="logoPreviewImg">
+                                        <span class="flip-card-template"></span>
+                                    </span>
+                                </span>
+                                            <button type="button" class="clr button-dwnld buy-now-card custom23" id="buyLogo">
+                                                Buy Now for
+                                                <b class="purchase-discount-limit custom30">...</b><i class="fa fa-info"></i>
+                                            </button>
+                                            <button type="button" class="clr button-dwnld download-jpg" id="createAnotherLogo">
+                                                CREATE ANOTHER LOGO<i class="fa fa-info"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 custom04">
+                                        <div class="unlimited-use custom24">
+                                            <span class="logo-text">Use your logo unlimited times</span><span
+                                                    class="purchase-text" style="padding: 0px">Purchase the original source files for only
+                            <strike>
+                                <span class="purchase-limit">...</span>
+                            </strike>
+                                &nbsp;<span class="purchase-discount-limit">...</span>
+                            </span>
+                                            <label class="percentage_label">Save upto <b><%= config.FLAT_DISCOUNT_LOGO %>%</b>
+                                                today!</label> <br/>
+                                           
+                                            <span class="use-text"><i class="fa fa-circle"></i>The high resolution file can be used for large scale and high resolution print applications like signs, billboards, ads, packaging, mailers, silk-screening, and business cards.</span>
+                                            <span class="use-text bold-text"><i class="fa fa-circle"></i>Once you purchase the logo,  that logo would be removed from our website and no one else will be able to use or purchase it.</span>
+                                            <!--
+                                            <span class="use-text"> 
+                                                We have been striving for excellence ever since our
+                                                inception and our eye for perfection has always helped us
+                                                build long lasting relationships with our clients that we
+                                                value. In addition to that we also offer:
+                                            </span>
+                                            <span style="padding-top: 0px;padding-bottom: 0px" class="use-text bold-text"><i class="fa fa-circle"></i>The best quality products.</span>
+                                            <span style="padding-top: 0px;padding-bottom: 0px" class="use-text bold-text"><i class="fa fa-circle"></i>A professional design team.</span>
+                                            <span style="padding-top: 0px;padding-bottom: 0px" class="use-text bold-text"><i class="fa fa-circle"></i>Quick, efficient and cost effective services.</span>
+                                            <span style="padding-top: 0px;padding-bottom: 0px" class="use-text bold-text"><i class="fa fa-circle"></i>Premium print quality.</span>
+                                            -->
+                                            <div class="arrow-left"></div>
+                                            <div class="" style="display: none">
+                                                <img src="" id="logoPreviewImg2" >
+                                            </div>
+                                        </div>
+                                        <div class="unlimited-use-download custom31">
+                                            <span class="purchase-text-new">All designed logo gets saved in �My designs".</span>
+                                            <div class="div-arrow-create"></div>
+                                            <div class="" style="display: none">
+                                                <img src="" id="logoPreviewImg2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 business-card-logo comm-bg">
+                                    <div class="col-md-6">
+                                        <div class="buss-card-logo-img">
+                                            <img class="buss-card-image1 custom25" src="/img/business_card_3.png">
+                                            <div class="buss-card-image"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <span class="buss-card-pdt">Congratulations on your online free logo.</span>
+                                        <span class="buss-card-create">Would you also like to design business card for <b
+                                                    class="card-company-name">comapny</b> ?</span>
+                        <span class="business-card-button"><a href="#" id="createBusinessCardOnBottom">Start Now
+                            </a></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <script src="/vendor/jquery/jquery.js"></script>
+
+
+   
+  
+  <script>
+      var currentCountryFromServer = "<%= JSON.stringify(geoip) %>";
+  </script>
+  <script src="/js/vendor/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.fancybox.js"></script>
+    <script type="text/javascript" src="/js/jquery.fancybox.pack.js"></script>
+    <script type="text/javascript" src="/js/jquery.fancybox-buttons.js"></script>
+    <script type="text/javascript" src="/js/jquery.fancybox-media.js"></script>
+    <script type="text/javascript" src="/js/jquery.fancybox-thumbs.js"></script>
+    <script src="/vendor/modernizr/modernizr.js"></script>
+    <script src="/vendor/jquery-cookie/jquery-cookie.js"></script>
+    <script src="/js/thirdparty/jquery.cookie.js"></script>
+    <script src="/js/thirdparty/mustache.js"></script>
+    <script src="/js/thirdparty/bootbox.js"></script>
+    <script src="/js/thirdparty/jquery-validate/jquery.validate.js"></script>
+    <script src="/js/thirdparty/toast/jquery.toast.min.js"></script>
+    <script src="/js/thirdparty/md5.js"></script>
+    <script src="/vendor/jquery.appear/jquery.appear.js"></script>
+    <script src="/vendor/jquery.easing/jquery.easing.js"></script>
+    <script src="/vendor/bootstrap/bootstrap.js"></script>
+    <script src="/vendor/jquery.validation/jquery.validation.js"></script>
+    <script src="/vendor/jquery.stellar/jquery.stellar.js"></script>
+    <script src="/vendor/jquery.easy-pie-chart/jquery.easy-pie-chart.js"></script>
+    <script src="/vendor/jquery.gmap/jquery.gmap.js"></script>
+    <script src="/vendor/twitterjs/twitter.js"></script>
+    <script src="/vendor/isotope/jquery.isotope.js"></script>
+    <script src="/vendor/owlcarousel/owl.carousel.js"></script>
+    <script src="/vendor/jflickrfeed/jflickrfeed.js"></script>
+    <script src="/vendor/magnific-popup/jquery.magnific-popup.js"></script>
+    <script src="/vendor/vide/vide.js"></script>
+    <script src="/js/bootstrap-formhelpers.js"></script>
+    <script src="/js/jquery.feedback_me.js"></script>
+    <script src="/js/bootstrap-formhelpers-colorpicker.js"></script>
+    <script src="/vendor/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+    <script src="/vendor/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+    <script src="/vendor/circle-flip-slideshow/js/jquery.flipshow.js"></script>
+    <script src="/js/views/view.home.js"></script>
+    <script src="/js/jquery.cycle2.js"></script>
+    <script src="/js/jquery.cycle2.shuffle.js"></script>
+    <script src="/js/thirdparty/jquery.svg/jquery.svg.js"></script>
+    <script src="/js/thirdparty/jquery.svg/jquery.svgdom.js"></script>
+    <script src="/js/thirdparty/jquery.sticky.js"></script>
+    <script type="text/javascript" src="/js/expand.js"></script>
+  
+    <script src="/js/vendor/slick.min.js"></script>
+    <script src="/js/vendor/wow.min.js"></script>
+    <script src="/js/vendor/lightcase.js"></script>
+    <script src="/js/vendor/jquery.countdown.min.js"></script>
+    <script src="/js/vendor/jquery.easing.min.js"></script>
+    <script src="js/vendor/slick.min.js"></script>
+    <script src="/js/vendor/TweenMax.min.js"></script>
+    <script src="/js/vendor/jquery.paroller.min.js"></script>
+    <script src="/js/vendor/tilt.jquery.min.js"></script>
+    <script src="/js/thirdparty/html5.js"></script>
+    <script src="/js/select2.min.js"></script>
+ 
+  
+    <script src="/js/theme.js"></script>
+    <script src="/js/theme.init.js"></script>
+    <script src="/js/custom.js"></script>
+    <script src="/js/logomaker/Base64.js"></script>
+    <script src="/js/logomaker/common.js"></script>
+    <script src="/js/logomaker/authenticate.js"></script>
+    <script src="/js/logomaker/helpers/header.js"></script>
+    <script src="/js/logomaker/helpers/footer.js"></script>
+    <script src="/js/ailogodesigner.js"></script> 
+    <script src="/js/ailogomaker.js"></script>  
+    <script src="/js/aipop.js"></script>  
+    
+  
+<div class="modal fade" id="bcardListModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+   <div class="modal-dialog">
+       <div class="modal-content new-modal-content">
+           <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                   <span aria-hidden="true">&times;</span></button>
+               <h4 class="modal-title" id="myModalLabel">Create a business card associated with this logo</h4>
+           </div>
+           <div class="modal-body">
+               <p class="bg-success custom26">Click on the business cards to customize</p>
+
+               <div class="overflow-auto">
+                   <div id="cards-list" class="col-md-12">
+
+                   </div>
+               </div>
+           </div>
+           <div class="modal-footer">
+               <button type="button" class="btn btn-success" style="display: none" id="checkoutNow">No, Just checkout
+                   this Logo
+               </button>
+               <button type="button" class="btn btn-success" style="display: none" id="downloadNow"
+                       data-dismiss="modal">
+                   No, Just Download this Logo
+               </button>
+               <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+           </div>
+       </div>
+   </div>
+</div>
+
+  
+  
+  <script>
+    $(document).ready(function(){
+      console.log("document loaded");
+      user=getUser();
+      if(user){
+        $('#headerAccount').css('display','none');
+        $('#myAccount').css('display','inline-block');
+      }
+      else{
+        $('#headerAccount').css('display','inline-block');
+        $('#myAccount').css('display','none');
+      }
+    })
+    // $(function () {
+        $("#loginBtnlogo").click(function (e) {
+            e.preventDefault();
+            addWaitingOverlay();
+            console.log("login-start")
+            signin($("#emailid").val(), $("#password").val(), function (resp) {
+                alert("You have successfully logged in.");
+                $('#headerAccount').css('display','none');
+                $('#myAccount').css('display','inline-block');
+                //window.location.reload();
+                removeWaitingOverlay();
+                
+            }, function (err) {
+                removeWaitingOverlay();
+                console.log(err);
+                alert(typeof err == "string" ? err : "Server Error: " + err.error);
+            });
+          
+          
+        });
+    // });
+    $(function () {
+      $("#signupForm").validate();
+      $("#pageCreateAccountBtn").click(function (e) {
+          e.preventDefault();
+          console.log($("#pageSignupUserName").val());
+            //$('#signupForm').valid()
+          if($("#pageSignupUserName").val().trim() == "" || $("#pageSignupPassword").val().trim() || $("#termandcondiction1").prop('checked') == false){
+            alert("Please fill up all required fields")
+          }else{
+            if (true) {
+              signup({email: $("#pageSignupUserName").val(), password: $("#pageSignupPassword").val()});
+            } else {
+              console.log("failure");
+             alert("Please enter the valid values");
+          }
+          }
+      });
+    });
+
+  $('#templateSave').click(function (e) {
+          e.preventDefault();
+          user=getUser();
+          if(!user){
+            alert("Hey User! Please login or create an account to proceed");
+          }
+      });
+  </script> 
+  <script>
+    function logalert() {
+        console.log("template-test");
+        alert("Hey User! Please login or create an account to proceed");
+    }
+</script>
+
+
+</body>
+</html>

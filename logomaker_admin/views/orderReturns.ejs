@@ -1,0 +1,40 @@
+<% include header.ejs %>
+<script type="text/javascript" src="/js/moment.min.js"></script>
+<script src="/js/logomaker/helpers/orderReturns.js"></script>
+<script>
+    var hostName = "<%= hostName %>";
+</script>
+<section class="page_top">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Return Requests</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-responsive tblTransactions">
+                <thead>
+                    <tr>
+                        <th>Date and Time</th>
+                        <th>User</th>
+                        <th>Phone #</th>
+                        <th>Email</th>
+                        <th>Product Image</th>
+                        <th>Reason</th>
+                        <th>Transaction ID</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<% include footer.ejs %>

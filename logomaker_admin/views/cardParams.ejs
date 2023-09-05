@@ -1,0 +1,39 @@
+<% include header.ejs %>
+<script src="/js/logomaker/helpers/card-params.js"></script>
+<style>
+    .tableRow td {
+        text-align: center;
+    }
+</style>
+<script>
+    $(document).on("mouseover", '.cardItems', function () {
+        $(this).find('a img').stop().animate({'margin-top': '-300px'});
+        $(this).find('.card_details').stop().animate({top: '0'});
+    })
+    $(document).on('mouseout', '.cardItems', function () {
+        $(this).find('a img').stop().animate({'margin-top': '0px'});
+        $(this).find('.card_details').stop().animate({top: '240px'});
+    });
+
+</script>
+<section class="page_top">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Card Parameters</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container admin_container table_card">
+    <table class="col-md-12 tableRow" border="1" id="homePageCardTbl1">
+        <tr>
+            <th>Front Card</th>
+            <th>Alignment</th>
+            <th>Back Card</th>
+            <th>Alignment</th>
+        </tr>
+    </table>
+</div>
+<% include footer.ejs %>

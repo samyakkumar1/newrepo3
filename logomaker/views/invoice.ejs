@@ -1,0 +1,126 @@
+<html>
+<head>
+    <title>Invoice</title>
+    <style>
+        body{text-align:center;font-family:"Helvetica Neue Light","HelveticaNeue-Light","Helvetica Neue",Calibri,Helvetica,Arial,sans-serif}
+        h3{margin-bottom:20px}
+        .container{border:10px;margin-left:auto;margin-right:auto;width:80%;text-align:left}
+        .row{width:100%}
+        .main-table{width:100%;border:solid 1px #000}
+        .top{text-align:center;font-size:20px}
+        .left-align{text-align:left}
+    </style>
+    <script src="/js/thirdparty/jquery.min.js"> </script>
+    <script src="/js/thirdparty/toast/jquery.toast.min.js"> </script>
+    <script src="/js/logomaker/common.js?v=<%= options.version %>"> </script>
+</head>
+<body>
+<img src="/img/email-templates/logo.jpg"/>
+    <h3><u>Final Details for Order  #<%= cartInfo.order_id %></u></h3>
+    <button onclick="window.print();">Print this page for your records.</button>
+    <hr />
+<br />
+    <div class="container">
+        <div class="row">
+            <b>Order Placed:</b> <%= cartInfo.date_purchased %> <br/>
+            <%- cartInfo.tracking_id ? "<b>Tracking number</b>: #" + cartInfo.tracking_id + "<br/>": "" %>
+            <b>Order Total:</b> <%= cartInfo.order_total %> <br/>
+        </div>
+        <br/><br/>
+        <table class="main-table">
+            <tr>
+                <th class="top custom19" colspan="2">
+                    <%- (cartInfo.expected_date ? "Dispatched on " + cartInfo.expected_date + "<br/>" : "") %>
+                    <%- (cartInfo.date_purchased ? "Purchased on " + cartInfo.date_purchased : "") %>
+                </th>
+            </tr>
+            <tr>
+                <td class="left-align custom20" colspan="2"><b>Delivery Address:</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <blockquote>
+                        <%- cartInfo.shipping_address.replace(/\n/g, "<br/>") %>
+                    </blockquote>
+                </td>
+            </tr>
+        </table>
+        <br/>
+
+        <table class="main-table" id="otherItems">
+            <tr>
+                <th class="top custom19" colspan="2">
+                    Items ordered
+                </th>
+            </tr>
+            <% for(var i=0; i < items.length; i++) { %>
+            <tr>
+                <td>
+                    <ul>
+                    <% if (items[i].type == "LOGO") { %>
+                        <li>Logo for <%= items[i].company_name + ", " + items[i].slogan %> </li>
+                    <% } else if(items[i].type == "CUSTOM") { %>
+                        <li>Product for <%= items[i].first_name + " " + items[i].last_name %> <%=items[i].email %><br/>
+                            <%- items[i].address_line_1 ? items[i].address_line_1 + "<br/>" : "" %>
+                            <%- items[i].address_line_2 ? items[i].address_line_2 + "<br/>" : ""  %>
+                            <%- items[i].website ? items[i].website + "<br/>" : ""  %>
+                            <%- items[i].phone_no ? items[i].phone_no + "<br/>" : ""  %>
+                            <ul>
+                                <li>Quantity: <%= (products[i].small + products[i].medium + products[i].large + products[i].xl +products[i].doublexl) %></li>
+                                <li>Name: <%= products[i].title %></li>
+                                <li>Shipping Type: <%= items[i].shipping_type %></li>
+                            </ul>
+                        </li>
+                    <% } else { %>
+                        <li>Business Card for <%= items[i].first_name + " " + items[i].last_name %> <%=items[i].email %><br/>
+                            <%- items[i].address_line_1 ? items[i].address_line_1 + "<br/>" : "" %>
+                            <%- items[i].address_line_2 ? items[i].address_line_2 + "<br/>" : ""  %>
+                            <%- items[i].website ? items[i].website + "<br/>" : ""  %>
+                            <%- items[i].phone_no ? items[i].phone_no + "<br/>" : ""  %>
+                            <ul>
+                                <li>Quantity: <%= items[i].qty %></li>
+                                <li>Finish: <%= items[i].finish %></li>
+                                <li>Paper Stock: <%= items[i].paper_stock %></li>
+                                <li>Back Of Card: <%= items[i].back_of_card %></li>
+                                <li>Shipping Type: <%= items[i].shipping_type %></li>
+                            </ul>
+                        </li>
+                    <% } %>
+                    </ul>
+                </td>
+            </tr>
+            <% } %>
+        </table>
+        <br/>
+        <table class="main-table">
+            <tr>
+                <th class="top custom19" colspan="2">
+                    Payment information
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <b>Payment Method:</b>
+                </td>
+                <td class="custom21">
+                    <b>Total: </b>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Payment gateway: <%= cartInfo.payement_type %>
+                </td>
+                <td>
+                    <%= cartInfo.order_total %>
+                </td>
+            </tr>
+        </table>
+        <br/>
+        <div class="text-align-center">
+            To view the purchased items, return to <a href="<%= url %>">My Designs</a>.<br/>
+            Please note: this is not a VAT invoice.<br/>
+            &copy; <%= 1900 + new Date().getYear() %>, <a href="http://www.onlinefreelogo.com">OnlineFreeLogo.com</a>
+        </div>
+    </div>
+</body>
+</html>

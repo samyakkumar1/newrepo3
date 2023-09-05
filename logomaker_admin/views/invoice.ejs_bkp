@@ -1,0 +1,40 @@
+<% include header.ejs %>
+<script src="/js/logomaker/helpers/invoice.js"></script>
+<script src="/js/thirdparty/moment.min.js"></script>
+<style>
+  .tableRow td {
+      text-align: center;
+  }
+</style>
+<section class="page_top">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Invoices</h1>
+        <div class="pull-right col-md-4" style="top: 10px">
+          <input class="form-control" id="email" placeholder="Enter an email to search" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container admin_container table_card">
+  <table class="col-md-12 tableRow" border="1">
+    <thead>
+      <tr>
+        <th class="col-md-2">Date</th>
+        <th class="col-md-2">User</th>
+        <th class="col-md-3">Shipping Address</th>
+        <th class="col-md-3">Items</th>
+        <th class="col-md-1">Price</th>
+        <th class="col-md-1">Actions</th>
+      </tr>
+    </thead>
+    <tbody id="invoiceTable">
+      
+    </tbody>
+  </table>
+        <a class="link" id="showAllRecords">Click here to show all records.</a>
+</div>
+<% include footer.ejs %>

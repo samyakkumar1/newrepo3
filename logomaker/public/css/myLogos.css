@@ -1,0 +1,53 @@
+.my-designs-preview-iframe {
+    width: 100%;
+    border: none;
+    }
+.my-product-name{
+    text-align: center;
+    display: block;
+}
+.my-other-products-ul{
+    padding-left: 0 !important;
+    list-style: none;
+    background: #fefefe;
+}
+
+.my-other-products-list {
+    display: inline-block;
+    border: 1px solid #eaeaea;
+    margin-right: 20px;
+    padding: 15px;
+    cursor: pointer;
+    position: relative;
+    margin-bottom: 5px;
+    margin-top: 15px;
+}
+
+.my-other-products-list object, .my-other-products-list .hasSVG {
+    height: 167px;
+    width: 220px;
+    margin: 0 auto;
+    display: block;
+}
+.my-logos-list{display: inline-block;border: 1px solid #eaeaea;margin-right: 20px;padding: 15px;cursor: pointer;min-width: 250px;position: relative;margin-bottom: 5px;margin-top: 15px;}
+.my-logos-list span.my-logo-company{display: block;text-align: center;padding-top: 15px;padding-bottom: 10px;}
+.my-logos-list object,.my-logos-list .hasSVG{height: 111px;width: 220px;margin: 0 auto;display: block;}
+.flip-logo-remove,.flip-logo-edit,.flip-logo-buy,.flip-logo-add{display: inline-block;color: #00cccb;background: #fff;width: 45px;padding:5px 5px;margin-right: 10px;border-radius: 2px;}
+.flip-logo-download{display: inline-block;color: #00cccb;background: #fff;width: 45px;padding:5px 5px;margin-right: 10px;border-radius: 2px;}
+.flip-logo-remove span,.flip-logo-edit span,.flip-logo-buy span,.flip-logo-add span{display: block;font-size: 13px;line-height: 13px;}
+.flip-logo-template{display:none;text-align: center;position: absolute;top: 0;background: #bbb;height: 100%;width: 100%;left: 0%;opacity: 0.9;transition: all 0.3s;}
+.my-logos-ul{padding-left: 0 !important;list-style: none;background: #fefefe;}
+.flip-logo-template i{font-size: 18px;}
+.flip-logo-remove-bl,.flip-logo-edit-bl,.flip-logo-buy-bl,.flip-logo-add-bl{display: block;position: relative;top: 15%;font-size: 13px;}
+.flip-logo-remove-bl span{border: 1px solid rgb(220, 60, 60);background: rgb(220, 60, 60);border-radius: 50px;color: #fff;padding: 0px 10px;width: 140px;display: block;margin: 0 auto;margin-bottom: 5px;}
+.flip-logo-remove-bl span:hover{background:rgb(173, 55, 55);border: 1px solid rgb(173, 55, 55)}
+.flip-logo-edit-bl span{border: 1px solid #209ECC;background: #209ECC;border-radius: 50px;color: #fff;padding: 0px 10px;width: 140px;display: block;margin: 0 auto;margin-bottom: 5px;}
+.flip-logo-edit-bl span:hover{background:#248AAF;border: 1px solid #248AAF;}
+.flip-logo-add-bl span{border: 1px solid  #47A447;background:  #47A447;color: #fff;border-radius: 50px;width: 140px;display: block;margin: 0 auto;}
+.flip-logo-add-bl span:hover{background:#3C8B3C;border: 1px solid #3C8B3C;}
+.flip-logo-buy-bl span{border: 1px solid rgb(239, 184, 83);background: rgb(239, 184, 83);color: #fff;border-radius: 50px;padding: 0px 10px;width: 140px;display: block;margin: 0 auto;margin-bottom: 5px;}
+.flip-logo-buy-bl span:hover{background:rgb(213, 161, 64);border: 1px solid rgb(213, 161, 64);}
+.separate-one{position: absolute!important;top: 50%!important;left:30%!important;}
+.separate-two{position: absolute!important;top:30%!important;left:30%!important;}
+.separate-two.purchased{left:0!important;}
+.collapse{visibility: visible !important;}

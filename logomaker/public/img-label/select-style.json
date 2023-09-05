@@ -1,0 +1,191 @@
+[{
+    "name":"Alpha Capsule",
+    "Industry": ["Health Care" , "Fitness"],
+    "style_dict":[{"type": "all", "concept": 0.5, "definition": 0.6 ,"era": 0.8 ,"maturity": 0.6 ,"personality": 0.5 ,"weight": 0.2}],
+    "pimg": "AlphaCap.png"
+}
+,
+{
+    "name":"Dynamo Fitness",
+    "Industry": ["Health Care" , "Fitness"],
+    "style_dict":[{"type": "all", "concept": 0.5, "definition": 0.5 ,"era": 0.5 ,"maturity": 0.5 ,"personality": 0.5 ,"weight": 0.5}],
+    "pimg": "DynamoFit.png"
+}
+,
+{
+    "name":"Ayurvedics",
+    "Industry": ["Health Care" , "Fitness"],
+    "style_dict":[{"type": "all", "concept": 0.5, "definition": 0.8 ,"era": 0.8 ,"maturity": 0.7 ,"personality": 0.5 ,"weight": 0.8}],
+    "pimg": "Ayurvedics.png"
+}
+,
+{
+    "name":"PharmaC",
+    "Industry": ["Health Care" , "Fitness"],
+    "style_dict":[{"type": "all", "concept": 0.4, "definition": 0.8 ,"era": 0.8 ,"maturity": 0.3 ,"personality": 0.2 ,"weight": 0.7}],
+    "pimg": "PharmaC.png"
+}
+,
+{
+    "name":"Corenergy",
+    "Industry": ["Health Care" , "Fitness"],
+    "style_dict":[{"type": "all", "concept": 0.7, "definition": 0.4 ,"era": 0.7 ,"maturity": 0.7 ,"personality": 0.7 ,"weight": 0.6}],
+    "pimg": "Corenergy.png"
+}
+,
+
+{
+    "name":"Divine Fly",
+    "Industry": ["Travel and Hospitality"],
+    "style_dict":[{"type": "all", "concept": 0.4, "definition": 0.3 ,"era": 0.3 ,"maturity": 0.6 ,"personality": 0.5 ,"weight": 0.5}],
+    "pimg": "DivineFly.png"
+}
+,
+
+{
+    "name":"Travel Wise",
+    "Industry": ["Travel and Hospitality"],
+    "style_dict":[{"type": "all", "concept": 0.4, "definition": 0.2 ,"era": 0.2 ,"maturity": 0.6 ,"personality": 0.5 ,"weight": 0.7}],
+    "pimg": "TravelWise.png"
+}
+,
+{
+    "name":"Blue Zilla",
+    "Industry": ["Travel and Hospitality"],
+    "style_dict":[{"type": "all", "concept": 0.6, "definition": 0.7 ,"era": 0.3 ,"maturity": 0.4 ,"personality": 0.5 ,"weight": 0.5}],
+    "pimg": "BlueZilla.png"
+}
+,
+{
+    "name":"Zenith",
+    "Industry": ["Travel and Hospitality"],
+    "style_dict":[{"type": "all", "concept": 0.7, "definition": 0.4 ,"era": 0.3 ,"maturity": 0.6 ,"personality": 0.2 ,"weight": 0.5}],
+    "pimg": "Zenith.png"
+}
+,
+{
+    "name":"Orange Travels",
+    "Industry": ["Travel and Hospitality"],
+    "style_dict":[{"type": "all", "concept": 0.6, "definition": 0.6 ,"era": 0.7 ,"maturity": 0.4 ,"personality": 0.5 ,"weight": 0.7}],
+    "pimg": "OrangeTravels.png"
+}
+,
+{
+    "name":"Republica Finance",
+    "Industry": ["Account Finance and Insurance"],
+    "style_dict":[{"type": "all", "concept": 0.4, "definition": 0.4 ,"era": 0.4 ,"maturity": 0.4 ,"personality": 0.6 ,"weight": 0.5}],
+    "pimg": "RepublicaFinance.png"
+}
+,
+{
+    "name":"Aegis Insurance",
+    "Industry": ["Account Finance and Insurance"],
+    "style_dict":[{"type": "all", "concept": 0.6, "definition": 0.8 ,"era": 0.5 ,"maturity": 0.4 ,"personality": 0.2 ,"weight": 0.2}],
+    "pimg": "Aegis.png"
+}
+,
+{
+    "name":"Gavin Prevail",
+    "Industry": ["Account Finance and Insurance"],
+    "style_dict":[{"type": "all", "concept": 0.4, "definition": 0.7 ,"era": 0.5 ,"maturity": 0.8 ,"personality": 0.4 ,"weight": 0.7}],
+    "pimg": "GavinPrevail.png"
+}
+,
+{
+    "name":"Money Haven",
+    "Industry": ["Account Finance and Insurance"],
+    "style_dict":[{"type": "all", "concept": 0.6, "definition": 0.4 ,"era": 0.5 ,"maturity": 0.3 ,"personality": 0.5 ,"weight": 0.8}],
+    "pimg": "MoneyHaven.png"
+}
+,
+{
+    "name":"SecureFox",
+    "Industry": ["Account Finance and Insurance"],
+    "style_dict":[{"type": "all", "concept": 0.4, "definition": 0.2 ,"era": 0.8 ,"maturity": 0.6 ,"personality": 0.1 ,"weight": 0.8}],
+    "pimg": "SecureFox.png"
+}
+,
+{
+    "name":"Republica Finance",
+    "Industry": ["Account Finance and Insurance"],
+    "style_dict":[{"type": "all", "concept": 0.6, "definition": 0.6 ,"era": 0.7 ,"maturity": 0.4 ,"personality": 0.5 ,"weight": 0.7}],
+    "pimg": "RepublicaFinance.png"
+}
+,
+{
+    "name":"Pet Empire",
+    "Industry": ["Animals and Pets"],
+    "style_dict":[{"type": "all", "concept": 0.4, "definition": 0.8 ,"era": 0.8 ,"maturity": 0.3 ,"personality": 0.2 ,"weight": 0.7}],
+    "pimg": "PetEmpire.PNG"
+}
+,
+{
+    "name":"Rider Club",
+    "Industry": ["Animals and Pets"],
+    "style_dict":[{"type": "all", "concept": 0.5, "definition": 0.7 ,"era": 0.5 ,"maturity": 0.8 ,"personality": 0.4 ,"weight": 0.5}],
+    "pimg": "RiderClub.png"
+}
+,
+{
+    "name":"Wild Rangers",
+    "Industry": ["Animals and Pets"],
+    "style_dict":[{"type": "all", "concept": 0.7, "definition": 0.7 ,"era": 0.9 ,"maturity": 0.8 ,"personality": 0.3 ,"weight": 0.5}],
+    "pimg": "WildRangers.png"
+}
+,
+{
+    "name":"Musing Butterfly",
+    "Industry": ["Animals and Pets"],
+    "style_dict":[{"type": "all", "concept": 0.4, "definition": 0.2 ,"era": 0.8 ,"maturity": 0.6 ,"personality": 0.3 ,"weight": 0.5}],
+    "pimg": "MusingButterfly.png"
+}
+,
+{
+    "name":"Bird Sanctuary",
+    "Industry": ["Animals and Pets"],
+    "style_dict":[{"type": "all", "concept": 0.4, "definition": 0.2 ,"era": 0.8 ,"maturity": 0.6 ,"personality": 0.1 ,"weight": 0.8}],
+    "pimg": "BirdSanct.png"
+}
+,
+{
+    "name":"Camellia",
+    "Industry": ["Beauty and Massage"],
+    "style_dict":[{"type": "all", "concept": 0.6, "definition": 0.5 ,"era": 0.5 ,"maturity": 0.7 ,"personality": 0.4 ,"weight": 0.5}],
+    "pimg": "Camellia.png"
+}
+,
+{
+    "name":"Agventure",
+    "Industry": ["Agriculture"],
+    "style_dict":[{"type": "all", "concept": 0.5, "definition": 0.2 ,"era": 0.5 ,"maturity": 0.7 ,"personality": 0.8 ,"weight": 0.5}],
+    "pimg": "Agventure.png"
+}
+,
+{
+    "name":"Oroganics",
+    "Industry": ["Agriculture"],
+    "style_dict":[{"type": "all", "concept": 0.4, "definition": 0.8 ,"era": 0.8 ,"maturity": 0.3 ,"personality": 0.2 ,"weight": 0.5}],
+    "pimg": "Oroganics.png"
+}
+,
+{
+    "name":"PurpleFarms",
+    "Industry": ["Agriculture"],
+    "style_dict":[{"type": "all", "concept": 0.7, "definition": 0.2 ,"era": 0.1 ,"maturity": 0.3 ,"personality": 0.8 ,"weight": 0.1}],
+    "pimg": "PurpleFarms.png"
+}
+,
+{
+    "name":"OpenWater",
+    "Industry": ["Agriculture"],
+    "style_dict":[{"type": "all", "concept": 0.6, "definition": 0.8 ,"era": 0.7 ,"maturity": 0.7 ,"personality": 0.3 ,"weight": 0.8}],
+    "pimg": "OpenWater.png"
+}
+,
+{
+    "name":"BlessedStems",
+    "Industry": ["Agriculture"],
+    "style_dict":[{"type": "all", "concept": 0.6, "definition": 0.8 ,"era": 0.5 ,"maturity": 0.4 ,"personality": 0.2 ,"weight": 0.1}],
+    "pimg": "BlessedStems.png"
+}
+]

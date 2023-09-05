@@ -1,0 +1,4 @@
+node_modules
+*.tmp.pdf*
+config.json
+config31Oct.json

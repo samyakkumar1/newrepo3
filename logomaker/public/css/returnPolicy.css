@@ -1,0 +1,23 @@
+.return-content-header{
+	font-size: 15px;
+	font-weight: 700;
+	padding: 10px 0;
+	display: block;
+	color: #00a5a4;
+}
+.refund-policy-span{
+	display: block;
+	padding-bottom: 10px;
+	color: #00a5a4;
+}
+.refund-policy-page ul{
+	margin-bottom: 35px;
+}
+.refund-policy-page ul li{
+	padding-bottom: 1px;
+}
+.refund-policy-page em{
+	color: #00a5a4;
+	font-weight: 700;
+	font-style: normal;
+}

@@ -1,0 +1,59 @@
+<% include header.ejs %>
+<script>
+    var realAppDomain = "<%= hostName %>"
+</script>
+<script type="text/javascript" src="/js/logomaker/helpers/view_orders_other_custom_products.js"></script>
+<script type="text/javascript" src="/js/logomaker/Base64.js"></script>
+<script type="text/javascript" src="/js/thirdparty/canvg/rgbcolor.js"></script>
+<script type="text/javascript" src="/js/thirdparty/canvg/StackBlur.js"></script>
+<script type="text/javascript" src="/js/thirdparty/canvg/canvg.js"></script>
+<section class="page_top">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Products Printing Orders</h1>
+                <button class="btn btn-sm btn-primary" id="downloadBtn" data-toggle="tooltip" data-placement="top" data-original-title="Download Report" ><i class="fa fa-download"></i></button>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                <select id="Ondropdownchange">
+                    <option value="ALL">All</option>
+                    <option value="NOT_PRINTED">New Order</option>
+                    <option value="PRINTING">Sent for print</option>
+                    <option value="PRINTED">Shipped now</option>
+                </select>
+            </div>
+            <div id="tblOrders">
+            <table class="table table-responsive tblPurchasedCards" >
+                <tr>
+                    <th class="col-md-2">Image</th>
+                    <th class="col-md-1">Design</th>
+                    <th class="col-md-1">Product Name</th>
+                    <th class="col-md-3">Address</th>
+                    <th class="col-md-2">Properties</th>
+                    <th class="col-md-2">Status</th>
+                    <th class="col-md-1">Download</th>
+                </tr>
+            </table>
+            <table class="table table-responsive tblPurchasedCards2">
+                <tr>
+                    <th class="col-md-2"></th>
+                    <th class="col-md-1"></th>
+                    <th class="col-md-1"></th>
+                    <th class="col-md-3"></th>
+                    <th class="col-md-2"></th>
+                    <th class="col-md-2"></th>
+                    <th class="col-md-1"></th>
+                </tr>
+                
+            </table>
+            </div>
+        </div>
+    </div>
+</div>
+<% include footer.ejs %>

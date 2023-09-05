@@ -1,0 +1,541 @@
+<% include myHeader.ejs %>
+<% include fonts.ejs %>
+
+<% if (global.config.USE_MIN_FILES == true) { %>
+<script src="/js/other-products-pod.min.js?v=<%= options.version %>"></script>
+<% } else { %>
+<script src="/js/logomaker/helpers/other-products.js"></script>
+<% } %>
+<link rel="stylesheet" href="/css/create-logo.css?v=<%= options.version %>"> 
+<link rel="stylesheet" href="/css/other-products-pod.css">  
+
+<script>
+    function submitDetail(){
+        //console.log("Transparency :",document.getElementById('svgedit').contentWindow);
+        document.getElementById('svgedit').contentWindow.getTransparency(function(istransparent){
+            if(istransparent == true){
+                afterVerification();
+            }else{
+                bootbox.alert("Design quality is not good please re-upload the design")
+            }
+        })
+    }
+    function afterVerification(){
+        var keyword = $("#keyword").val();
+        var description = $("#dname").val();
+        var title = $("#tname").val();
+        var price = $("#mprice").val();
+        var productId = <%=params.id%>;
+        var userid = <%=params.userid%>;
+        var base_price = <%=params.base_price%>;
+        var color = productcolor;
+        var coupanCode;
+        var coupanPercent;
+        var obj = {
+            "description":description.trim(),
+            "productcolor":color,
+            "title":title.trim(),
+            "price":price,
+            "productid":productId,
+            "userid":userid,
+            "keyword":keyword
+        }
+        if(cpriceElement.value > 0 ){
+            if(cprofitElement.value > 0){
+                if($("#coupancode").val() == ""){
+                    bootbox.alert("Please generate a coupon");
+                    return false;
+                }else{
+                    coupanCode = $("#coupancode").val();
+                    coupanPercent = cpriceElement.value;
+                    obj.coupancode = coupanCode;
+                    obj.percent = coupanPercent;
+                }
+            }else{
+                bootbox.alert("Profit should be greater then 0");
+                return false
+            }
+
+        }
+        console.log("obj",obj);
+        if(base_price > price || title == '' || description == '' || price == '' || $("#disclaimer").prop('checked') == false){
+           if(base_price > price){
+                bootbox.alert("Price should be greater then equal to base price");
+           }else{
+                bootbox.alert("Please fill all the details");
+           }
+            document.getElementById("submitdetail").disabled = false;
+        }else{
+            on();
+            $("#generatedlink").html('');
+            document.getElementById("submitdetail").disabled = true;
+            document.getElementById('svgedit').contentWindow.logoDownload(function(base64logo){
+                obj.logo = base64logo;
+                document.getElementById('canvasBgFront').contentWindow.downloadimg(function(base64img){
+                obj.front_image = base64img;
+    //            document.getElementById('canvasBgBack').contentWindow.downloadimg(function(back64){
+    //                obj.back_image = back64;
+                doPost("/generateProduct", obj, function (resp) {
+                
+                    if (resp.status == 200) {
+                        console.log(resp)
+                    
+                        // Create anchor element. 
+                        var a = document.createElement('a');  
+                    
+                        // Create the text node for anchor element. 
+                        var link = document.createTextNode("Here is your generated link"); 
+                            
+                        // Append the text node to anchor element. 
+                        a.appendChild(link);  
+                            
+                        // Set the title. 
+                        a.title = "This is Link";  
+
+                        a.target = "_blank";
+                            
+                        // Set the href property. 
+                        a.href = resp.url;  
+                        
+                        $("#generatedlink").html(a);
+
+                        $("#dname").val('');
+                        $("#tname").val('');
+                        $("#mprice").val('');
+                        document.getElementById("submitdetail").disabled = false;
+                        off()
+                    } else {
+                        off()
+                        console.log(resp);
+                        bootbox.alert("Password entered is invalid.");
+                    }
+                    }, function (err) {
+                        off()
+                        console.log(err);
+                        bootbox.alert(typeof err == "string" ? err : "Server Error: " + err.error);
+                    });
+            });
+
+            });
+            
+        }
+        
+    }
+    function changeShirtColor(frontcontent,color){
+        //document.getElementById('canvasBgFront').contentWindow.init();
+        if (frontcontent) {
+           // $("#canvasBgFront").remove();
+           document.getElementById('canvasBgFront').contentWindow.setImage(frontcontent);
+           //document.getElementById('canvasBgBack').contentWindow.setImage(backcontent);
+           frontImage = frontcontent;
+           productcolor = color;
+
+           //backImage = backcontent;
+           // $("#canvasBgFront").removeAttr("src")
+            //$("#canvasBgFront").attr("src", contents);
+        } else {
+            $("#canvasBgFront").removeAttr("src");
+        }
+    }
+    var frontParams = "<%= params.frontLogoParams %>".split(";");
+    var backParams = "<%= params.backLogoParams %>".split(";");
+    var frontBaseParams = "<%= params.base_params_front %>".split(";");
+    var backBaseParams = "<%= params.base_params_back %>".split(";");
+    var otherProductId = <%= params.id %>;
+    var base_price = <%=params.base_price%>;
+    //var htmlToImage = <%= htmlToImage %>;
+
+    //Object.keys(htmlToImage).forEach(function (key) {
+      //  console.log(htmlToImage[key]);
+    //});
+   // console.log(htmlToImage);
+    //console.log("<%= params.id %>;",paramss)
+      
+    var otherimages = "<%=params.otherimages%>";
+    var otherimagescol = "<%=params.other_images_col%>";
+    var frontImage = '/getOtherProductImage?id=<%= params.frontUrl %>';
+    var productcolor = "<%=params.other_images_col[0]%>";
+
+    //var backImage = '/getOtherProductImage?id=<%= params.backUrl %>';
+    var flatDiscountPercentageOther = <%= config.FLAT_DISCOUNT_OTHER %>;
+    var designCount = <%= params.design_count %>;
+    <% var i = 1; %>;
+
+$( document ).ready(function() {
+   // document.getElementById('svgedit').contentWindow.checkTransparency();
+});
+
+</script>
+<style>
+    .designPreviews{
+        border: solid 1px lightgray !important;
+        display: inline-block;
+        padding: 10px;
+        width: 205px;
+        height: 180px;
+        vertical-align: middle;
+        pointer-events: none;
+    }
+    #zoomPreviewDiv{
+        height: 300px !important;
+    }
+    
+    .zoom-in{
+        height: 449px !important;
+        width: 430px !important;
+        border: none;
+        margin: -48px 32px 0 -53px !important;
+    }
+
+</style>
+<section class="page-top page-top-logo">
+    <div class="container" style="margin-top:120px;">
+        <div class="row">
+            <div class="col-md-12"> 
+                <span class="page-common-header">Create your <%= params.name %></span>
+            </div>
+        </div>
+    </div>
+</section>
+<input type="file" accept="image/*" id="customLogoUpload" class="hide" />
+<div class="container py-3 my-3 border rounded shadow-sm wizard-tabs" style="margin-top:95px;">
+    <div class="row" style="margin-top:30px;">
+	<section class="col-12">
+	     <ul class="wizard-steps" role="tablist">
+	 	<ul class="wizard-steps">
+         	   <li class="active wiz-one" style="background-color:purple;border-color:purple">
+                <a class="text-center" aria-expanded="false"  style="color:purple;border-color:purple">
+                    <span class="badge hidden-xs" style="background-color:#505bda"><%= i++ %></span>
+                    Upload Your Design
+                </a>
+            </li>
+                <% if (params.design_count) { %>
+            <li class="wiz-five" style="background-color:purple;border-color:purple">
+                <a class="text-center" aria-expanded="false"  style="color:purple;border-color:purple">
+                    <span class="badge hidden-xs" style="background-color:#505bda"><%= i++ %></span>
+                    Choose design
+                </a>
+            </li>
+                <% } %>
+            <li class="wiz-two" style="background-color:purple;border-color:purple">
+                <a class="text-center" aria-expanded="false"  style="color:purple;border-color:purple">
+                    <span class="badge hidden-xs" style="background-color:#505bda"><%= i++ %></span>
+                    Customize your <%= params.name %>
+                </a>
+            </li>
+            <li class="wiz-three" style="background-color:purple;border-color:purple">
+                <a class="text-center" aria-expanded="true"  style="color:purple;border-color:purple">
+                    <span class="badge hidden-xs" style="background-color:#505bda"><%= i++ %></span>
+                    Customize Purchase options
+                </a>
+            </li>
+            <li class="wiz-four" style="background-color:purple;border-color:purple">
+                <a class="text-center" aria-expanded="true"  style="color:purple;border-color:purple">
+                    <span class="badge hidden-xs" style="background-color:#505bda"><%= i++ %></span>
+                    Generate Product Link
+                </a>
+            </li>
+        </ul>
+</section>
+    </div>
+</div>  
+<div role="main" class="main create-logo">
+    <div class="container create-card-main">
+        <div class="row">
+            <div class="col-md-12">
+                <% if (params.desc) { %>
+                <div class="create-logo-header"></div>
+                <% } %>
+                <div class="panel-group">
+                    <div class="panel panel-one">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion"
+                                   href="#" class="edit-inactive">
+                                    Choose the Design
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="accordionOne" class="panel-collapse collapse in">
+                            <div class="panel-body custom01">
+                                <div class="col-md-6" style="padding-top:50px;text-align:center;">
+                                    <ul class="logos-list">
+                                    </ul>
+                                </div>
+                                <div class="col-md-6" style="border-left: 2px solid #c8c8c8;text-align:center;">
+                                    <video src="/videos/concept_explainer.mp4" width="400" height="250" poster="/images/bg/thumbnail.png" controls="controls" style="width: 400px; height: 250px;"></video>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                <% if (params.design_count) { %>
+                    <div class="panel panel-five">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion"
+                                   href="#" class="edit-inactive">
+                                    Choose design
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="accordionFive" class="panel-collapse collapse in">
+                            <div class="panel-body custom01">
+                                <div class="col-md-12">
+                                    <ul class="designs-list">
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="panel-footer">
+                                <button class="btn btn-primary ofl-button" id="btnBackStep5" style="background-color:#505bda;border-color:purple;color:purple;">Back</button>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+                    <div class="panel panel-two">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion"
+                                   href="#" class="edit-inactive">
+                                    Customize your <%= params.name %>
+                                </a>
+                            </h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-md-6">
+                                <h4>Preview</h4>
+                                <div class="canvasBgFront"> 
+                                    <iframe src="/product-preview/big-preview.html" id="canvasBgFront"></iframe>
+                                </div >
+                                <% if (params.backUrl) { %>
+                                <!--<div class="canvasBgBack">  
+                                    <iframe src="/product-preview/big-preview.html" id="canvasBgBack"></iframe>
+                                </div>-->
+                                <% } %>
+                                <% if (params.id) { %>
+                                    <div style="margin-top:20px;" id="selectcolor" style="display:none">
+                                        <label class="pod-labels" for="colors">Select Colors</label>
+                                        <div class="round">
+                                            <%for (var result in params.other_images_col){%>
+                                                <input type="checkbox"   style="width:5px;background-color:<%=params.other_images_col[result]%>;" />
+                                                <label for="<%=params.other_images_col[result]%>" style="background-color:<%=params.other_images_col[result]%>;border:1px solid black" onclick="changeShirtColor('<%=params.otherimages[result]%>','<%=params.other_images_col[result]%>')"></label>
+                                            <%}%>
+                                        </div>
+                                    </div>
+                                <% } %>
+                            </div>
+                            <div class="col-md-6" id="svgEditorFrame" style="height:500px !important;"></div>
+                        </div>
+                        <div class="panel-footer">
+                            <button class="btn btn-secondary" id="btnBackStep2">Back</button>
+                            <button class="btn btn-primary pull-right" id="sell-online">Next</button>
+                           <!-- <button class="btn btn-primary pull-right" id="btnSaveStep2">Next</button>-->
+                        </div>
+                    </div>
+                    <div class="panel panel-two-three" style="display:none;" id="panel-choice">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#" class="edit-inactive">
+                                    Merch Distribution options
+                                </a>
+                            </h4>
+                        </div>
+                        <!--<div class="panel-body" style="text-align: center;">
+                        <button class="btn btn-secondary" id="buynow">Buy Now</button> OR
+                        <button class="btn btn-primary" id="sell-online">Sell online</button>
+                        </div>-->
+                    </div>
+                    <div class="panel panel-three">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#" class="edit-inactive">
+                                    Customize Purchase options
+                                </a>
+                            </h4>
+                        </div>
+                        <div class="panel-body">
+                            <!--<div id="zoomPreviewDiv" style="padding-right: 15px;padding-left: 15px;display: none; position: fixed; left: 400px; top: 25px; z-index: 9999; background-color: white; border: solid 1px gray; width: 400px"> 
+                                <div class="row" style="background-color: white">
+                                    <iframe src="/product-preview/big-preview.html" style="height: 100%; width: 100%; border: none">
+                                    </iframe>
+                                </div>
+                            </div>-->
+                            <div class="col-md-12 no-padding-left">
+                                <!--<div class="menuItm-header">Preview</div>
+                                <div class="col-md-4 col-sm-4 no-padding-left">
+                                    <span id="bottomIframeContainer"></span>
+                                    <span class="menuItm-edit">
+                                        <a class="tooltip1" data-toggle="tooltip" data-placement="top" data-original-title="Edit" id="editBtnLink"><i class="fa fa-pencil "></i></a>
+                                        <a class="tooltip1 hide" data-toggle="tooltip" data-placement="top" data-original-title="Preview" id="previewBtnLink"><i class="fa fa-search"></i></a>
+                                    </span>
+                                </div>-->
+                                <div class="col-md-4 col-sm-4 menuItm-details" id="settingsContent">
+
+                                </div>
+                                <div class="col-md-8 col-sm-8">
+                                    <div class="total-itm-cost text-center">
+                                        <div class="col-md-12" style="margin-top: 16px;margin-bottom: 15px;">
+                                            You have a total of <span class="totalQty">...</span> <%= params.name %>(s)
+                                        </div>
+                                        <div class="col-md-12" style="margin-top: 16px;margin-bottom: 15px;">
+                                            Total :<span class="itm-discount-cost original-price" id="totalOriginalPrice">...</span><span id="totalReducedPrice" class="after-discount-cost">...</span>
+                                        </div>
+                                    </div>
+                                    <a class="btn btn-primary pull-right" id="addToCartBtn">Add to Cart</a>
+                                    <a class="btn btn-secondary" id="btnBackStepSettings">Back</a>
+                                </div>
+                            </div>
+                            <div id="settingsSteps" style="display: none" class="col-md-2"></div>
+                            <!--
+                            <div id="settingsSteps"  class="col-md-2"></div>
+                            <div id="settingsContent" class="col-md-8"></div>
+                            <div id="settingsSteps" class="col-md-2">
+                                <img id="productPreview" src="/img/business_card.png" /> <br />
+                                Total: <b><span class="original-price" id="totalOriginalPrice">...</span> <span id="totalReducedPrice">...</span> </b>
+                            </div> 
+                            -->
+                        </div>
+                        <div class="panel-footer" style="display: none">
+                            <button class="btn btn-primary ofl-button pull-right" id="btnNextStep3">Next</button>
+                            <button class="btn btn-primary ofl-button" id="btnBackStep3">Back</button>
+                        </div>
+                    </div>
+                    <div class="panel panel-four" style="display:none;">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#" class="edit-inactive">
+                                    Print on demand: Setup
+                                </a>
+                            </h4>
+                        </div>
+                        <div class="panel-body" style="text-align: center;">
+                            <div class="col-md-6" style="text-align:left;border-right: 1px solid #d7d7d7;">
+                                <label class="pod-labels" for="tname">Title</label>
+                                <input class="pod-input" type="text" id="tname" name="tname"><br><br>
+                                <label class="pod-labels" for="dname">Description</label>
+                                <textarea class="pod-input" id="dname" name="dname" rows="3" cols="50"></textarea>
+                            </div>
+                            <div class="col-md-6" style="text-align:left;">
+                                <label class="pod-labels" for="mprice">Price</label>
+                                <input class="pod-input" type="text" id="mprice" name="mprice" placeholder="Enter price in INR" value="<%=params.base_price%>"><br>
+                                <input type="hidden" id="profit" name="profit"/>
+                                Profit: <span id="profitText">0</span> INR<br>
+                                <label class="pod-labels" for="cpercent">Generate Coupon</label><br>
+                                <input class="pod-input" type="text" style="width:13%;height:15px;" id="cpercent" name="cpercent" value=""> %
+                                <button class="btn btn-primary" onclick="generateCoupon()" id="generateCoupon">Generate</button>
+                                <input type="text" readonly style="width:23%;height:15;padding:17px;" id="coupancode">
+                                <div class="ctooltip" id="tooltipId">
+                                    <button class="btn btn-primary" onclick="copytext()" onmouseout="outFunc()"><span class="tooltiptext" id="myTooltip">Copy to clipboard</span>Copy</button>
+                                </div>
+                                <br>
+                                <input type="hidden" id="cprofit" name="profit"/>
+                                Profit after applying coupon: <span id="cprofitText">0</span> INR<br>                           
+                                <label class="pod-labels" for="keyword">Keywords</label>
+                                <input class="pod-input" type="text" id="keyword" name="keyword"/>
+                                <br>
+                                <br>
+                                <input type="checkbox" id="disclaimer">&nbsp;&nbsp;
+                                <label class="pod-labels" for="termandcondiction">I confirm that my design adheres to the ethic design codes of the community guidelines</label>
+                                <div style="margin-top:20px;">
+                                    <button class="btn btn-primary" onclick="submitDetail()" id="submitdetail">Submit</button><br>
+                                    <span id="generatedlink"></span>
+                                    <!--<label class="pod-labels" for="colors">Select Colors</label>
+                                    <div class="round">
+                                      <input type="checkbox" id="white_color" style="width:5px;"/>
+                                      <label for="white_color" id="whitecolor"></label>
+                                      <input type="checkbox" id="blue_color" style="width:5px;"/>
+                                      <label for="blue_color" id="bluecolor"></label>
+                                      <input type="checkbox" id="black_color" style="width:5px;"/>
+                                      <label for="black_color" id="blackcolor"></label>
+                                    </div>-->
+                                </div>
+                               <!-- <input type="checkbox" id="listed_val" name="choice1">
+                                <label for="choice1" style="color:rgb(19, 19, 19);"> Want listed for online selling?</label><br>-->
+                               
+                            </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var priceElement = document.getElementById("mprice");
+    var profitElement = document.getElementById("profit");
+    var profitTextElement = document.getElementById("profitText");
+
+    function updateProfit() {
+        var profit = (Number(priceElement.value) - Number(base_price)).toFixed(2); //Function to retrieve product price: for now 350 rupees
+        profitElement.value = profit;
+        if(profit<0){
+            profitTextElement.innerText = "No Profits! Increase your price"; 
+        }
+        else {
+            profitTextElement.innerText = profit; 
+        }
+    }
+    priceElement.onchange = updateProfit;
+
+    var cpriceElement = document.getElementById("cpercent");
+    var cprofitElement = document.getElementById("cprofit");
+    var cprofitTextElement = document.getElementById("cprofitText");
+
+    function updateCoupanProfit() {
+        tooltipId.style.display = "none";
+        coupanCode.style.display = "none";
+        $("#coupancode").val('');
+
+        if(Number(cpriceElement.value) > 0){
+            var coupandeduct = Math.floor((Number(priceElement.value)*(Number(cpriceElement.value)/100)));
+            var cprofit = (Number(priceElement.value) - Number(base_price) - coupandeduct).toFixed(2); //Function to retrieve product price: for now 350 rupees
+            cprofitElement.value = cprofit;
+            if(cprofit<0){
+                cprofitTextElement.innerText = "No Profits! Increase your price"; 
+            }
+            else {
+                cprofitTextElement.innerText = cprofit; 
+            }
+        }
+    
+    }
+    cpriceElement.onchange = updateCoupanProfit;
+    var tooltipId = document.getElementById("tooltipId");
+    var coupanCode = document.getElementById("coupancode");
+
+    tooltipId.style.display = "none";
+    coupanCode.style.display = "none";
+    $("#coupancode").val('');
+
+    function generateCoupon(){
+        if(cprofitElement.value > 0){
+            var length = 9;
+            var result           = [];
+            var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            var charactersLength = characters.length;
+            for ( var i = 0; i < length; i++ ) {
+                result.push(characters.charAt(Math.floor(Math.random() * charactersLength)));
+            }
+            var coupancode = result.join('');
+            $("#coupancode").val(coupancode);
+            coupanCode.style.display = "inline-block";
+            tooltipId.style.display = "inline-block";
+        }
+    }
+
+    function copytext() {
+        var copyText = document.getElementById("coupancode");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+        document.execCommand("copy");
+        
+        var tooltip = document.getElementById("myTooltip");
+        tooltip.innerHTML = "Copied: " + copyText.value;
+    }  
+    function outFunc() {
+        var tooltip = document.getElementById("myTooltip");
+        tooltip.innerHTML = "Copy to clipboard";
+    }
+     
+</script>
+<% include myFooter.ejs %>

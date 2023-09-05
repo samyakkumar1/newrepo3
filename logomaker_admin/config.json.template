@@ -1,0 +1,37 @@
+{
+    "APP_USERNAME": "test",
+    "APP_PASSWORD": "test",
+    "APP_PORT": 8081,
+    "SESSION_KEY": "somekey",
+    "SESSION_SECRET": "somesecret",
+    "LOGO_PATH": "",
+    "CARD_PATH": "",
+    "USER_LOGO_PATH": "",
+    "USER_CARD_PATH": "",
+    "OTHER_PRODUCTS_PATH": "",
+    "USER_OTHER_PRODUCTS_PATH": "",
+    "REAL_APP_DOMAIN": "http://localhost:8080",
+    "APP_DOMAIN": "http://localhost:8081"
+    "db": {
+        "DB_HOST": "127.0.0.1",
+        "DB_NAME": "logomaker",
+        "DB_USER": "dbuser",
+        "DB_PASSWORD": "dbpasswd",
+        "MAX_DB_CONNECTIONS": 10
+    },
+    "redis": {
+        "REDIS_HOST": "127.0.0.1",
+        "REDIS_PORT": 6379,
+        "REDIS_PASSWORD": "redis_passkey",
+        "REDIS_SESSIION_PREFIX": "logomaker_sess:",
+        "MAX_REDIS_CONNECTIONS": 10
+    },
+    "PASSWORD": "d6F3Efeq",
+    "emailConfig": {
+        "service": "gmail",
+        "auth": {
+            "user": "DesignerBe@foundingminds.com",
+            "pass": "159ece9d70212172"
+        }
+    }
+}

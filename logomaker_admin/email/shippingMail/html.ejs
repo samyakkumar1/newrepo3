@@ -1,0 +1,53 @@
+<!Doctype html>
+<html>
+<head><title>.::Tagbit::.</title>
+<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+</head>
+<body style="padding:0; margin:0;font-size:15px; font-family:Roboto; color: #999;">
+<!--Outer container -->
+<div style="max-width:616px; margin-left:auto; margin-right:auto; border:1px solid #383838;">
+	<div style="padding-left:8px; padding-right:8px; border-top:10px solid #505BDA; border-bottom:10px solid #B308F8; padding-top:10px; padding-bottom:10px;">
+		<!--Outer Table -->
+		<table style="width:600px;border:none;" cellpadding="0" cellspacing="0">
+			<tr>
+				<td align="left" valign="top" style="padding-bottom:10px;">
+					<!--Header Table -->
+                    <a href="http://tagbit.co" style="border:none; outline:none;"><img src="https://www.tagbit.co/img/email-templates/emailheader.png"
+                        alt="Tagbit"/></a>
+					<!--Header Table -->
+				</td>
+			</tr>
+			<tr>
+				<td align="left" valign="top" style="padding-top:5px; padding-bottom:15px;">
+					<!--Navigation Table -->
+					<!--Header Table -->
+					<table style="width:100%;border:none;" cellpadding="10px" cellspacing="0">
+						<tr>
+							<td align="right" valign="middle"
+								style="width:33%; background-color:#f3f3f3; padding-top:5px; padding-bottom:5px;">
+								
+                                <a href="https://www.tagbit.co/editProfile" style="color:#4c4e4e;border:none;outline:none;text-decoration:none;font-size:12px;">My Account</a>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td style="font-size: 18px;">
+					Hi <b><%= name %></b>,<br/>
+					<br/>
+                    <div style="text-align: center;font-size: 16px;">
+					Your order has been shipped with '<%= shipper_name %>', You can track the order with the order ID '<%= order_id %>'.<br/>
+					The Expected date of delivery will be '<%= expected_date %>'.<br/>
+				</div>
+				<br/>
+					Regards,<br/>
+					<a href="https://www.tagbit.co">Tagbit Team</a> <br/>
+					<br/>&copy; 2020 Tagbit.co
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
+</body>
+</html>

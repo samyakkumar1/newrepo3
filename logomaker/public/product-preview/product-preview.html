@@ -1,0 +1,30 @@
+<html> 
+  <head>
+    <style>
+      body {
+          overflow: hidden;
+          padding: 0px;
+          margin: 0px;
+      }
+      canvas {
+          /*border: dashed 1px red;*/
+          z-index: 9999;
+          position: absolute;
+          max-height: 100%;   
+          left: 0px;
+          top: 0px;
+          width: 100px;
+          height: 100px;
+      }
+      img {
+          height: 100%;
+          width: 100%
+      }
+    </style>
+    <script src='/product-preview/product-preview.js'></script>
+  </head>
+  <body>
+    <img src="" id="canvasBgFront"/>
+    <canvas id="canvas"></canvas>
+  </body>
+</html>

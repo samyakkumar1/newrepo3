@@ -1,0 +1,60 @@
+<% include myHeader.ejs %>
+<link rel="stylesheet" href="/css/create-logo.css?v=<%= options.version %>"> 
+<link rel="stylesheet" href="/css/other-products.css?v=<%= options.version %>"> 
+<style>
+    .other-image{
+        height: 200px; 
+        max-width: 100%;
+    }
+    .logos-list li{
+        height: auto;
+        padding: 10px;
+        margin: 10px;
+    }
+    .image-container{
+        background-color: white;
+    }
+</style>
+<script>
+    $(function () {
+        doPost("/listOtherProducts", {categoryId: <%= params.categoryId %>}, function (resp) {
+            if (resp.status == 200) {
+                for (var i = 0; i < resp.products.length; i++) { 
+                    var item = $('<li class="col-md-3">\
+                        <a href="/other/' + resp.products[i].seo_url + '">\n\
+                        <div class="image-container"><img class="other-image" src="/getOtherProductImage?id=' + resp.products[i].base_image_url + '" /></div>\n\
+                        </a><br />' + resp.products[i].name + '&nbsp;\
+                    </li>');
+                    $(".otherProductsList").append(item); 
+                    item.click(function (){
+                        window.location = '/other/' + resp.products[i].seo_url;
+                    });
+                }
+            } else if (resp.status == 201) {
+                $(".otherProductsList").append("<tr><td>No other products registered.</td></tr>");
+            } else {
+                console.log(resp);
+                showToast("Error: " + resp.msg);
+            }
+        }, function (err) {
+            console.log(err);
+            showToast("Connection Error!!");
+        });
+    });
+</script>
+<section class="page-top page-top-logo">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12"> 
+                <span class="page-common-header">Choose a product</span>
+            </div>
+        </div>
+    </div>
+</section>
+<br/><br/>
+<div class="container">
+    <div class="col-md-12"><%- params.description %></div>
+    <ul class="logos-list otherProductsList">  
+    </ul> 
+</div>
+<% include myFooter.ejs %>

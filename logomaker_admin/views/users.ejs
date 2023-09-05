@@ -1,0 +1,39 @@
+<% include header.ejs %>
+<script type="text/javascript" src="/js/logomaker/helpers/users.js"></script>
+<script>
+    var hostName = "<%= hostName %>";
+</script>
+<section class="page_top">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Users</h1>
+                
+                <input id="txtUserEmail" type="text" placeholder="Enter email here and press enter" class="form-control pull-right" style="margin-top: 10px; width: 500px" />
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Total Users : <span id="totaluser"></span> &nbsp;&nbsp; Active Users : <span id="totalactiveusers"></span></h2>
+            <table class="table table-responsive table-striped table-bordered table-hover table-condensed tblUsers">
+                <thead>
+                    <tr>
+                        <th class="col-md-2">Email</th>
+                        <th class="col-md-2">Name</th>
+                        <th class="col-md-2">Phone #</th>
+                        <th class="col-md-4">Address</th>
+                        <th class="col-md-2">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td colspan="5">Please wait...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<% include footer.ejs %>

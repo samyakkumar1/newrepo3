@@ -1,0 +1,317 @@
+<% include myHeader.ejs %>
+<link rel="stylesheet" href="/css/myCards.css?v=<%= options.version %>" media="screen">
+<link rel="stylesheet" href="/css/myLogos.css?v=<%= options.version %>" media="screen">
+<link rel="stylesheet" href="/css/mymerch.css" media="screen">
+
+<%if (global.config.USE_MIN_FILES == true) { %>
+    <script src="/js/mydesigns.min.js?v=<%= options.version %>"></script>
+<% } else { %>
+    <!-- <script src="/js/logomaker/helpers/logolist.js"></script>
+    <script src="/js/logomaker/helpers/cardlist.js"></script>
+    <script src="/js/logomaker/helpers/my-other-products-list.js"></script> -->
+    <script src="/js/logomaker/helpers/purchasehistory.js"></script>
+<% } %>
+<style>
+.merch_side{
+    background-color: #f1f1f1;
+    border-radius: 4px;
+    border: 1px solid #d7d7d7;
+    padding: 10px;
+    margin-top: 17%;
+}
+</style>
+<section class="page-top page-top-logo">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12" style="margin-top:100px;">
+                <h1 class="page-common-header">My Dashboard</h1>
+            </div>
+        </div>
+    </div>
+</section> 
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+        <div class="col-md-12">
+            <% if(user.usertype == 'CUSTOMER') {  %>
+            <h6>Hope you are doing great!</h6>
+            <p>Here is the summary at your spend</p>
+            <% } else { %>
+                <p>Tagbit helps you to design as many logos as you desire and only pay for the logo designs that you want to download and use. Once paid, the logos are sent to you in high resolution files. Also, all logos purchased are removed from our site so that nobody else uses the same design again.  You can also make infinite changes to the bought logos and download the files.  If you wish to design more logo options, you can go back to the logo maker.</p>
+                <p>To help you get more visibility to your brand, we also help you with other products such as Business cards, Mugs, T-shirts with your logo. Happy logo & merchandise making with Tagbit!</p>
+            <% } %>
+        </div>
+            <div class="col-md-9">
+                <div id="wrapper">
+                    <div id="content">
+                        <div class="demo"> 
+                            <% if(user.usertype == 'DESIGNER') { %>
+                            <h3 class="expand"><i class="fa fa-plus-circle"></i><i class="fa fa-minus-circle"></i>My Logos<span class="logo-count">(0)</span></h3>
+                            <div class="collapse">
+                                <ul class="my-logos-ul col-md-12">
+                                </ul>
+                            </div>
+
+                            <h3 class="expand"><i class="fa fa-plus-circle"></i><i class="fa fa-minus-circle"></i>My Cards<span class="card-count">(0)</span></h3>
+                            <div class="collapse">
+                                <ul class="my-cards-ul col-md-12">
+                                </ul>
+                            </div> 
+                            
+                            <h3 class="expand"><i class="fa fa-plus-circle"></i><i class="fa fa-minus-circle"></i>My Other Products<span class="other-products-count"> (0)</span></h3>
+                            <div class="collapse">
+                                <ul class="my-other-products-ul col-md-12">
+                                </ul>
+                            </div> 
+                            
+   				            <% for(var i=0; products && i < products.length; i++) {%> 
+                                <h3 class="expand"><i class="fa fa-plus-circle"></i><i class="fa fa-minus-circle"></i>My <%= products[i].title %>s<span class="<%= products[i].seo_url %>-count"> (0)</span></h3>
+                                <div class="collapse">
+                                    <ul class="my-<%= products[i].seo_url %>-ul col-md-12 my-other-products-ul">
+                                        <span >Delivery Status : <%= products[i].status %></span>
+                                    </ul>
+                                </div> 
+                            <% } %>
+
+                            <h3 class="expand"><i class="fa fa-plus-circle"></i><i class="fa fa-minus-circle"></i>Listed Merchandise<span class="myMerch-count"> (0)</span></h3>
+                            <div class="collapse">
+                                <ul class="my-other-products-ul col-md-12">
+                                </ul>
+                            </div> 
+                            <% } %>
+                            <h3 class="expand" style="padding-bottom:20px;"><i class="fa fa-plus-circle"></i><i class="fa fa-minus-circle"></i>Purchased History<span class="hist-count">(0)</span></h3>
+                            <div class="collapse">
+                                <ul class="my-purchases-ul col-md-12 custom26">
+                                </ul>
+                            </div> 
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="choose-thumb mb-30"><img src="/images/tshirtidea.png" alt="image"></div>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="choose-thumb mb-30" id="switchtodesigner"><img src="/images/start_creating.png" alt="image" style="cursor: pointer;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <% if(user.usertype == 'CUSTOMER') {  %>
+                <div class="merch_side" style="float:left;width:100%;">
+                    <h6>Account Settings</h6>
+                    <hr style="margin:10px 0 10px 0">
+                    <a  href="/editProfile">Edit Your Profile</a><br>
+                    <a href="/change-password">Change Your Password</a>
+                </div>
+                <div class="merch_side" style="float:left; min-height:50%; margin-top: 0px;background: none;border: none;padding: 0px;">
+                    <br><button class="btn btn-primary" id="switchtodesigner2">Switch To Designer</button>
+                </div>
+                <% } %>
+            </div>
+
+            <div id="returnprocess" style="display: none;" class="infoclass">              
+                <div class="signupbox">
+                    <span class="closeInfo" id="closereturnpmp">&times;</span>
+                    <div id="signup">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <h3>Return Request</h3>
+                          </div>
+                        </div>
+                    </div>                        
+                        <div class="form-group">
+                            
+                            <label for="confirm_pp_id">Reason <em>*</em></label>
+                            <textarea id="returnreason"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <button id="addReturnRequest" class="btn btn-primary btn-sm pull-right" style="margin-bottom: 10px;">Submit</button>
+                            </div>
+                        </div> 
+                </div>
+            </div>
+            <div id="cancelprocess" style="display: none;" class="infoclass">
+                <div class="signupbox">
+                    <span class="closeInfo" id="closecancelpmp">&times;</span>
+                    <div id="signup">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3>Cancel Request</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+
+                        <label for="confirm_pp_id">Reason <em>*</em></label>
+                        <textarea id="cancelreason"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <button id="addCancelRequest" class="btn btn-primary btn-sm pull-right"
+                                style="margin-bottom: 10px;">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<% include myFooter.ejs %>
+<script type="text/javascript">
+var returncancelid;
+function requestreturn(id){
+        returncancelid = id
+        returnprocess.style.display = "block";
+}
+var cancelid;
+function requestcancel(id){
+        cancelid = id
+        cancelprocess.style.display = "block";
+}
+$(function(){
+
+    
+
+    $('.tooltip1').tooltip();
+    $("#content h3.expand").toggler();
+    $("#content div.demo").expandAll({trigger: "h3.expand", ref: "h3.expand"});
+    $("#content div.other").expandAll({
+      expTxt : "[Show]", 
+      cllpsTxt : "[Hide]",
+      ref : "ul.collapse",
+      showMethod : "show",
+      hideMethod : "hide"
+    });
+    $("#content div.post").expandAll({
+      expTxt : "[Read this entry]", 
+      cllpsTxt : "[Hide this entry]",
+      ref : "div.collapse", 
+      localLinks: "p.top a"    
+    });    
+    $('.my-logos-list').hover(function(){
+        $(this).find('.flip-logo-template').show();
+    },
+    function(){
+        $(this).find('.flip-logo-template').hide();
+    });
+    $('.my-cards-list').hover(function(){
+        $(this).find('.flip-card-template').show();
+    }, function(){
+        $(this).find('.flip-card-template').hide();
+    });
+    $('.expand a').on('click',function(){
+        if($(this).hasClass('open'))
+        {
+            $(this).parent().find('.fa-plus-circle').show();
+            $(this).parent().find('.fa-minus-circle').hide();
+        }
+        else
+        {
+            $(this).parent().find('.fa-plus-circle').hide();
+            $(this).parent().find('.fa-minus-circle').show(); 
+        }
+    });
+    $('.demo .switch a').on('click',function(){
+        if($('.expand a').hasClass('open'))
+        {
+            $('.expand a').parent().find('.fa-plus-circle').hide();
+            $('.expand a').parent().find('.fa-minus-circle').show();
+        }
+        else
+        {
+            $('.expand a').parent().find('.fa-plus-circle').show();
+            $('.expand a').parent().find('.fa-minus-circle').hide(); 
+        }
+    });
+    $("#switchtodesigner").on('click',function(){
+      var user = getUser();
+      user.usertype = 'DESIGNER';
+      setUser(user);
+      signout(function(){
+        location.reload();
+      },true);
+      changeUserType(user.id)
+
+    })
+    $("#switchtodesigner2").on('click',function(){
+      var user = getUser();
+      user.usertype = 'DESIGNER';
+      setUser(user);
+      signout(function(){
+        location.reload();
+      },true);
+      changeUserType(user.id)
+
+    })
+    var returnprocess = document.getElementById("returnprocess");
+    var addReturnRequest = document.getElementById("addReturnRequest");
+    var closereturnpmp = document.getElementById("closereturnpmp");
+    var closecancelpmp = document.getElementById("closecancelpmp");
+    addReturnRequest.onclick = function(e){
+                var reason = $("#returnreason").val();
+                if(reason.trim()=="" || reason.trim().length < 21){
+                    bootbox.alert("Reason should not be less then 20 characters")
+                }else{
+                    var obj = {id:returncancelid,reason:reason};
+                    postReturnRequest(obj);
+                }
+    }
+    var cancelprocess = document.getElementById("cancelprocess");
+    var addCancelRequest = document.getElementById("addCancelRequest");
+            addCancelRequest.onclick = function(e){
+                    var reason = $("#cancelreason").val();
+                    if(reason.trim()=="" || reason.trim().length < 21){
+                        bootbox.alert("Reason should not be less then 20 characters")
+                    }else{
+                        var obj = {id:cancelid,reason:reason};
+                        postCancelRequest(obj);
+                    }
+            }
+
+    closereturnpmp.onclick = function() {
+        returnprocess.style.display = "none";
+    }
+    closecancelpmp.onclick = function() {
+        cancelprocess.style.display = "none";
+    }
+
+    function postReturnRequest(obj){
+        doPost("/requestReturn", obj, function (b) {
+            $("#returnreason").val("");
+            if(b.status == 200){
+                if(b.already== 1){
+                    returnprocess.style.display = "none";
+                    bootbox.alert("Your already raised a return request.")
+                }else{
+                    returnprocess.style.display = "none";
+                    bootbox.alert("Your return request has been raised successfully.")
+                }
+            }else{
+                returnprocess.style.display = "none";
+                bootbox.alert("Something went wrong.Please try again latter")
+            }
+        })
+    }
+    
+    function postCancelRequest(obj){
+        doPost("/requestCancel", obj, function (b) {
+            $("#cancelreason").val("");
+            if(b.status == 200){
+                if(b.already== 1){
+                    cancelprocess.style.display = "none";
+                    bootbox.alert("Your already raised a cancellation request.")
+                }else{
+                    cancelprocess.style.display = "none";
+                    bootbox.alert("Your cancel request has been raised successfully.")
+                }
+            }else{
+                cancelprocess.style.display = "none";
+                bootbox.alert("Something went wrong.Please try again latter")
+            }
+        })
+                
+    }
+});
+</script>

@@ -1,0 +1,75 @@
+<% include header.ejs %>
+<link type="text/css" href="../css/base-admin-3.css" rel="stylesheet">
+
+<link type="text/css" href="../css/base-admin-3-responsive.css" rel="stylesheet">
+
+
+<div class="container">
+    <div class='dashboard_widgets'>
+        <div class='col-md-6'>
+            <div class="widget msg-widget">
+                <div class="widget-header">
+                    <h3><a href="/logo/listLogos">Logos</a></h3>
+                    <span class="dashboard_addLogo"><button data-toggle="modal" data-target="#addLogoModal"
+                                                            class="btn btn-default">Add
+                        </button></span>
+                </div>
+                <!-- /widget-header -->
+                <div class="widget-content">
+                    <table class="col-md-12 tableRow" border="1" id="homePageLogoTbl">
+                        <tr>
+                            <th>Logo</th>
+                            <th>Category</th>
+                            <th>Title</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!-- /widget -->
+        </div>
+
+        <div class='col-md-6'>
+            <div class="widget msg-widget">
+                <div class="widget-header">
+                    <h3><a href="/card/listCards">Business Card</a></h3>
+                    <span class="dashboard_addCard"><button data-toggle="modal" data-target="#addCardModal"
+                                                            class="btn btn-default">Add
+                        </button></span>
+                </div>
+                <!-- /widget-header -->
+                <div class="widget-content">
+                    <table class="col-md-12 tableRow" border="1" id="homePageCardTbl">
+                        <tr>
+                            <th>Card</th>
+                            <th>Category</th>
+                            <th>Title</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!-- /widget -->
+        </div>
+
+        <div class='col-md-6'>
+            <div class="widget msg-widget">
+                <div class="widget-header">
+                    <h3><a href="/category/listCategories">Categories</a></h3>
+                    <span class="dashboard_addCategory"><button data-toggle="modal" data-target="#addCategoryModal"
+                                                                class="btn btn-default">Add
+                        </button></span>
+                </div>
+                <!-- /widget-header -->
+                <div class="widget-content">
+                    <table class="col-md-12 tableRow tblCategoriesDashBoard" border="1">
+                        <tr>
+                            <th>Category Name</th>
+                            <th>Description</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!-- /widget -->
+        </div>
+    </div>
+</div>
+<% include footer.ejs %>

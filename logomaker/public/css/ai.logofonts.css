@@ -1,0 +1,332 @@
+@font-face {
+	font-family: 'Space-text';
+	src: 
+		url('/fonts/SpaceText-Light.otf') 
+		format('opentype');
+}
+@font-face {
+	font-family: 'Viga';
+	src: 
+		url('/fonts/Viga-Regular.otf') 
+		format('opentype');
+}
+@font-face {
+	font-family: 'Decalotype';
+	src: 
+		url('/fonts/Decalotype-Black.ttf') 
+		format('truetype');
+}
+@font-face {
+	font-family: 'Titillium';
+	src: 
+		url('/fonts/Titillium-Black.otf') 
+		format('opentype');
+}
+@font-face {
+	font-family: 'Inknut-antiqua';
+	src: 
+		url('/fonts/InknutAntiqua-Black.ttf') 
+		format('truetype');
+}
+@font-face {
+	font-family: 'Neuton';
+	src: url('/fonts/Neuton-Light.ttf')
+	format('truetype');
+}
+@font-face {
+	font-family: 'Aladin';
+	src: url('/fonts/Aladin-Regular.ttf')
+	format('truetype');
+}
+@font-face {
+	font-family: 'Aleo';
+	src: url('/fonts/Aleo-Light.otf') 
+	format('opentype');
+}
+@font-face {
+	font-family: 'Amita';
+	src: url('/fonts/amita-bold.ttf') 
+	format('truetype');
+}
+@font-face {
+	font-family: 'Archivo';
+	src: url('/fonts/Archivo-Medium.ttf') 
+	format('truetype');
+}
+@font-face {
+	font-family: 'ArimaKoshi';
+	src: url('/fonts/ArimaKoshi-Light.otf') format('opentype');
+}
+@font-face {
+	font-family: 'Asul';
+	src: url('/fonts/Asul-Bold.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Baloo';
+	src: url('/fonts/Baloo-Regular.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Blackout';
+	src: url('/fonts/Blackout-Midnight.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Cabin';
+	src: url('/fonts/Cabin-Regular.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Changa';
+	src: url('/fonts/Changa-Light.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Condiment';
+	src: url('/fonts/Condiment-Regular.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Corben';
+	src: url('/fonts/Corben-Regular.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Cormorant';
+	src: url('/fonts/Cormorant-Regular.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'CroissantOne';
+	src: url('/fonts/CroissantOne-Regular.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'DeliusSwashCaps';
+	src: url('/fonts/DeliusSwashCaps-Regular.ttf') format('truetype');	
+}
+@font-face {
+	font-family: 'Devonshire';
+	src: url('/fonts/Devonshire-Regular.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Digitalt';
+	src: url('/fonts/Digitalt.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'DrSugiyama';
+	src: url('/fonts/DrSugiyama-Regular.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Elsie';
+	src: url('/fonts/Elsie-Black.otf') format('opentype');
+}
+@font-face {
+	font-family: 'ElsieSwashCaps';
+	src: url('/fonts/ElsieSwashCaps-Black.otf') format('opentype');
+}
+@font-face {
+	font-family: 'Fanwood Text';
+	src: url('/fonts/Fanwood Text.ttf') format('opentype');
+}
+@font-face {
+	font-family: 'Fondamento';
+	src: url('/fonts/Fondamento-Italic.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Fascinate';
+	src: url('/fonts/Fascinate-Regular.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'FredokaOne';
+	src: url('/fonts/FredokaOne-Regular.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Gabriela';
+	src: url('/fonts/Gabriela-Regular.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Galada';
+	src: url('/fonts/Galada-Regular.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'GermaniaOne';
+	src: url('/fonts/GermaniaOne-Regular.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'GlacialIndifference';
+	src: url('/fonts/GlacialIndifference-Italic.otf') format('opentype');
+}
+@font-face {
+	font-family: 'Gnomon-Foreground';
+	src: url('/fonts/Gnomon-Foreground.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Heuristica';
+	src: url('/fonts/Heuristica-Regular.otf') format('opentype');
+}
+@font-face {
+	font-family: 'HKGrotesk';
+	src: url('/fonts/HKGrotesk-Light.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'HKVenetian';
+	src: url('/fonts/HKVenetian-Italic.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'IAWriterDuospace';
+	src: url('/fonts/iAWriterDuospace-BoldItalic.otf') format('opentype');
+}
+@font-face {
+	font-family: 'IBMPlexMono';
+	src: url('/fonts/IBMPlexMono-Light.otf') format('opentype');
+}
+@font-face {
+	font-family: 'IBMPlexSans';
+	src: url('/fonts/IBMPlexSans-SemiBold.otf') format('opentype');
+}
+@font-face {
+	font-family: 'IBMPlexSerif';
+	src: url('/fonts/IBMPlexSerif-ExtraLight.otf') format('opentype');
+}
+@font-face {
+	font-family: 'Istok';
+	src: url('/fonts/Istok-Regular.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Jellee';
+	src: url('/fonts/Jellee-Roman.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Judson';
+	src: url('/fonts/Judson-Bold.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Kameron';
+	src: url('/fonts/Kameron-Regular.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Karla';
+	src: url('/fonts/Karla-BoldItalic.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Kavivanar';
+	src: url('/fonts/Kavivanar-Regular.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'KaushanScript';
+	src: url('/fonts/KaushanScript-Regular.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'LeagueMono';
+	src: url('/fonts/LeagueMono-Medium.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Lekton';
+	src: url('/fonts/Lekton-Regular.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'LinguisticsPro';
+	src: url('/fonts/LinguisticsPro-Regular.otf') format('opentype');
+}
+@font-face {
+	font-family: 'MarkoOne';
+	src: url('/fonts/MarkoOne-Regular.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Michroma';
+	src: url('/fonts/Michroma.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Montserrat';
+	src: url('/fonts/Montserrat-ExtraLight.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'NanumGothicCoding';
+	src: url('/fonts/NanumGothicCoding-Regular.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Nautilus';
+	src: url('/fonts/Nautilus.otf') format('opentype');
+}
+@font-face {
+	font-family: 'Nevis';
+	src: url('/fonts/nevis.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Norwester';
+	src: url('/fonts/norwester.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Now';
+	src: url('/fonts/Now-Medium.otf') format('opentype');
+}
+@font-face {
+	font-family: 'Officecodeprod';
+	src: url('/fonts/officecodeprod-regular.otf') format('opentype');
+}
+@font-face {
+	font-family: 'OldStandard';
+	src: url('/fonts/OldStandard-Bold.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'OstrichSans';
+	src: url('/fonts/OstrichSans-Light.otf') format('opentype');
+}
+@font-face {
+	font-family: 'Philosopher';
+	src: url('/fonts/Philosopher-Bold.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Prociono';
+	src: url('/fonts/Prociono.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Questrial';
+	src: url('/fonts/Questrial-Regular.otf') format('opentype');
+}
+@font-face {
+	font-family: 'Rajdhani';
+	src: url('/fonts/Rajdhani-Light.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Renner';
+	src: url('/fonts/Renner-LightItalic.otf') format('opentype');
+}
+@font-face {
+	font-family: 'Rubik';
+	src: url('/fonts/Rubik-Light.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Sansation';
+	src: url('/fonts/Sansation_Regular.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'SedgwickAve';
+	src: url('/fonts/SedgwickAve-Regular.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Sen';
+	src: url('/fonts/sen-regular.otf') format('opentype');
+}
+@font-face {
+	font-family: 'SixCaps';
+	src: url('/fonts/SixCaps.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'SquadaOne';
+	src: url('/fonts/SquadaOne-Regular.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'TenorSans';
+	src: url('/fonts/TenorSans-Regular.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'TruenoBd';
+	src: url('/fonts/TruenoBd.otf') format('opentype');
+}
+@font-face {
+	font-family: 'WorkSans';
+	src: url('/fonts/WorkSans-Bold.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Yesteryear';
+	src: url('/fonts/Yesteryear-Regular.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Sriracha';
+	src: url('/fonts/Sriracha-Regular.ttf') format('truetype');
+}
+

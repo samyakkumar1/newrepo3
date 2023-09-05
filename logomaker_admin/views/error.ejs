@@ -1,0 +1,8 @@
+<% include header.ejs %>
+<div class="container">
+    <h3><%- i18n.__("An error has been occurred while processing the request.") %></h3>
+    <hr/>
+    <h4><%= message %> - <%= error.status %></h4>
+    <pre><%= error.stack %></pre>
+</div>
+<% include footer.ejs %>

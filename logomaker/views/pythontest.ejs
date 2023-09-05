@@ -1,0 +1,57 @@
+<% include myHeader.ejs %>
+<script src="/js/color-mapper.js"></script>
+<link rel="stylesheet" href="/css/pythonstyle.css">
+<div class="row section-centre">
+    <div class="centered-head" style="text-align:center;">
+        <h2 class="thin-h2-black">Description</h2>
+        <h3 class="thin-h3-grey">Tell us something about your Venture</h3>
+        </div>
+
+<div class="col-sm-6" style="margin-top: 20px;">
+    <h4 class="thin-h4-grey">Let's Categorize</h3>
+<div class="ip-form">
+    <ul>
+    <li><input class='fm-ip' type="text" placeholder="Food and Restaurents" style="width:85%" id="industry"></li>
+    <li><textarea class='fm-tx-area' rows="4" cols="70" id='venturedesc'
+        placeholder="We love to cook. We own a family restaurent and desire to make new changes to it and bring it online"></textarea></li>
+    </ul>
+</div>
+</div>
+<div class="col-sm-6" style="margin-top: 20px;">
+    <h4 class="thin-h4-grey">Your Market Insights</h3>
+    <div class="att-block" id="lacomp-block">
+    <div class="att-slide-text">
+            <p class="thin-p5-grey alignleft">Feminine</p>
+            <p class="thin-p5-grey alignright">Masculine</p>
+    </div>
+    <div class="slidecontainer">
+        <input type="range" min="0" max="1" value="0.5" class="slider" id="mfcomp" step=0.5 style="margin:5px 5px 5px 100px;">
+      </div>
+    </div>
+    <div class="att-block" id="mfcomp-block">
+        <div class="att-slide-text">
+                <p class="thin-p5-grey alignleft">Luxurious</p>
+                <p class="thin-p5-grey alignright">Affordable</p>
+        </div>
+        <div class="slidecontainer">
+            <input type="range" min="0" max="1" value="0.5" class="slider" id="lacomp" step=0.5 style="margin:5px 5px 5px 100px;">
+          </div>
+        </div>
+        <div class="att-block" id="vmcomp-block">
+            <div class="att-slide-text">
+                    <p class="thin-p5-grey alignleft">Vintage</p>
+                    <p class="thin-p5-grey alignright">Modern</p>
+            </div>
+            <div class="slidecontainer">
+                <input type="range" min="0" max="1" value="0.5" class="slider" id="vmcomp" step=0.5 style="margin:5px 5px 5px 100px;">
+              </div>
+            </div>
+</div>
+</div>
+<div class="row">
+<div class="centered-head col-12" style="text-align:center;">
+    <button class="nxt-btn" type="button" id='nxt-btn'><span class="text">NEXT</span></button>
+</div>
+</div>
+</body>
+<% include myFooter.ejs %>

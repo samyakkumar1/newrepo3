@@ -1,0 +1,37 @@
+<% include header.ejs %>
+<script src="/js/logomaker/helpers/other_products.js" type="text/javascript"></script>
+<style>
+    tbody img{
+        max-height: 100px;
+    }
+</style>
+<section class="page_top">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Other Products</h1>
+                <a class="pull-right btn btn-primary" style="margin-top: 10px" href="/other-products/add" >Add a Product</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container admin_container table_card">
+    <div class="row">
+        <table class="table table-responsive tblOtherProducts">
+            <thead>
+                <th class="col-md-1">Name</th>
+                <th class="col-md-2">Description</th>
+                <th class="col-md-2">Front Image</th>
+                <th class="col-md-2">Back Image</th>
+                <th class="col-md-3">SEO Options</th>
+                <th class="col-md-1">Status</th>
+                <th class="col-md-1">Actions</th>
+            </thead>
+            <tbody>
+            <td colspan="6">Please wait...</td>
+            </tbody>
+        </table>
+    </div>
+</div>
+<% include footer.ejs %>

@@ -1,0 +1,116 @@
+<% include myHeader.ejs %>
+<link rel="stylesheet" href="/css/editProfile.css?v=<%= options.version %>" media="screen">
+<%if (global.config.USE_MIN_FILES == true) { %>
+    <script src="/js/editprofile.min.js?v=<%= options.version %>"></script>
+<% } else { %>
+    <script src="/js/logomaker/helpers/editprofile.js"></script>
+<% } %>
+<style>
+.editProfileCountrySelector{width:100%}
+.editProfileCountrySelector > a{width:100%}
+.editProfileCountrySelector>.bfh-selectbox-options{left:0;width:100%}
+.editProfileCountrySelector [role=listbox],.editProfileCountrySelector .bfh-selectbox-options ul{width:100%;max-width:100%}
+.editProfileCountrySelector ul{width:100%;max-width:100%}
+</style>
+<section class="page-top page-top-logo">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12" style="margin-top:100px;">
+                <span class="page-common-header">Update Your Profile</span>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="container">
+    <div class="col-md-8">
+        <div class="col-md-12 edit-profile-header">
+            <h4>These information can be used while checking out the shopping cart.</h4>
+        </div>
+        <form id="editProfileForm">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="emailId">Email address</label>
+                        <input type="email" class="form-control input-sm disabled" id="emailId" name="emailId" placeholder="Enter email" disabled email="true">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="phone_num">Phone Number <em>*</em></label>
+                        <input type="text" required="true" class="form-control input-sm" id="phone_num" name="phone_num" maxlength="10" minlength="10" placeholder="Phone Number">
+                        <span id="errmsg"></span>
+                        <span class="pwd-error">This field is required.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="first_name">First Name</label>
+                        <input type="text" class="form-control input-sm" id="first_name" name="first_name" placeholder="First Name">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="last_name">Last Name</label>
+                        <input type="text" class="form-control input-sm" id="last_name" name="last_name" placeholder="Last Name">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="address1">Address Line 1<em>*</em></label>
+                        <input type="text" class="form-control input-sm" id="address1" required="true" name="address1" placeholder="Address Line 1">
+                        <span class="pwd-error">This field is required.</span>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="address2">Address Line 2</label>
+                        <input type="text" class="form-control input-sm" id="address2" name="address2" placeholder="Address Line 1">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="country">Country</label>
+                        <div class="bfh-selectbox bfh-countries editProfileCountrySelector" data-country="IN" data-flags="true"
+                             data-filter="true"  id="country" name="country"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="state">State</label>
+                        <input type="text" class="form-control input-sm" id="state" name="state" placeholder="State">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="city">City</label>
+                        <input type="text" class="form-control input-sm" id="city" name="city" placeholder="City">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="postal_code">Postal Code</label>
+                        <input type="text" class="form-control input-sm" id="postal_code" name="postal_code" placeholder="Postal Code">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="address">Current Password<em>*</em></label>
+                <input type="password" required="true" minlength="5" class="form-control input-sm" id="current_password" name="current_password" placeholder="Enter Current Password to Save Changes">
+                <span class="pwd-error">This field is required.</span>
+            </div>
+            <button id="saveProfile" class="btn btn-primary pull-right" style="margin-bottom: 10px;">Save</button>
+        </form>
+    </div>
+</div>
+<% include myFooter.ejs %>
+<script type="text/javascript">
+    $(function(){
+        $('#saveProfile').on('click',function(){
+            if($('#current_password').val()==""){
+                $('.pwd-error').fadeIn();
+            }
+            else{
+                $('.pwd-error').fadeOut();
+            }
+
+        });
+    });
+</script>

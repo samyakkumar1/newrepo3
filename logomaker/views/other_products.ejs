@@ -1,0 +1,223 @@
+<% include myHeader.ejs %>
+<% if (global.config.USE_MIN_FILES == true) { %>
+<script src="/js/other-products.min.js?v=<%= options.version %>"></script>
+<% } else { %>
+<script src="/js/logomaker/helpers/other-products.js"></script>
+<% } %>
+<link rel="stylesheet" href="/css/create-logo.css?v=<%= options.version %>"> 
+<link rel="stylesheet" href="/css/other-products.css?v=<%= options.version %>">  
+<script>
+    var frontParams = "<%= params.frontLogoParams %>".split(";");
+    var backParams = "<%= params.backLogoParams %>".split(";");
+    var frontBaseParams = "<%= params.base_params_front %>".split(";");
+    var backBaseParams = "<%= params.base_params_back %>".split(";");
+    var otherProductId = <%= params.id %>;
+    console.log(otherProductId);
+    var frontImage = '/getOtherProductImage?id=<%= params.frontUrl %>';
+    var backImage = '/getOtherProductImage?id=<%= params.backUrl %>';
+    var flatDiscountPercentageOther = <%= config.FLAT_DISCOUNT_OTHER %>;
+    var designCount = <%= params.design_count %>;
+    <% var i = 1; %>;
+</script>
+<style>
+    .designPreviews{
+        border: solid 1px lightgray !important;
+        display: inline-block;
+        padding: 10px;
+        width: 205px;
+        height: 180px;
+        vertical-align: middle;
+        pointer-events: none;
+    }
+    #zoomPreviewDiv{
+        height: 300px !important;
+    }
+</style>
+<section class="page-top page-top-logo">
+    <div class="container" style="margin-top:120px;">
+        <div class="row">
+            <div class="col-md-12"> 
+                <span class="page-common-header">Create your <%= params.name %></span>
+            </div>
+        </div>
+    </div>
+</section>
+<input type="file" accept="image/*" id="customLogoUpload" class="hide" />
+<div class="container py-3 my-3 border rounded shadow-sm wizard-tabs" style="margin-top:95px;">
+    <div class="row" style="margin-top:30px;">
+	<section class="col-12">
+	     <ul class="wizard-steps" role="tablist">
+	 	<ul class="wizard-steps">
+         	   <li class="active wiz-one" style="background-color:purple;border-color:purple">
+                <a class="text-center" aria-expanded="false"  style="color:purple;border-color:purple">
+                    <span class="badge hidden-xs" style="background-color:#505bda"><%= i++ %></span>
+                    Choose from the purchased logos
+                </a>
+            </li>
+                <% if (params.design_count) { %>
+            <li class="wiz-five" style="background-color:purple;border-color:purple">
+                <a class="text-center" aria-expanded="false"  style="color:purple;border-color:purple">
+                    <span class="badge hidden-xs" style="background-color:#505bda"><%= i++ %></span>
+                    Choose design
+                </a>
+            </li>
+                <% } %>
+            <li class="wiz-two" style="background-color:purple;border-color:purple">
+                <a class="text-center" aria-expanded="false"  style="color:purple;border-color:purple">
+                    <span class="badge hidden-xs" style="background-color:#505bda"><%= i++ %></span>
+                    Customize your <%= params.name %>
+                </a>
+            </li>
+            <li class="wiz-three" style="background-color:purple;border-color:purple">
+                <a class="text-center" aria-expanded="true"  style="color:purple;border-color:purple">
+                    <span class="badge hidden-xs" style="background-color:#505bda"><%= i++ %></span>
+                    Customize Purchase options
+                </a>
+            </li>
+            <li class="wiz-four" style="background-color:purple;border-color:purple">
+                <a class="text-center" aria-expanded="true"  style="color:purple;border-color:purple">
+                    <span class="badge hidden-xs" style="background-color:#505bda"><%= i++ %></span>
+                    Save & Buy your <%= params.name %>
+                </a>
+            </li>
+        </ul>
+</section>
+    </div>
+</div>  
+<div role="main" class="main create-logo">
+    <div class="container create-card-main">
+        <div class="row">
+            <div class="col-md-12">
+                <% if (params.desc) { %>
+                <div class="create-logo-header"></div>
+                <% } %>
+                <div class="panel-group">
+                    <div class="panel panel-one">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion"
+                                   href="#" class="edit-inactive">
+                                    Choose from your saved logos
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="accordionOne" class="panel-collapse collapse in">
+                            <div class="panel-body custom01">
+                                <div class="col-md-12">
+                                    <ul class="logos-list">
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                <% if (params.design_count) { %>
+                    <div class="panel panel-five">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion"
+                                   href="#" class="edit-inactive">
+                                    Choose design
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="accordionFive" class="panel-collapse collapse in">
+                            <div class="panel-body custom01">
+                                <div class="col-md-12">
+                                    <ul class="designs-list">
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="panel-footer">
+                                <button class="btn btn-primary ofl-button" id="btnBackStep5" style="background-color:#505bda;border-color:purple;color:purple;">Back</button>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+                    <div class="panel panel-two">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion"
+                                   href="#" class="edit-inactive">
+                                    Customize your <%= params.name %>
+                                </a>
+                            </h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-md-4" style="height: 100%;">
+                                <h4>Preview</h4>
+                                <div class="canvasBgFront"> 
+                                    <iframe src="/product-preview/big-preview.html" id="canvasBgFront"></iframe>
+                                </div >
+                                <% if (params.backUrl) { %>
+                                <div class="canvasBgBack">  
+                                    <iframe src="/product-preview/big-preview.html" id="canvasBgBack"></iframe>
+                                </div>
+                                <% } %>
+                            </div>
+                            <div class="col-md-8" id="svgEditorFrame" style="height:500px !important;"></div>
+                        </div>
+                        <div class="panel-footer">
+                            <button class="btn btn-secondary" id="btnBackStep2">Back</button>
+                            <button class="btn btn-primary pull-right" id="btnSaveStep2">Next</button>
+                        </div>
+                    </div>
+                    <div class="panel panel-three">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#" class="edit-inactive">
+                                    Customize Purchase options
+                                </a>
+                            </h4>
+                        </div>
+                        <div class="panel-body">
+                            <div id="zoomPreviewDiv" style="padding-right: 15px;padding-left: 15px;display: none; position: fixed; left: 400px; top: 25px; z-index: 9999; background-color: white; border: solid 1px gray; width: 400px"> 
+                                <div class="row" style="background-color: white"><iframe src="/product-preview/big-preview.html" style="height: 100%; width: 100%; border: none"></iframe></div>
+                            </div>
+                            <div class="col-md-12 no-padding-left">
+                                <div class="menuItm-header">Preview</div>
+                                <div class="col-md-4 col-sm-4 no-padding-left">
+                                    <!--<img id="productPreview" src="" class="menuItm-img"/>-->
+                                    <span id="bottomIframeContainer"></span>
+                                    <span class="menuItm-edit">
+                                        <a class="tooltip1" data-toggle="tooltip" data-placement="top" data-original-title="Edit" id="editBtnLink"><i class="fa fa-pencil "></i></a>
+                                        <a class="tooltip1 hide" data-toggle="tooltip" data-placement="top" data-original-title="Preview" id="previewBtnLink"><i class="fa fa-search"></i></a>
+                                    </span>
+                                </div>
+                                <div class="col-md-4 col-sm-4 menuItm-details" id="settingsContent">
+
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                    <div class="total-itm-cost text-center">
+                                        <div class="col-md-12" style="margin-top: 16px;margin-bottom: 15px;">
+                                            You have a total of <span class="totalQty">...</span> <%= params.name %>(s)
+                                        </div>
+                                        <div class="col-md-12" style="margin-top: 16px;margin-bottom: 15px;">
+                                            Total :<span class="itm-discount-cost original-price" id="totalOriginalPrice">...</span><span id="totalReducedPrice" class="after-discount-cost">...</span>
+                                        </div>
+                                    </div>
+                                    <a class="btn btn-primary pull-right" id="addToCartBtn">Add to Cart</a>
+                                    <a class="btn btn-secondary" id="btnBackStepSettings">Back</a>
+                                </div>
+                            </div>
+                            <div id="settingsSteps" style="display: none" class="col-md-2"></div>
+                            <!--
+                            <div id="settingsSteps"  class="col-md-2"></div>
+                            <div id="settingsContent" class="col-md-8"></div>
+                            <div id="settingsSteps" class="col-md-2">
+                                <img id="productPreview" src="/img/business_card.png" /> <br />
+                                Total: <b><span class="original-price" id="totalOriginalPrice">...</span> <span id="totalReducedPrice">...</span> </b>
+                            </div> 
+                            -->
+                        </div>
+                        <div class="panel-footer" style="display: none">
+                            <button class="btn btn-primary ofl-button pull-right" id="btnNextStep3">Next</button>
+                            <button class="btn btn-primary ofl-button" id="btnBackStep3">Back</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<% include myFooter.ejs %>

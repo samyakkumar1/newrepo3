@@ -1,0 +1,314 @@
+<% include header.ejs %>
+<script type="text/javascript" src="/js/logomaker/helpers/pricing_console.js"></script>
+<script type="text/javascript" src="/js/thirdparty/jquery-ui/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/js/thirdparty/papaparse.min.js"></script>
+<link rel="stylesheet" href="/js/thirdparty/jquery-ui/jquery-ui.min.css"/>
+<link rel="stylesheet" href="/js/thirdparty/jquery-ui/jquery-ui.theme.min.css"/>
+<section class="page_top">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Pricing administration</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div id="tabs">
+                <ul>
+                    <li><a href="#countries_pricing">Countries</a></li>
+                    <li><a href="#logo_pricing">Logo Pricing</a></li>
+                    <li><a href="#card_pricing">Card Pricing</a></li>
+                    <li><a href="#other_pricing">Other Products Pricing</a></li>
+                    <span class="pull-right btn btn-default btn-file">
+                        <input type="file" id="uploadPricingInfo" value="Upload CSV File"/>
+                    </span>
+                </ul>
+                <div id="countries_pricing">
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#countryModel">
+                        Add New Country
+                    </button>
+                    <table id="tblPricingCountries" class="table table-striped">
+                        <tr>
+                            <th class="col-md-4">Country</th>
+                            <th class="col-md-3">Currency</th>
+                            <th class="col-md-3">Code</th>
+                            <th class="col-md-2">Actions</th>
+                        </tr>
+                    </table>
+                </div>
+                <div id="logo_pricing">
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#logoPricingModel">
+                        Add Logo Pricing for Country
+                    </button>
+                    <table id="tblPricingLogos" class="table table-striped">
+                      <thead>
+                        <tr>
+                            <th class="col-md-4">Country</th>
+                            <th class="col-md-3">Price</th>
+                            <th class="col-md-3">Color Changes</th>
+                            <th class="col-md-2">Actions</th>
+                        </tr>
+                      </thead>
+                    </table>
+                </div>
+                <div id="card_pricing">
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#cardPricingModel">
+                        Add Card Pricing
+                    </button>
+                    <table id="tblPricingCards" class="table table-striped">
+                      <thead>
+                        <tr>
+                            <th class="col-md-1">Country</th>
+                            <th class="col-md-1">Finish</th>
+                            <th class="col-md-1">Quantity</th>
+                            <th class="col-md-1">Executive</th>
+                            <th class="col-md-1">Superior</th>
+                            <th class="col-md-1">Back Side</th>
+                            <th class="col-md-1">Back Side Superior</th>
+                            <th class="col-md-1">Standard Shipping</th>
+                            <th class="col-md-1">Express Shipping</th>
+                            <th class="col-md-1">Design</th>
+                            <th class="col-md-2">Actions</th>
+                        </tr>
+                      </thead>
+                    </table>
+                </div>
+                <div id="other_pricing">
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#otherProductPricingModel">
+                        Add New Product Pricing
+                    </button>
+                    <table id="tblPricingOtherProducts" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="col-md-2">Product</th>
+                                <th class="col-md-3">Setting</th>
+                                <th class="col-md-2">Value</th>
+                                <th class="col-md-2">Country</th>
+                                <th class="col-md-1">Price</th>
+                                <th class="col-md-2">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="noOtherProductPricingLabel">
+                                <td colspan="5">No pricing added yet!!</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="cardPricingModel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Add/Edit Card Prices</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <form>
+                    <div class="form-group col-md-4">
+                        <label for="cardPricingCountry">Country</label>
+                        <select class="form-control" id="cardPricingCountry">
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="cardPricingFinish">Finish</label>
+                        <select class="form-control" id="cardPricingFinish">
+                            <option value="GLOSS">GLOSS</option>
+                            <option value="MATT">MATT</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="cardPricingPrice">Quantity</label>
+                        <select class="form-control" id="cardPricingQuantity">
+                            <option value="100">100</option>
+                            <option value="250">250</option>
+                            <option value="500">500</option>
+                            <option value="1000">1000</option>
+                            <option value="2500">2500</option>
+                            <option value="5000">5000</option>
+                            <option value="7500">7500</option>
+                            <option value="10000">10000</option>
+                            <option value="15000">15000</option>
+                            <option value="20000">20000</option>
+                            <option value="25000">25000</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="cardPricingExecutive">Executive</label>
+                        <input type="text" class="form-control" id="cardPricingExecutive"/>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="cardPricingSuperior">Superior</label>
+                        <input type="text" class="form-control" id="cardPricingSuperior"/>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="cardPricingBackSide">Back Side</label>
+                        <input type="text" class="form-control" id="cardPricingBackSide"/>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="cardPricingBackSideSuperior">Back Side Superior</label>
+                        <input type="text" class="form-control" id="cardPricingBackSideSuperior"/>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="cardPricingStandardShipping">Standard Shipping</label>
+                        <input type="text" class="form-control" id="cardPricingStandardShipping"/>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="cardPricingExpShipping">Express Shipping</label>
+                        <input type="text" class="form-control" id="cardPricingExpShipping"/>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="cardPricingDesign">Download Design Cost</label>
+                        <input type="text" class="form-control" id="cardPricingDesign"/>
+                    </div>
+                    <div class="form-group col-md-8">
+                        <br/>
+                        <label for="cardPricingSameForAllCountries">
+                        <input type="checkbox" id="cardPricingSameForAllCountries"/> Same download cost for all options in this country
+                        </label>
+                    </div>
+                </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="saveCardPricing">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="logoPricingModel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Add/Edit Logo Prices</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="logoPricingCountry">Country</label>
+                        <select class="form-control" id="logoPricingCountry">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="logoPricingPrice">Price</label>
+                        <input type="text" class="form-control" id="logoPricingPrice" placeholder="Price">
+                    </div>
+                    <div class="form-group" style="display: none">
+                        <label for="logoPricingColorChanges">Price for Color Changes</label>
+                        <input type="text" class="form-control" id="logoPricingColorChanges" placeholder="Price for Color Changes">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="saveLogoPricing">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="countryModel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Add/Edit Country</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="countryName">Country Name</label>
+                        <input type="text" class="form-control" id="countryName" placeholder="Country Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="countryCurrency">Currency</label>
+                        <select class="form-control" id="countryCurrency">
+                            <option>INR</option>
+                            <option>USD</option>
+                            <option>EUR</option>
+                            <option>AUD</option>
+                            <option>SGD</option>
+                            <option>AED</option>
+                            <option>GBP</option>
+                            <option>CAD</option>
+                            <option>NZD</option>
+                            <option>JPY</option>
+                            <option>SEK</option>
+                            <option>DKK</option>
+                            <option>LTL</option>
+                            <option>HKD</option>
+                            <option>CHF</option>
+                            <option>ISK</option>
+                            <option>HUF</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="countryCode">Code</label>
+                        <input type="text" class="form-control" id="countryCode" placeholder="Code">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="saveCountry">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="otherProductPricingModel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Add/Edit Other product Pricing</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="otherProductsPricingProduct">Product</label>
+                        <select class="form-control" id="otherProductsPricingProduct"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="otherProductsPricingSetting">Setting</label>
+                        <select class="form-control" id="otherProductsPricingSetting"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="otherProductsPricingSettingValue">Setting Value</label>
+                        <select class="form-control" id="otherProductsPricingSettingValue"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="otherProductsPricingCountry">Country</label>
+                        <select class="form-control" id="otherProductsPricingCountry"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="otherProductsPricingPrice">Price</label>
+                        <input type="text" class="form-control" id="otherProductsPricingPrice" placeholder="Price">
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" id="sameValueForProductValueCheckBox" />
+                        <label for="sameValueForProductValueCheckBox">Same price for all values in this setting in this country.
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="addOtherProdPricingSaveBtn">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<% include footer.ejs %>

@@ -1,0 +1,181 @@
+<html>
+  <head> 
+<!--
+    <link rel="stylesheet" href="jgraduate/css/jPicker.css" type="text/css"/>
+    <link rel="stylesheet" href="jgraduate/css/jgraduate.css" type="text/css"/>
+    <link href="/js/thirdparty/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="svg-editor-custom.css" type="text/css"/>
+
+    <script src="/js/thirdparty/jquery.min.js"></script>
+    <script src="jquery-migrate.min.js"></script>
+    <script src="/js/thirdparty/pathseg.js"></script>
+    <script src="/js/thirdparty/toast/jquery.toast.min.js"></script>
+    <script src="/js/thirdparty/jquery-ui-1.11.1/jquery-ui.js"></script>
+    <script src="/js/thirdparty/bootstrap/js/bootstrap.min.js"></script>
+    <script src="js-hotkeys/jquery.hotkeys.min.js"></script>
+    <script src="jquerybbq/jquery.bbq.min.js"></script>
+    <script src="svgicons/jquery.svgicons.js"></script>
+    <script src="jgraduate/jquery.jgraduate.min.js"></script>
+    <script src="touch.js"></script>
+    <script src="canvg/rgbcolor.js"></script>
+    <script src="canvg/canvg.js"></script>
+    <script src="/js/thirdparty/bootbox.js"></script>
+    <script src="svgedit.js"></script>
+    <script src="jquery-svg.js"></script>
+    <script src="browser.js"></script>
+    <script src="svgtransformlist.js"></script>
+    <script src="math.js"></script>
+    <script src="units.js"></script>
+    <script src="svgutils.js"></script>
+    <script src="sanitize.js"></script>
+    <script src="history.js"></script>
+    <script src="coords.js"></script>
+    <script src="recalculate.js"></script>
+    <script src="select.js"></script>
+    <script src="draw.js"></script>
+    <script src="path.js"></script>
+    <script src="svgcanvas.js"></script>
+    <script src="/js/logomaker/common.js"></script>
+    <script src="svg-editor.js"></script>
+    <script src="locale/locale.js"></script>
+    <script src="/js/thirdparty/jquery-ui-1.11.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="jscolor/jscolor.js"></script>
+    <script src="config.js"></script>
+    <script src="jgraduate/jpicker.js"></script>
+    <script src="jquery-ui/jquery-ui-1.8.17.custom.min.js"></script>
+    <script src="editor-common.js"></script> 
+-->
+    <link rel="stylesheet" href="svgedit.min.css?v=2.9.2" type="text/css"/>
+    <script src="/js/thirdparty/jquery.min.js?v=2.9.2"></script>
+    <script src="/js/common.min.js?v=2.9.2"></script>
+    <script src="svgedit.min.js?v=2.9.2"></script> 
+
+    <style type="text/css">
+        .toolbar-info {
+            color: #fff;
+            bottom: -2px;
+        }
+
+        #btnAddLogo .toolbar-info {
+            left: 9px;
+        }
+
+        #btnDelete .toolbar-info, #btnUndo .toolbar-info, #btnRedo .toolbar-info, #view_grid_2 .toolbar-info {
+            left: 11px;
+        }
+
+        #toolbar_top {
+            bottom: 60px;
+        }
+
+    </style>
+</head>
+<body>
+<div id="text_tool" align="left">
+    <button class="btn btn-default toolbar-head" id="btnAddText">
+        <img src="images/text.png"><span class="toolbar-info"></span></button>
+
+</div>
+<div id="toolbar_top" align="center">
+    <button class="btn btn-default toolbar-head" id="btnAddLogo" title="Insert an Image"><img
+            src="images/image_1.png"></span><span
+            class="toolbar-info">Image</span></button>
+    <button class="btn btn-default toolbar-head" id="btnDelete"
+            title="Select an element and click to delete the element"><img src="images/delete.png"></span><span
+            class="toolbar-info">Delete</span></button>
+    <button class="btn btn-default toolbar-head" id="btnPreview" title="Zoom">
+        <img src="images/zoom.png"><span class="toolbar-info">Preview</span></button>
+    <button class="btn btn-default toolbar-head" id="btnUndo" title="Undo"><img src="images/redo.png"></span>
+        <span class="toolbar-info">Undo</span></button>
+    <button class="btn btn-default toolbar-head" id="btnRedo" title="Redo">
+        <img src="images/undo.png"><span class="toolbar-info">Redo</span></button>
+    <button class="btn btn-default toolbar-head" id="btnReset" title="Reset"><img src="images/refresh.png"></span>
+        <span class="toolbar-info">Reset</span></button>
+    <button class="btn btn-default toolbar-head" id="view_grid_2" title="Show/Hide Grid">
+        <img src="images/mesh.png"><span class="toolbar-info">Grid</span></button>
+
+</div>
+<div class="invisibleDiv" style="display: none">
+    <span id="colorTools">
+        Color: <input class="jscolor" id="colorPicker" type="text">
+    </span>
+    <span id="imgTools">
+        <input type="file" id="insertImageToolBar">
+    </span>
+    <span id="textTools">
+        Font: <span id="fontPreviewList">Fonts</span> 
+        <div id="previewHolder">
+          <table id="preview"> 
+          </table> 
+        </div> 
+        <select id="comboFontSize"> </select>
+    </span>
+    <span id="groupTools">
+        <button class="btn btn-default" id="groupBtn"><img src="images/shape_group_elements.png"></button>
+    </span>
+    <span id="unGroupTools">
+        <button class="btn btn-default" id="unGroupBtn"><img src="images/shape_ungroup.png"></button>
+    </span>
+</div>
+<div id="svg_editor">
+    <div id="workarea">
+        <style id="styleoverrides" type="text/css" media="screen" scoped="scoped"></style>
+        <div id="svgcanvas" style="position:relative">
+
+        </div>
+    </div>
+
+
+    <div id="tools_left" class="tools_panel" style="display: none">
+        <div class="tool_button" id="tool_line" title="Line Tool"></div>
+    </div>
+
+    <div id="tools_bottom" class="tools_panel" style="display: none">
+        <div id="zoom_panel" class="toolset" title="Change zoom level">
+        </div>
+        <div id="tools_bottom_2">
+            <div id="color_tools">
+                <div class="color_tool" id="tool_fill">
+                    <label class="icon_label" for="fill_color" title="Change fill color"></label>
+
+                    <div class="color_block">
+                        <div id="fill_bg"></div>
+                        <div id="fill_color" class="color_block"></div>
+                    </div>
+                </div>
+                <div class="color_tool" id="tool_stroke">
+                    <label class="icon_label" title="Change stroke color"></label>
+
+                    <div class="color_block">
+                        <div id="stroke_bg"></div>
+                        <div id="stroke_color" class="color_block" title="Change stroke color"></div>
+                    </div>
+                    <label class="stroke_label">
+                        <input id="stroke_width" title="Change stroke width by 1, shift-click to change by 0.1" size="2"
+                               value="5" type="text" data-attr="Stroke Width"/> </label>
+
+                    <div id="toggle_stroke_tools" title="Show/hide more stroke tools"></div>
+                    <label class="stroke_tool"> <select id="stroke_style" title="Change stroke dash style">
+                        <option selected="selected" value="none">&#8212;</option>
+                        <option value="2,2">...</option>
+                        <option value="5,5">- -</option>
+                        <option value="5,2,2,2">- .</option>
+                        <option value="5,2,2,2,2,2">- ..</option>
+                    </select> </label>
+
+                    <div class="stroke_tool dropdown" id="stroke_linejoin">
+                        <div id="cur_linejoin" title="Linejoin: Miter"></div>
+                        <button></button>
+                    </div>
+                    <div class="stroke_tool dropdown" id="stroke_linecap">
+                        <div id="cur_linecap" title="Linecap: Butt"></div>
+                        <button></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input id="text" type="text" size="35"/>
+</body>
+</html>                                                   

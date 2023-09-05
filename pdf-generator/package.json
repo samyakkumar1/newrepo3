@@ -1,0 +1,11 @@
+{
+    "name": "ofl-phantomjs-printer",
+    "dependencies": {
+        "express": "~3.4.8",
+        "phantom": "2.0.9"
+    },
+    "main": "./app.js",
+    "scripts": {
+        "start": "node app.js"
+    }
+}

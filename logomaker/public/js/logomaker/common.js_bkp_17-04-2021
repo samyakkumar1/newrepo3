@@ -1,0 +1,824 @@
+/**
+ * Created by Designerbe on 26-09-2020.
+ */
+
+var overlayCount = 0;
+var logoCache = {};
+var fxSetup;
+var busyTimer;
+var startStack = [];
+var endStack = [];
+
+$(function () {
+    /* used while using serving content from S3/CDN */
+    $(".actualSite").each(function (index, elem) {
+        $(elem).attr("href", window.actualSite + $(elem).attr("href"));
+    });
+    if (window.actualSite == undefined) {
+        window.actualSite = window.location.origin;
+    }
+});
+
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
+function selectDropDownItemByName(dropBoxId, selectedValue) {
+    $(dropBoxId + ' option').filter(function () {
+        return ($(this).val() == selectedValue);
+    }).prop('selected', true);
+}
+
+function getWindowsPrinterLink(id, url, type, height, width, cmyk, format) {
+    //var printerUrl = "http://localhost:8081?rootUrl=" + encodeURIComponent("http://localhost:8080");
+    var printerUrl = "http://52.76.89.235:8081"; 
+    
+    if (!type) {
+        type = "card";
+    } 
+    
+    if (!height) {
+        height = 100;
+    }
+    if (!width) {
+        width = 1000;
+    }
+    if (!format) {
+        format = "pdf";
+    }
+    if (cmyk) {
+        cmyk = "&cmyk=true";
+    } else {
+        cmyk = "";
+    }
+    return printerUrl + '/?format=' +format+ '&width=' + width + '&height=' + height + cmyk + '&type=' + type + '&id=' + id + '&url=' + encodeURIComponent(url);
+}
+
+function addWaitingOverlay(dontAutoEnd) {
+    if (overlayCount <= 0) {
+        startStack = [];
+        var overlay = document.createElement("div");
+        overlay.setAttribute("id", "overlay");
+        overlay.setAttribute("class", "overlay");
+        document.body.appendChild(overlay);
+        if (!dontAutoEnd) {
+            busyTimer = setTimeout(function () {
+                if (overlayCount > 0) {
+                    console.log("Overlay not ended appropriatly, forcing removeWaitingOverlay.");
+                    console.log("Start Calls: " + startStack);
+                    console.log("End Calls: " + endStack);
+                    overlayCount = 1;
+                    removeWaitingOverlay();
+                }
+            }, 3 * 60 * 1000);
+        }
+    } else {
+        startStack.push(new Error().stack);
+    }
+    overlayCount++;
+}
+
+function discountAmt(discountPercentage, amount) {
+    return Number(amount - ((discountPercentage / 100) * amount)).toFixed(2);
+}
+
+function removeWaitingOverlay() {
+    //var stack = new Error().stack;
+    overlayCount--;
+    if (overlayCount <= 0) {
+        try {
+            document.body.removeChild(document.getElementById("overlay"));
+        } catch (err) {
+            console.log(err);
+        }
+        clearTimeout(busyTimer);
+        endStack = [];
+    } else {
+        endStack.push(new Error().stack);
+    }
+}
+
+function getNewRandomNumber(min, max) {
+    return Math.round((Math.random() * (max - min)) + min);
+}
+
+function getURLParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+            results = regex.exec(location.search);
+    return results == null ? null : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+function getAsStr(element) {
+    var str = element;
+    if (typeof element == "number") {
+        str = element + "";
+    } else if (typeof element != "string") {
+        str = element.toString();
+    }
+    return str;
+}
+
+function isEmptyString(str) {
+    if (typeof str != "string") {
+        str = getAsStr(str);
+    }
+    if ((str == undefined) || (str == null)) {
+        return false;
+    }
+    return (!str || /^\s*$/.test(str) || str.length === 0 || !str.trim() || str.trim().length === 0);
+}
+
+function setFillColor(targetElement, sourceElement) {
+    if (targetElement.length > 0 && sourceElement.length > 0) {
+        var color = getColor(sourceElement[0]);
+        if (color != null) {
+            if (targetElement[0].nodeName == "g") {
+                applyColorToGroupElement(targetElement.children(), color);
+            } else {
+                targetElement.attr("fill", color);
+                targetElement.css("fill", color);
+            }
+        }
+    }
+}
+
+function getColor(node) {
+    if (node.nodeName == "g") {
+        if (typeof node.children != "undefined") {
+            for (var i = 0; i < node.children.length; i++) {
+                var color = getColor(node.children[0]);
+                if (color) {
+                    return color;
+                }
+            }
+        } else {
+            for (var i = 0; i < node.childNodes.length; i++) {
+                if (node.childNodes[i].nodeType == 1) {
+                    var color = getColor(node.childNodes[i]);
+                    if (color) {
+                        return color;
+                    }
+                }
+            }
+        }
+    } else {
+        var color = node.getAttribute("fill");
+        if (color == null) {
+            var style = getStyleRules(node.getAttribute("style"));
+            color = style.fill;
+        }
+        return color;
+    }
+}
+
+function applyColorToGroupElement(groupElement, color) {
+    groupElement.each(function (idx, val) {
+        if (val.nodeName == "g") {
+            applyColorToGroupElement($(val).children(), color);
+        } else {
+            $(val).attr("fill", color);
+            $(val).css("fill", color);
+        }
+    });
+}
+
+function getStyleRules(input) {
+    if (input == null) {
+        return {};
+    } else {
+        var result = {};
+
+        var attributes = input.split(';');
+        for (var i = 0; i < attributes.length; i++) {
+            var entry = attributes[i].split(/:(.+)/)
+            result[entry[0]] = entry[1];
+        }
+        return result;
+    }
+}
+
+function editLogo(logoId, fromPurchase) {
+
+    window.location = "/logo-design-online?id=" + logoId + (fromPurchase == true ? "&from=purchase" : "");
+}
+
+function editCard(cardId, fromPurchase) {
+    window.location = "/design-business-card-online?id=" + cardId + (fromPurchase == true ? "&from=purchase" : "");
+}
+
+function addLogoToShoppingCart(id, callback) {
+    if (typeof id == "string" && id.indexOf("logo_") == 0) {
+        id = id.split("_")[1];
+    }
+    var params = {item_id: id, itemType: 'LOGO'};
+    if (isLoggedIn(true) == true) {
+        // addWaitingOverlay();
+        doPost("/addItemToCurrentShoppingCart", params, function (resp) {
+            // removeWaitingOverlay();
+            if (resp.status == 200) {
+                if (callback != undefined) {
+                    callback();
+                }
+            } else {
+                bootbox.alert(resp.msg);
+            }
+        }, function (err) {
+            // removeWaitingOverlay();
+            console.log(err);
+            bootbox.alert((typeof err == "string" ? err : "Server Error."));
+        });
+    } else {
+        var cartItem = "cart_" + id;
+        storeJson(cartItem, params);
+        var items = retrieveJson("carts");
+        if (items != null || items != undefined) {
+            if (items.indexOf(cartItem) < 0) {
+                items.push(cartItem);
+                storeJson("carts", items);
+            }
+        } else {
+            storeJson("carts", [cartItem]);
+        }
+        if (callback != undefined) {
+            callback();
+        }
+    }
+}
+
+function addCardToShoppingCart(id, callback) {
+    if (typeof id == "string" && id.indexOf("card_") == 0) {
+        id = id.split("_")[1];
+    }
+    var params = {item_id: id, itemType: 'BC'};
+    if (isLoggedIn(true) == true) {
+        addWaitingOverlay();
+        doPost("/addItemToCurrentShoppingCart", params, function (resp) {
+            removeWaitingOverlay();
+            if (resp.status == 200) {
+                if (callback != undefined) {
+                    callback();
+                }
+            } else {
+                bootbox.alert(resp.msg);
+            }
+        }, function (err) {
+            removeWaitingOverlay();
+            console.log(err);
+            bootbox.alert((typeof err == "string" ? err : "Server Error."));
+        });
+    } else {
+        var cartItem = "cart_" + id;
+        storeJson(cartItem, params);
+        var items = retrieveJson("carts");
+        if (items != null || items != undefined) {
+            if (items.indexOf(cartItem) < 0) {
+                items.push(cartItem);
+                storeJson("carts", items);
+            }
+        } else {
+            storeJson("carts", [cartItem]);
+        }
+        if (callback != undefined) {
+            callback();
+        }
+    }
+}
+
+function addOtherProductToShoppingCart(id, callback) {
+    var params = {item_id: id, itemType: 'OTHER'};
+    addWaitingOverlay();
+    doPost("/addItemToCurrentShoppingCart", params, function (resp) {
+        removeWaitingOverlay();
+        if (resp.status == 200) {
+            if (callback != undefined) {
+                callback();
+            }
+        } else {
+            bootbox.alert(resp.msg);
+        }
+    }, function (err) {
+        removeWaitingOverlay();
+        console.log(err);
+        bootbox.alert((typeof err == "string" ? err : "Server Error."));
+    });
+}
+
+function addOtherCustomProductToShoppingCart(id, callback) {
+    var params = {item_id: id, itemType: 'CUSTOM'};
+    addWaitingOverlay();
+    doPost("/addItemToCurrentShoppingCart", params, function (resp) {
+        removeWaitingOverlay();
+        if (resp.status == 200) {
+            if (callback != undefined) {
+                callback();
+            }
+        } else {
+            bootbox.alert(resp.msg);
+        }
+    }, function (err) {
+        removeWaitingOverlay();
+        console.log(err);
+        bootbox.alert((typeof err == "string" ? err : "Server Error."));
+    });
+}
+
+function saveItemLocally(type, fileName, params) {
+    storeJson(fileName, params);
+    var items = retrieveJson(type);
+    if (items != null || items != undefined) {
+        if (items.indexOf(fileName) < 0) {
+            items.push(fileName);
+            storeJson(type, items);
+        }
+    } else {
+        storeJson(type, [fileName]);
+    }
+}
+
+function removeItemLocally(type, id) {
+    var logos = retrieveJson(type);
+    logos.splice(logos.indexOf(id), 1);
+    storeJson(type, logos);
+    deleteJson(id);
+    removeItemLocallyFromShoppingCart(id);
+}
+
+function removeItemLocallyFromShoppingCart(id) {
+    var partial_id = id.substr(id.indexOf("_"));
+    var items = retrieveJson("carts");
+    deleteJson("cart" + partial_id);
+    if (items != null || items != undefined) {
+        var idx = items.indexOf("cart" + partial_id);
+        if (idx >= 0) {
+            items.splice(idx, 1);
+            storeJson("carts", items);
+        }
+    }
+}
+
+function doPost(path, json, successfn, errorfn) {
+    return doRequest(path, json, "POST", successfn, errorfn, 0);
+}
+
+function doGet(path, params, successfn, errorfn) {
+    return doRequest(path, params, "GET", successfn, errorfn, 0);
+}
+
+function doGetWithExtraParams(path, params, exParams, successfn, errorfn) {
+    return doRequest(path, params, "GET", function (resp) {
+        successfn(resp, exParams);
+    }, errorfn, 0);
+}
+
+function doRequest(path, data, method, successfn, errorfn, nRetries) {
+    return doActualRequest(path, data, method, successfn, errorfn, nRetries, true);
+}
+
+function doSyncRequest(path, data, method) {
+    var result = {};
+    doActualRequest(path, data, method, function (resp) {
+        if (resp.error) {
+            result.error = resp;
+        } else {
+            result = resp;
+        }
+    }, function (resp) {
+        result.error = resp;
+    }, 0, false);
+    return result;
+}
+
+function doActualRequest(path, data, method, successfn, errorfn, nRetries, async) {
+    var maxRetries = 3;
+    var realPath = path;
+    var req = {type: method, url: path};
+    if (nRetries === undefined) {
+        nRetries = 0;
+    }
+    if (window.actualSite) {
+        path = window.actualSite + path;
+    }
+    if (method == "GET") {
+        req.data = data;
+    } else {
+        req.data = JSON.stringify(data);
+    }
+    req.contentType = "application/json";
+    req.async = async;
+    req.timeout = 0;
+    return $.ajax(req).success(function (resp) {
+        if (resp.error) {
+            if (errorfn !== undefined) {
+                errorfn(resp);
+            } else {
+                showToast('Server returned error: ' + resp.error);
+            }
+        } else {
+            successfn(resp);
+        }
+    }
+    ).fail(function (xhr, status, err) {
+        if (xhr.status == 403) {
+            window.location = window.actualSite + "/?msg_id=1";
+        } else {
+            if (Math.floor(xhr.status / 100) == 4) {
+                if (errorfn !== undefined) {
+                    errorfn({error: xhr.status});
+                } else {
+                    showToast("Server returned " + xhr.status + ".");
+                }
+            } else {
+                if (nRetries < maxRetries) {
+                    console.log("request failed. retrying...", new Error(path + " with " + JSON.stringify(data)).stack);
+                    console.log("XHR: ", xhr, "Status: ", status, "Error: ", err)
+                    if (errorfn === undefined) {
+                        showToast("Request failed. Retrying...");
+                    }
+                    setTimeout(function () {
+                        doRequest(realPath, data, method, successfn, errorfn, nRetries + 1);
+                    }, 3000);
+                } else {
+                    if (errorfn !== undefined) {
+                        errorfn({error: "timeout"});
+                    } else {
+                        showToast("Communication Error");
+                    }
+                }
+            }
+        }
+    });
+}
+
+function showToast(msg, type, sticky, duration) {
+    //type: danger info success
+    if (duration === undefined)
+        duration = 3000;
+    if (type === undefined)
+        type = "danger";
+    var options = {duration: duration, sticky: sticky, type: type};
+    $.toast(msg, options);
+}
+
+function isFunction(object) {
+    return object && typeof object == 'function';
+}
+
+function imageupload(url,fileData){
+    //data = new FormData();
+    //data.append('file', fileData);
+    $.ajax({
+        url: url,
+        type: "POST",
+        data: fileData,
+       // enctype: 'multipart/form-data',
+        processData: false,
+        contentType: false,
+        success: function(data) {
+           console.log(data)
+        },
+        error: function(e) {
+            console.log(e)        
+        }
+      });
+}
+function endsWith(str, suffix) {
+    return str.indexOf(suffix, str.length - suffix.length) !== -1;
+}
+
+var JSON = JSON || {};
+
+JSON.stringify = JSON.stringify || function (obj) {
+    var t = typeof (obj);
+    if (t != "object" || obj === null) {
+        // simple data type
+        if (t == "string")
+            obj = '"' + obj + '"';
+        return String(obj);
+    } else {
+        // recurse array or object
+        var n, v, json = [], arr = (obj && obj.constructor == Array);
+        for (n in obj) {
+            if (obj.hasOwnProperty(n)) {
+                v = obj[n];
+                t = typeof (v);
+                if (t == "string")
+                    v = '"' + v + '"';
+                else if (t == "object" && v !== null)
+                    v = JSON.stringify(v);
+                json.push((arr ? "" : '"' + n + '":') + String(v));
+            }
+        }
+        return (arr ? "[" : "{") + String(json) + (arr ? "]" : "}");
+    }
+};
+
+JSON.parse = JSON.parse || function (str) {
+    if (str === "")
+        str = '""';
+    eval("var p=" + str + ";");
+    return p;
+};
+
+function storeJson(key, json) {
+    var key_ = "store_" + key;
+    var value_ = JSON.stringify(json);
+    if (localStorage === undefined) {
+        $.cookie(key_, value_, {expires: 7, path: "/"});
+    } else {
+        localStorage.setItem(key_, value_)
+    }
+}
+
+function retrieveJson(key) {
+    var key_ = "store_" + key;
+    var value;
+    if (localStorage === undefined) {
+        value = $.cookie(key_);
+    } else {
+        value = localStorage.getItem(key_);
+    }
+    if (value === undefined || value == "")
+        value = "{}";
+    return JSON.parse(value);
+}
+
+function deleteJson(key) {
+    var key_ = "store_" + key;
+    if (localStorage === undefined) {
+        $.removeCookie(key_, {path: "/"});
+    } else {
+        window.localStorage.removeItem(key_);
+    }
+}
+
+$.fn.exists = function () {
+    return this.length !== 0;
+};
+
+function updateCardImage(id, url, image) {
+    var container = $(id);
+    container.css({
+        visibility: 'hidden'
+    });
+    container.svg();
+    var svg = container.svg('get');
+    svg.load(url, {
+        onLoad: function (svg, error) {
+            $(svg.root()).attr("height", "100%");
+            $(svg.root()).attr("width", "100%");
+            if (error) {
+                console.log(error)
+            } else {
+                var _drawCard = function () {
+                    container.css({
+                        visibility: 'visible'
+                    });
+                };
+                if (image) {
+                    var afterImgLoad = function (data) {
+                        if (data != null) {
+                            var logoGTagInCard = $("#logo", container);
+                            var svgLogoDom, img, pos, color;
+                            if (typeof data == "string") {
+                                svgLogoDom = $(data);
+                            } else {
+                                svgLogoDom = data;
+                            }
+                            try {
+                                $("defs", svgLogoDom).remove();
+                                pos = $("#logo", container)[0].getBBox();
+                                logoGTagInCard.children().remove();
+                                logoGTagInCard.append(svgLogoDom);
+                                $(svgLogoDom).attr("height", pos.height + "px");
+                                $(svgLogoDom).attr("width", pos.width + "px");
+                                $(svgLogoDom).attr("x", pos.x);
+                                $(svgLogoDom).attr("y", pos.y);
+                                setFillColor($("#color1", container), $("#Color1", svgLogoDom));
+                                setFillColor($("#color2", container), $("#Color2", svgLogoDom));
+                                setFillColor($("#color3", container), $("#Color3", svgLogoDom));
+                            } catch (err) {
+                                console.log(err);
+                            }
+                            _drawCard();
+                        }
+                    };
+
+                    if (image.indexOf("logo_") == 0) {
+                        afterImgLoad(retrieveJson(image).url);
+                    } else if (image.trim().indexOf("<") == 0) {
+                        afterImgLoad(image);
+                    } else {
+                        var url = "/getUserLogoImage?id=" + image + "&random=" + (new Date().getTime());
+                        //addWaitingOverlay();
+                        if (!logoCache[url]) {
+                            logoCache[url] = $.get(url + "&random=" + Math.random());
+                        }
+                        logoCache[url].then(function (data) {
+                          //  removeWaitingOverlay();
+                            afterImgLoad($(data.childNodes).clone());
+                        }, function (xhr, textStatus, errorThrown) {
+                          //  removeWaitingOverlay();
+                            console.error(xhr, textStatus, errorThrown)
+                        });
+                    }
+                } else {
+                    _drawCard();
+                }
+            }
+        }, changeSize: true
+    });
+}
+
+function updateJQSvgImage(selector, url, callback) {
+    var _loadSVG = {
+        onLoad: function (svg, error) {
+            if (error) {
+                console.log(error);
+            } else {
+                $(svg.root()).attr("height", "100%");
+                $(svg.root()).attr("width", "100%");
+                $("font", svg.root()).remove();
+                $("style", svg.root()).after($("#allFonts").html());
+            }
+            callback ? callback() : $.noop();
+        }, changeSize: true
+    };
+    $(selector).svg();
+    $(selector).svg('get').load(url, _loadSVG);
+}
+
+function updateMyDesignsCount(loadFromServer) {
+    if (loadFromServer == true) {
+        var myDesignsCount = 0;
+        doPost("/listUserLogos", {}, function (resp) {
+            if (resp.status == 200) {
+                myDesignsCount = myDesignsCount + resp.logos.length;
+            } else if (resp.status == 201) {
+                console.log(resp);
+            } else {
+                console.log(resp);
+            }
+            $(".my-design-count").text(myDesignsCount);
+        }, function (err) {
+            showToast("Connection Error!")
+            console.log(err);
+        });
+        doPost("/listUserCards", {}, function (resp) {
+            if (resp.status == 200) {
+                myDesignsCount = myDesignsCount + resp.cards.length;
+            } else if (resp.status == 201) {
+                console.log(resp);
+            } else {
+                console.log(resp);
+            }
+            $(".my-design-count").text(myDesignsCount);
+        }, function (err) {
+            showToast("Connection Error!");
+            console.log(err);
+        });
+        doGet("/listUserOtherProducts", {}, function (resp) {
+            if (resp.status == 200) {
+                myDesignsCount = myDesignsCount + resp.products.length;
+            } else if (resp.status == 201) {
+                console.log(resp);
+            } else {
+                console.log(resp);
+            }
+            $(".my-design-count").text(myDesignsCount);
+        }, function (err) {
+            showToast("Connection Error!");
+            console.log(err);
+        });
+    } else {
+        var logos = retrieveJson("logos");
+        var cards = retrieveJson("cards");
+        var total = 0;
+        if (logos != null) {
+            total += logos.length;
+        }
+        if (cards != null) {
+            total += cards.length;
+        }
+        $(".itemCount").text(total);
+    }
+}
+
+function updateCartCount(loadFromServer) {
+    if (loadFromServer == true) {
+        doPost("/listCartItems", {}, function (resp) {
+            var length = 0;
+            if (resp.status == 200) {
+                length = resp.items.length;
+            } else if (resp.status == 201) {
+                length = 0;
+            } else {
+                console.log("Error: " + resp.msg);
+            }
+            $(".cart-order").text(length);
+        }, function (err) {
+            console.log(err);
+        });
+    } else {
+        $(".cart-order").text(retrieveJson("carts") == null ? 0 : retrieveJson("carts").length);
+    }
+}
+
+/*
+ function updateMoneyJs(successCallback, err) {
+ var fn = function (url, errCallback) {
+ $.getJSON(url, function (data) {
+ if (data != null) {
+ if (typeof fx != "undefined") {
+ fx.rates = data.rates;
+ fx.base = data.base;
+ } else {
+ // If not, apply to fxSetup global:
+ fxSetup = {
+ rates: data.rates,
+ base: data.base
+ }
+ }
+ if (successCallback != undefined) {
+ successCallback();
+ }
+ } else {
+ if (errCallback != undefined) {
+ errCallback("Unable to load currency data.");
+ }
+ }
+ }).error(function (error) {
+ console.log("Cant retrieve data from openexchangerates.org. Using locally cached data.");
+ if (errCallback != undefined) {
+ errCallback(error);
+ }
+ });
+ };
+ fn('//openexchangerates.org/api/latest.json?app_id=aa06b5475ee948ff8128b1817c14819d', function (err) {
+ fn("/exchange.json", err);
+ })
+ }
+ */
+
+function downloadPurchasedItem(id, fromPurchase) {
+    console.log("Edit Logossss")
+
+}
+
+function formatUrl(url, fallback) {
+    return encodeURIComponent(url ? url.replace(/\s/g, "_") : fallback).toLowerCase();
+}
+
+function ieSVGFix(string) {
+    var i = 1;
+    var threshold = 0;
+    while (i < 1000) {
+        if (string.indexOf('xmlns:NS' + i) == -1) {
+            threshold++;
+        } else {
+            threshold = 0;
+        }
+        if (threshold > 5) {
+            break;
+        }
+        string = string.replace('xmlns:NS' + i + '=""', "");
+        string = string.replace('NS' + i + ':xmlns:svg="http://www.w3.org/2000/svg"', '');
+        string = string.replace('NS' + i + ':xmlns:html="http://www.w3.org/1999/xhtml"', '');
+        i++;
+    }
+    if (i == 1000) {
+        console.log("1000 iterations expired!!");
+    }
+    return string;
+}
+
+function getIframeWindow(iframe_object) {
+    var doc;
+
+    if (iframe_object.contentWindow) {
+        return iframe_object.contentWindow;
+    }
+
+    if (iframe_object.window) {
+        return iframe_object.window;
+    }
+
+    if (!doc && iframe_object.contentDocument) {
+        doc = iframe_object.contentDocument;
+    }
+
+    if (!doc && iframe_object.document) {
+        doc = iframe_object.document;
+    }
+
+    if (doc && doc.defaultView) {
+        return doc.defaultView;
+    }
+
+    if (doc && doc.parentWindow) {
+        return doc.parentWindow;
+    }
+
+    return undefined;
+}
+

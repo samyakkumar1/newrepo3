@@ -1,0 +1,22 @@
+User-agent: *
+Host: www.Tagbit.co
+www.Tagbit.co/sitemap.xml
+Allow: /
+Allow: /index
+Allow: /checkout
+Allow: /logodesigner
+Allow: /logo-design-online
+Allow: /bcdesigner
+Allow: /design-business-card-online
+Allow: /contactUs
+Allow: /mydesigns
+Allow: /changePassword
+Allow: /howItWorks
+Allow: /onFreeLogo
+Allow: /moreFaq
+Allow: /aboutUs
+Allow: /privacyPolicy
+Allow: /refundPolicy
+Allow: /shippingPolicy
+Allow: /termsUse
+Allow: /tips
